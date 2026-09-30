@@ -1,0 +1,22 @@
+# Local Python and app builds
+.venv/
+.sau-venv/
+__pycache__/
+*.py[cod]
+dist/
+.DS_Store
+
+# Private content, accounts, browser sessions and logs
+data/
+backups/
+*.sqlite3
+*.sqlite3-*
+*.db
+*.log
+.env
+.env.*
+*.pem
+*.p12
+*.pfx
+*.key
+integrations/social-auto-upload/
