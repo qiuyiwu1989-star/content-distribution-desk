@@ -25,12 +25,16 @@ for runtime in .venv; do
 done
 /bin/cp "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/Python3" "$RESOURCE/.venv/Python3"
 /usr/bin/ditto "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/Resources/Python.app" "$RESOURCE/.venv/Resources/Python.app"
+/bin/cp "$PROJECT/mac-app/run-server.sh" "$RESOURCE/mac-app/run-server.sh"
+chmod +x "$BUNDLE/Contents/MacOS/DistributionDesk" "$RESOURCE/mac-app/run-server.sh"
+if [[ "${DESK_STAGE_ONLY:-0}" == "1" ]]; then
+  printf 'Staged %s (installed app left running and unchanged)\n' "$BUNDLE"
+  exit 0
+fi
 SUPPORT="$HOME/Library/Application Support/内容分发台"
 mkdir -p "$SUPPORT/runtime/.sau-venv" "$SUPPORT/runtime/social-auto-upload"
 /usr/bin/rsync -a "$PROJECT/.sau-venv/" "$SUPPORT/runtime/.sau-venv/"
 /usr/bin/rsync -a "$PROJECT/integrations/social-auto-upload/" "$SUPPORT/runtime/social-auto-upload/"
-/bin/cp "$PROJECT/mac-app/run-server.sh" "$RESOURCE/mac-app/run-server.sh"
-chmod +x "$BUNDLE/Contents/MacOS/DistributionDesk" "$RESOURCE/mac-app/run-server.sh"
 mkdir -p "$HOME/Applications"
 /usr/bin/ditto "$BUNDLE" "$INSTALLED"
 /usr/bin/codesign --force --deep --sign - "$INSTALLED"
