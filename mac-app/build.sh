@@ -15,7 +15,7 @@ PY
 "$PROJECT/.venv/bin/python" "$PROJECT/mac-app/icon.py" "$BUNDLE/Contents/Resources/DistributionDesk.icns"
 RESOURCE="$BUNDLE/Contents/Resources/Project"
 mkdir -p "$RESOURCE/mac-app" "$RESOURCE/integrations"
-for file in server.py distribution.py adapters.py platform_rules.py wechat_bridge.py requirements.txt; do /bin/cp "$PROJECT/$file" "$RESOURCE/$file"; done
+for file in server.py distribution.py site_import.py adapters.py platform_rules.py wechat_bridge.py requirements.txt; do /bin/cp "$PROJECT/$file" "$RESOURCE/$file"; done
 /usr/bin/rsync -a --delete "$PROJECT/static/" "$RESOURCE/static/"
 /usr/bin/rsync -a --delete "$PROJECT/.venv/" "$RESOURCE/.venv/"
 # Keep Python entry points inside the app instead of external symbolic links.

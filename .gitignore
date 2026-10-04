@@ -20,3 +20,5 @@ backups/
 *.pfx
 *.key
 integrations/social-auto-upload/
+# Private exports downloaded from the writing desk
+distribution-*.json

@@ -347,6 +347,8 @@ def create_app(data_dir=None):
 
     from distribution import install
     install(app,data,db,get,fail,text,now,event,validate_task)
+    from site_import import install as install_site_import
+    install_site_import(app,db,fail,text,now)
     return app
 
 if __name__ == '__main__':

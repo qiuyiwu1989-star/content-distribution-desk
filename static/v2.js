@@ -1,6 +1,6 @@
 /* Input contracts, platform-aware task assignment, connection and execution UI. */
 const oldNewPackage=newPackage,oldPackageDetail=packageDetail,oldTaskDetail=taskDetail;
-newPackage=function(){oldNewPackage();$('#package-form').insertAdjacentHTML('afterbegin',`<div class="input-contract"><b>输入已经完成的内容</b><span>文章：标题 + 正文 / Markdown</span><span>图文：标题 + 简介 + 有顺序的图片</span><span>视频：标题 + 简介 + 视频文件 + 封面</span></div>`);};
+newPackage=function(){oldNewPackage();$('#package-form').insertAdjacentHTML('beforebegin',`<div class="input-contract"><b>从 qiuyiwu.com 导入</b><span>在网站写作后台通过发布检查后，下载内容快照 JSON，再从这里导入。重复导入不会建重复包；新版本保留旧渠道稿。</span><button class="secondary" type="button" data-v2="site-import">选择网站内容快照</button></div>`);$('#package-form').insertAdjacentHTML('afterbegin',`<div class="input-contract"><b>输入已经完成的内容</b><span>文章：标题 + 正文 / Markdown</span><span>图文：标题 + 简介 + 有顺序的图片</span><span>视频：标题 + 简介 + 视频文件 + 封面</span></div>`);};
 packageDetail=function(id){
  oldPackageDetail(id);const p=S.packages.find(x=>x.id===id),assets=S.assets.filter(x=>x.package_id===id);
  $('.detail-meta').insertAdjacentHTML('afterend',`<div class="package-tools"><button class="primary" data-v2="distribute" data-id="${id}">${icon('users')}批量安排渠道</button><button class="secondary" data-v2="edit-package" data-id="${id}">编辑成品信息</button></div>`);
@@ -44,6 +44,7 @@ document.addEventListener('click',async e=>{
  const b=e.target.closest('[data-v2]');if(!b)return;
  const id=b.dataset.id;
  try{switch(b.dataset.v2){
+ case 'site-import':openModal('导入网站内容快照',`<form id="site-import-form"><p>选择网站写作后台导出的 JSON 文件。导入只建成品包，不会自动创建渠道任务或发布。</p><label>内容快照文件<input type="file" name="snapshot" accept=".json,application/json" required></label><div class="form-error" role="alert"></div><div class="form-footer"><button type="button" class="secondary" data-action="close">取消</button><button class="primary">导入成品包</button></div></form>`);break;
  case 'distribute':distributeDialog(id);break;
  case 'options':if(taskDirty())throw Error('请先保存当前渠道版本');optionsDialog(id);break;
  case 'preflight':await preflightDialog(id);break;
@@ -60,9 +61,10 @@ document.addEventListener('click',async e=>{
 });
 document.addEventListener('change',e=>{if(e.target.id==='dispatch-timing'){const later=e.target.value==='later';$('#dispatch-date-label').hidden=!later;$('#dispatch-form').elements.scheduled.required=later;}});
 document.addEventListener('submit',async e=>{
- const f=e.target;const handled=['bridge-form','distribute-form','options-form','dispatch-form','connection-form','bind-form','import-form','package-edit-form','retry-form'];if(!handled.includes(f.id))return;
+ const f=e.target;const handled=['site-import-form','bridge-form','distribute-form','options-form','dispatch-form','connection-form','bind-form','import-form','package-edit-form','retry-form'];if(!handled.includes(f.id))return;
  e.preventDefault();e.stopImmediatePropagation();const fd=new FormData(f),d=Object.fromEntries(fd.entries()),id=f.dataset.id,button=$('button.primary,button.secondary.full',f);if(button)button.disabled=true;const err=$('.form-error',f);if(err)err.textContent='';
  try{switch(f.id){
+ case 'site-import-form':{const file=f.elements.snapshot.files[0];if(!file||file.size>1024*1024)throw Error('请选择小于 1 MB 的内容快照 JSON');let snapshot;try{snapshot=JSON.parse(await file.text());}catch{throw Error('JSON 文件无法解析');}const r=await api('/site-import','POST',snapshot);await refresh();packageDetail(r.package_id);toast(r.created?(r.previous_package_id?'已导入网站新版本；旧渠道稿保留':'网站内容已导入，可以安排渠道'):'这个网站版本已经导入，已打开现有成品包');break;}
  case 'bridge-form':await api('/bridge/settings','PUT',{token:d.token});f.elements.token.value='';toast('连接口令已保存，请继续检查账号');break;
  case 'distribute-form':{const targets=fd.getAll('targets').map(v=>{const [account_id,format]=v.split(':');return {account_id,format};});const r=await api('/packages/'+id+'/distribute','POST',{targets});await refresh();packageDetail(id);toast(`创建 ${r.created.length} 项任务，跳过 ${r.skipped.length} 项已有任务`);break;}
  case 'options-form':await api('/tasks/'+id+'/options','PUT',{revision:S.tasks.find(x=>x.id===id).revision,mode:d.mode,category:d.category?Number(d.category):null,collection:d.collection||'',landscape_cover_id:d.landscape_cover_id||null});await refresh();taskDetail(id);toast('交付设置已保存，请重新检查并确认');break;
