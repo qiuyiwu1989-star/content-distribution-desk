@@ -36,6 +36,22 @@ python3 -m venv .venv
 
 调度器随服务运行，每 20 秒处理到期任务；关闭服务后不会执行。重启时，中断中的任务进入「待核对」而不会盲目重试。此版本只适合单人本机使用，不能直接开放公网或用多个 WSGI worker 运行。
 
+## 给 AI Agent 使用的本机 CLI
+
+保持分发台应用运行，然后执行 `./desk_cli.py --help`（或 `python3 desk_cli.py --help`）。CLI 输出 JSON，适合 Agent 解析；仅允许连接 `127.0.0.1` 或 `localhost`。
+
+```sh
+python3 desk_cli.py list packages
+python3 desk_cli.py list accounts
+python3 desk_cli.py import-site ./distribution-example.json
+python3 desk_cli.py distribute 包ID --target 账号ID:article
+python3 desk_cli.py preflight 任务ID
+```
+
+还可用 `create-package --title 标题 --body-file 正文.md` 新建成品包，或用 `list tasks`、`list runs` 查看进度。CLI **不提供提交发布、重试和回填发布结果的命令**；这些高影响操作仍在应用中由人确认。网站快照文件含未公开正文，调用 Agent 时不要把文件内容或本机会话令牌发送到外部服务。
+
+本阶段先交付无额外依赖的 CLI。MCP 服务可在这一层复用相同的只读与草稿创建能力，但尚未作为独立服务安装。
+
 ## 平台连接
 
 - **公众号、知乎、B 站文章：** 使用 [Wechatsync](https://github.com/wechatsync/Wechatsync) Chrome 扩展，经本机 WebSocket 桥接。安装扩展并在平台登录后，将扩展 Token 配入分发台。
