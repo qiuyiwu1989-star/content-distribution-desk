@@ -22,3 +22,14 @@ backups/
 integrations/social-auto-upload/
 # Private exports downloaded from the writing desk
 distribution-*.json
+
+# Local batch catalogs, snapshots and user-specific audit reports
+static/batches.json
+*.before-*
+*.bak
+docs/分发台改版内容库.jpg
+docs/账号与分发关系核查.md
+docs/视频号自动化联调状态.md
+docs/视频号合集归类建议.md
+scripts/rebuild_batch_catalog.py
+docs/批量视频发布内容准备说明.md

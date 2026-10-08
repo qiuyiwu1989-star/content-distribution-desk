@@ -115,7 +115,7 @@ def execute(snapshot, bridge, directory):
         with open(directory/'private-output.log','wb') as out:
             os.chmod(directory/'private-output.log',0o600)
             try:
-                r=subprocess.Popen(cmd,cwd=SAU_ROOT,stdout=out,stderr=subprocess.STDOUT,stdin=subprocess.DEVNULL,start_new_session=True)
+                r=subprocess.Popen(cmd,cwd=SAU_ROOT,stdout=out,stderr=subprocess.STDOUT,stdin=subprocess.DEVNULL,start_new_session=True,env={**os.environ,"DESK_DRAFT_DIAGNOSTIC":str(directory/"draft-diagnostic.json")})
                 code=r.wait(timeout=900)
             except subprocess.TimeoutExpired:
                 try:os.killpg(r.pid,signal.SIGKILL)

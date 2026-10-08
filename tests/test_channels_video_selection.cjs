@@ -1,0 +1,11 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const source=fs.readFileSync('extensions/channels-assistant/background.js','utf8');
+const fn=source.slice(source.indexOf('function videoIds('),source.indexOf("const BASE="));
+const ctx={};vm.createContext(ctx);vm.runInContext(fn,ctx);
+const assets=[{id:'v',kind:'video',mime:'video/mp4'},{id:'c',kind:'image',mime:'image/png'},{id:'v2',mime:'video/mp4'}];
+const ids=x=>Array.from(ctx.videoIds({asset_ids:x},assets));
+assert.deepStrictEqual(ids(['v','c']),['v']);
+assert.deepStrictEqual(ids(['c']),[]);
+assert.deepStrictEqual(ids(['v','v2','c']),['v','v2']);
+assert.deepStrictEqual(ids(['missing','v']),['v']);
+console.log('PASS: video plus cover accepted; missing and multiple videos remain distinguishable');

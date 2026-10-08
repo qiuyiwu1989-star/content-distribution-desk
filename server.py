@@ -2,6 +2,7 @@
 import io
 import json
 import os
+import re
 import secrets
 import sqlite3
 import threading
@@ -129,7 +130,9 @@ def create_app(data_dir=None):
         if request.method in {'POST', 'PUT', 'PATCH', 'DELETE'}:
             if request.headers.get('X-Desk-Token') != token:
                 return jsonify(error='会话已刷新，请重新打开页面'), 403
-            if request.headers.get('Origin') and request.headers['Origin'] != request.host_url.rstrip('/'):
+            origin = request.headers.get('Origin', '')
+            extension_observation = request.path == '/api/channel-observations' and re.fullmatch(r'chrome-extension://[a-p]{32}', origin)
+            if origin and origin != request.host_url.rstrip('/') and not extension_observation:
                 return jsonify(error='不允许跨站写入'), 403
             if request.is_json and not isinstance(request.get_json(), dict):
                 return jsonify(error='请求必须是 JSON 对象'), 400
@@ -252,6 +255,10 @@ def create_app(data_dir=None):
                 ca = get(c, 'assets', cover)
                 if ca['kind'] != 'image' or ca['package_id'] != t['package_id']:
                     fail('封面不正确')
+            if 'options' in d:
+                if not isinstance(d['options'],dict):fail('交付设置格式不正确')
+                value=app.desk_validate_options(c,t,d['options'])
+                c.execute('INSERT OR REPLACE INTO task_options VALUES(?,?)',(id,json.dumps(value)))
             app.desk_cancel_pending(c,id)
             c.execute("UPDATE tasks SET title=?,body=?,tags=?,asset_ids=?,cover_id=?,status='draft',scheduled=NULL,revision=revision+1,updated=? WHERE id=?", (text(d.get('title', t['title']), 200, True), text(d.get('body', t['body'])), text(d.get('tags', t['tags']), 500), json.dumps(assets), cover, now(), id))
             event(c, id, '保存新版本；原排期已清除，需重新确认交付')
@@ -345,8 +352,14 @@ def create_app(data_dir=None):
         finally:
             target.unlink(missing_ok=True)
 
+    from account_registry import install as install_account_registry
+    install_account_registry(app,data,db,get,fail,text,now)
+    from library import install as install_library
+    install_library(app,data,db,get,fail,text,now,ROOT / 'static/batches.json')
     from distribution import install
     install(app,data,db,get,fail,text,now,event,validate_task)
+    from channel_observations import install as install_channel_observations
+    install_channel_observations(app,data,db,get,fail,text,now)
     from site_import import install as install_site_import
     install_site_import(app,db,fail,text,now)
     return app

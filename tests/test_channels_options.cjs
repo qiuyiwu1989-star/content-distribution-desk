@@ -1,0 +1,34 @@
+const assert=require('node:assert/strict');
+const {create}=require('../extensions/channels-assistant/form-options.js');
+function control(kind,attrs={},text=''){
+ const el={kind,attrs,textContent:text,children:[],nodeType:1,disabled:false,clicks:0,events:[],parentElement:null,labels:[],options:[],selectedOptions:[],
+ getAttribute(n){return Object.hasOwn(this.attrs,n)?this.attrs[n]:null;},getClientRects(){return [{}];},
+ matches(selector){return selector.split(',').some(s=>s==='input[type="checkbox"]'?this.kind==='checkbox':s==='select'?this.kind==='select':s==='input'?this.kind==='input':s==='[role="checkbox"]'?this.attrs.role==='checkbox':s==='[role="combobox"]'?this.attrs.role==='combobox':s==='[role="option"]'?this.attrs.role==='option':false);},
+ closest(){return null;},querySelectorAll(){return [];},contains(other){return this===other;},click(){this.clicks++;this.onClick?.();},dispatchEvent(e){this.events.push(e.type);this.onDispatch?.(e);}};
+ return el;
+}
+function harness({checkboxes=[],widgets=[],labels=[],choices=[],dialogs=[]}={}){
+ const query=s=>s==='input[type="checkbox"],[role="checkbox"]'?checkboxes:s==='label,span,div,button'?labels:s==='[role="dialog"],dialog,.weui-desktop-dialog'?dialogs:s==='[role="option"],li,button,span,div'?choices:widgets;
+ return create({query,visible:()=>true,wait:async()=>{}});
+}
+(async()=>{
+ const checked=control('checkbox',{'aria-label':'声明原创'});checked.checked=true;
+ let h=harness({checkboxes:[checked]});assert.deepEqual(await h.perform('original'),{checked:true,already:true});assert.equal(checked.clicks,0,'Already checked must never toggle off');
+ const unchecked=control('checkbox',{'aria-label':'声明原创'});unchecked.checked=false;unchecked.onClick=()=>unchecked.checked=true;
+ h=harness({checkboxes:[unchecked]});assert.equal((await h.perform('original')).checked,true);assert.equal(unchecked.clicks,1);await h.perform('original');assert.equal(unchecked.clicks,1,'Repeated operation remains idempotent');
+ const role=control('div',{role:'checkbox','aria-label':'声明原创','aria-checked':'false'});role.onClick=()=>role.attrs['aria-checked']='true';h=harness({checkboxes:[role]});assert.equal((await h.perform('original')).checked,true);
+ const unknown=control('div',{role:'checkbox','aria-label':'声明原创','aria-checked':'mixed'});h=harness({checkboxes:[unknown]});await assert.rejects(h.perform('original'),/无法确认/);assert.equal(unknown.clicks,0);
+ const nonMatching=control('checkbox',{'aria-label':'同意服务协议'});nonMatching.checked=false;h=harness({checkboxes:[nonMatching]});await assert.rejects(h.perform('original'),/未唯一识别/);assert.equal(nonMatching.clicks,0);
+ const noChange=control('checkbox',{'aria-label':'声明原创'});noChange.checked=false;h=harness({checkboxes:[noChange]});await assert.rejects(h.perform('original'),/未回读/);assert.equal(noChange.clicks,1,'No repeated toggle on readback failure');
+ const declarations=[];const terms=control('div',{},'原创声明协议 请阅读条款');const showing=control('checkbox',{'aria-label':'声明原创'});showing.checked=false;showing.onClick=()=>{showing.checked=true;declarations.push(terms);};h=harness({checkboxes:[showing],dialogs:declarations});await assert.rejects(h.perform('original'),/人工阅读/);assert.equal(terms.clicks,0);
+ const trigger=control('button',{role:'combobox','aria-label':'合集'},'目标合集');h=harness({widgets:[trigger]});assert.deepEqual(await h.perform('collection','目标合集'),{selected:true,value:'目标合集',already:true});assert.equal(trigger.clicks,0);
+ const fieldLabel=control('span',{},'添加到合集'),existing=control('button',{role:'combobox'},'企业AI');fieldLabel.parentElement={textContent:'添加到合集 企业AI',matches:()=>false,querySelectorAll:()=>[existing]};h=harness({labels:[fieldLabel],widgets:[existing]});assert.equal((await h.perform('collection','企业AI')).already,true);assert.equal(existing.clicks,0,'Persistent 添加到合集 field identifies selected collection without placeholder');
+ const namedExisting=control('button',{role:'combobox','aria-label':'添加到合集'},'企业AI');h=harness({widgets:[namedExisting]});assert.equal((await h.perform('collection','企业AI')).already,true);
+ const select=control('select',{'aria-label':'合集'});const opt={textContent:'目标合集',value:'target'};select.options=[{textContent:'推荐合集',value:'suggested'},opt];select.selectedOptions=[select.options[0]];select.onDispatch=e=>{if(e.type==='change')select.selectedOptions=[opt];};h=harness({widgets:[select]});assert.equal((await h.perform('collection','目标合集')).selected,true);assert.equal(select.value,'target');assert.deepEqual(select.events,['input','change']);
+ const custom=control('button',{role:'combobox','aria-label':'合集'},'选择合集');const choice=control('div',{role:'option'},'目标合集');choice.onClick=()=>custom.textContent='目标合集';h=harness({widgets:[custom],choices:[choice]});assert.equal((await h.perform('collection','目标合集')).selected,true);assert.equal(custom.clicks,1);assert.equal(choice.clicks,1);
+ const mismatch=control('button',{role:'combobox','aria-label':'合集'},'旧合集');const notRetained=control('div',{role:'option'},'目标合集');h=harness({widgets:[mismatch],choices:[notRetained]});await assert.rejects(h.perform('collection','目标合集'),/回读/);assert.equal(notRetained.clicks,1);
+ const missing=control('button',{role:'combobox','aria-label':'合集'},'旧合集');const recommendation=control('div',{role:'option'},'推荐合集');h=harness({widgets:[missing],choices:[recommendation]});await assert.rejects(h.perform('collection','目标合集'),/精确匹配/);assert.equal(recommendation.clicks,0);
+ h=harness({widgets:[select]});const prior=select.value;await assert.rejects(h.perform('collection','不存在合集'),/未唯一找到/);assert.equal(select.value,prior);
+ const expanded=control('button',{role:'combobox','aria-label':'添加到合集'},'旧合集 企业AI');const popup=control('div',{role:'listbox'},'企业AI');popup.matches=selector=>selector.includes('[role="listbox"]');expanded.childNodes=[{nodeType:3,textContent:'旧合集'},popup];h=harness({widgets:[expanded]});assert.equal(h.readCollection(expanded),'旧合集','Popup option text is not evidence of the selected field value');
+ console.log('PASS: original state/idempotence/terms and collection exact matching/readback/no fallback');
+})().catch(e=>{console.error(e);process.exitCode=1});

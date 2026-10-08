@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "分发台 · 视频号辅助提交",
+  "version": "0.7.1",
+  "description": "从本机分发台辅助上传、填写和保存草稿；公开发布由用户完成。",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "alarms"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:4318/*",
+    "https://channels.weixin.qq.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://channels.weixin.qq.com/*"
+      ],
+      "js": [
+        "form-options.js",
+        "frame-agent.js",
+        "observer.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true,
+      "match_origin_as_fallback": true
+    },
+    {
+      "matches": [
+        "https://channels.weixin.qq.com/*"
+      ],
+      "js": [
+        "runner.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "minimum_chrome_version": "106"
+}

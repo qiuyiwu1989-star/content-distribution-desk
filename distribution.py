@@ -249,6 +249,21 @@ def install(app, data, db, get, fail, text, now, event, validate_task):
                 created.append(tid)
         return jsonify(created=created,skipped=skipped),201
 
+    def validated_options(c,t,d):
+        a=get(c,'accounts',t['account_id'])
+        mode=d.get('mode','manual');rule=rules_for(a['platform'],t['format'])
+        if mode not in rule['modes']:fail('该平台不支持此交付方式')
+        category=d.get('category')
+        if category is not None and (type(category) is not int or not 1<=category<=99999):fail('分区 ID 需要是有效正整数')
+        cover=d.get('landscape_cover_id') or None
+        if cover:
+            image=get(c,'assets',cover)
+            if image['package_id']!=t['package_id'] or image['kind']!='image':fail('横版封面必须是本包图片')
+        value={'mode':mode,'category':category,'collection':text(d.get('collection',''),100),'landscape_cover_id':cover}
+        return value
+
+    app.desk_validate_options=validated_options
+
     @app.put('/api/tasks/<tid>/options')
     def set_options(tid):
         d=request.get_json()
@@ -256,15 +271,8 @@ def install(app, data, db, get, fail, text, now, event, validate_task):
             c.execute('BEGIN IMMEDIATE');t=get(c,'tasks',tid);a=get(c,'accounts',t['account_id'])
             if t['revision']!=d.get('revision'):fail('任务已更新，请刷新',409)
             if t['status'] not in {'draft','ready','scheduled','queued','blocked'}:fail('此任务已经执行，不能修改')
-            mode=d.get('mode','manual');rule=rules_for(a['platform'],t['format'])
-            if mode not in rule['modes']:fail('该平台不支持此交付方式')
-            category=d.get('category')
-            if category is not None and (type(category) is not int or not 1<=category<=99999):fail('分区 ID 需要是有效正整数')
-            cover=d.get('landscape_cover_id') or None
-            if cover:
-                image=get(c,'assets',cover)
-                if image['package_id']!=t['package_id'] or image['kind']!='image':fail('横版封面必须是本包图片')
-            value={'mode':mode,'category':category,'collection':text(d.get('collection',''),100),'landscape_cover_id':cover}
+            value=validated_options(c,t,d)
+            mode=value['mode']
             cancel_pending(c,tid)
             c.execute('INSERT OR REPLACE INTO task_options VALUES(?,?)',(tid,json.dumps(value)))
             c.execute("UPDATE tasks SET status='draft',scheduled=NULL,revision=revision+1,updated=? WHERE id=?",(now(),tid))
@@ -326,6 +334,25 @@ def install(app, data, db, get, fail, text, now, event, validate_task):
             c.execute("UPDATE runs SET status='queued',not_before=?,updated=?,attempt=attempt+1,message=? WHERE id=?",(now(),now(),'已人工核对后重试：'+d['note'],rid))
             c.execute("UPDATE tasks SET status='queued',revision=revision+1,updated=? WHERE id=?",(now(),t['id']))
             event(c,t['id'],'人工核对未重复后重试：'+d['note'])
+        return jsonify(ok=True)
+
+    @app.post('/api/runs/<rid>/reconcile')
+    def reconcile_history(rid):
+        d=request.get_json()
+        labels={'not_found':'未找到本次草稿或作品','draft':'已找到平台草稿','review':'已找到送审内容','published':'已找到公开作品'}
+        outcome=d.get('outcome')
+        if outcome not in labels:fail('请选择平台核对结果')
+        if d.get('checked') is not True:fail('请先实际核对平台')
+        note=text(d.get('note',''),3000,True)
+        with db() as c:
+            c.execute('BEGIN IMMEDIATE')
+            run=get(c,'runs',rid)
+            if run['status']!='unknown':fail('此执行已核对或无需核对，请刷新',409)
+            task=get(c,'tasks',run['task_id'])
+            if task['status']=='unknown':fail('当前任务仍在等待核对，请使用记录平台结果入口',409)
+            message='人工核对历史执行：'+labels[outcome]+' · '+note
+            c.execute("UPDATE runs SET status='resolved',updated=?,message=? WHERE id=?",(now(),message,rid))
+            event(c,task['id'],message+'；当前渠道版本未改变')
         return jsonify(ok=True)
 
     def process_one():

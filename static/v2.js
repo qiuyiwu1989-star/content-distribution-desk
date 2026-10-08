@@ -13,6 +13,11 @@ taskDetail=function(id){
   panel.querySelectorAll('[data-transition="ready"],[data-action="schedule"],.schedule-label').forEach(x=>x.remove());
   panel.insertAdjacentHTML('beforeend',`<div class="mode-summary"><span>交付方式</span><strong>${S.mode_labels[o.mode]}</strong><button class="text-button" data-v2="options" data-id="${id}">调整</button></div><button class="primary full" data-v2="preflight" data-id="${id}">${icon('check')}发布检查与确认</button>`);
  }
+ if(a.platform==='channels'&&t.format==='video'){
+  const advanced=document.createElement('details');advanced.innerHTML='<summary>高级：旧上传器与人工交付</summary>';
+  for(const el of [...panel.children])if(el.matches('.mode-summary,[data-v2="preflight"]'))advanced.append(el);
+  panel.append(advanced);panel.insertAdjacentHTML('afterbegin','<h3>用插件同步到视频号</h3><p>在 Chrome 打开视频号发表页，打开插件，按封面选择内容并加载。无需在这里确认交付或启动旧上传器。</p>');
+ }
  if(t.status==='running')$('.task-actions').insertAdjacentHTML('afterbegin','<div class="notice"><p>正在执行已批准版本。请勿在其他窗口重复提交；执行结束后会显示回执或核对提示。</p></div>');
  const runs=(S.runs||[]).filter(r=>r.task_id===id);
  if(runs.length){$('.task-actions').insertAdjacentHTML('beforeend',`<section class="run-history"><h3>执行记录</h3>${runs.map(r=>`<div><b>${runStatus(r.status)}</b><small>${date(r.updated,true)} · 第 ${r.attempt} 次</small><p>${esc(r.message||'等待计划时间')}</p>${r.receipt_url?`<a class="text-button" href="${esc(r.receipt_url)}" target="_blank" rel="noopener">打开平台回执 ↗</a>`:''}${['unknown','blocked'].includes(r.status)&&['unknown','blocked'].includes(t.status)?`<button class="secondary small" data-v2="retry" data-id="${r.id}">核对后重试</button>`:''}</div>`).join('')}</section>`);}
