@@ -170,6 +170,7 @@ def create_app(data_dir=None):
         for t in result['tasks']:
             t['asset_ids'] = json.loads(t['asset_ids'])
         result=app.desk_enrich(result)
+        result=app.desk_enrich_publication(result)
         return jsonify(**result, platforms=PLATFORMS, formats=FORMATS, statuses=STATUSES, server_time=now(), delivery_mode='mixed')
 
     @app.post('/api/accounts')
@@ -182,6 +183,30 @@ def create_app(data_dir=None):
         with db() as c:
             c.execute('INSERT INTO accounts VALUES(?,?,?,?)', (id, platform, text(d.get('name'), 80, True), now()))
         return jsonify(id=id), 201
+
+    @app.patch('/api/accounts/<aid>')
+    def edit_account(aid):
+        d=request.get_json() or {}
+        with db() as c:
+            a=get(c,'accounts',aid);platform=d.get('platform',a['platform'])
+            if platform not in PLATFORMS:fail('请选择平台')
+            if platform!=a['platform'] and c.execute('SELECT 1 FROM tasks WHERE account_id=?',(aid,)).fetchone():fail('已有任务历史，不能直接改变平台；请新增正确平台账号，保留原历史',409)
+            name=text(d.get('name',a['name']),80,True)
+            if c.execute('SELECT 1 FROM accounts WHERE platform=? AND name=? AND id<>?',(platform,name,aid)).fetchone():fail('同平台同名账号已存在',409)
+            if platform!=a['platform']:
+                c.execute('DELETE FROM checks WHERE account_id=?',(aid,));c.execute('DELETE FROM connections WHERE account_id=?',(aid,))
+                c.execute('UPDATE registry_accounts SET linked_account_id=NULL WHERE linked_account_id=?',(aid,))
+            c.execute('UPDATE accounts SET platform=?,name=? WHERE id=?',(platform,name,aid))
+        return jsonify(ok=True)
+
+    @app.delete('/api/accounts/<aid>')
+    def delete_account(aid):
+        with db() as c:
+            get(c,'accounts',aid)
+            if c.execute('SELECT 1 FROM tasks WHERE account_id=?',(aid,)).fetchone():fail('此连接有任务历史，不能删除；可以修改名称或保留历史连接',409)
+            c.execute('UPDATE registry_accounts SET linked_account_id=NULL WHERE linked_account_id=?',(aid,))
+            c.execute('DELETE FROM checks WHERE account_id=?',(aid,));c.execute('DELETE FROM connections WHERE account_id=?',(aid,));c.execute('DELETE FROM accounts WHERE id=?',(aid,))
+        return jsonify(ok=True)
 
     @app.post('/api/packages')
     def package():
@@ -211,6 +236,10 @@ def create_app(data_dir=None):
             target.unlink()
             fail('文件为空')
         kind, mime = types[ext]
+        from asset_storage import deduplicate_upload
+        with db() as c:
+            candidates = [data / 'files' / row['id'] for row in c.execute('SELECT id FROM assets WHERE size=? AND kind=?', (size, kind))]
+        deduplicate_upload(target, candidates)
         try:
             with db() as c:
                 c.execute('INSERT INTO assets VALUES(?,?,?,?,?,?,?)', (aid, id, name, mime, size, kind, now()))
