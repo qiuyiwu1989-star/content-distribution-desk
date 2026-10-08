@@ -157,6 +157,11 @@ def create_app(data_dir=None):
     def index():
         return (ROOT / 'static/index.html').read_text().replace('__TOKEN__', token)
 
+    @app.get('/api/version')
+    def version():
+        path=ROOT / 'version.json'
+        return jsonify(json.loads(path.read_text()) if path.exists() else {'version':'unknown','changes':[]})
+
     @app.get('/api/state')
     def state():
         tick()

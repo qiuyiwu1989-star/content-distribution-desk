@@ -8,14 +8,14 @@ PROJECT_PATH="$PROJECT" BUNDLE_PATH="$BUNDLE" /usr/bin/python3 - <<'PY'
 import os, plistlib
 from pathlib import Path
 bundle=Path(os.environ['BUNDLE_PATH'])
-info={'CFBundleName':'内容分发台','CFBundleDisplayName':'内容分发台','CFBundleIdentifier':'com.qiuyiwu.distributiondesk','CFBundleExecutable':'DistributionDesk','CFBundlePackageType':'APPL','CFBundleShortVersionString':'0.4.1','CFBundleVersion':'6','LSMinimumSystemVersion':'13.0','NSHighResolutionCapable':True,'DeskProjectPath':os.environ['PROJECT_PATH'],'CFBundleIconFile':'DistributionDesk.icns'}
+info={'CFBundleName':'内容分发台','CFBundleDisplayName':'内容分发台','CFBundleIdentifier':'com.qiuyiwu.distributiondesk','CFBundleExecutable':'DistributionDesk','CFBundlePackageType':'APPL','CFBundleShortVersionString':__import__('json').loads((Path(os.environ['PROJECT_PATH'])/'version.json').read_text())['version'],'CFBundleVersion':str(__import__('json').loads((Path(os.environ['PROJECT_PATH'])/'version.json').read_text())['build']),'LSMinimumSystemVersion':'13.0','NSHighResolutionCapable':True,'DeskProjectPath':os.environ['PROJECT_PATH'],'CFBundleIconFile':'DistributionDesk.icns'}
 with (bundle/'Contents/Info.plist').open('wb') as file:plistlib.dump(info,file)
 PY
 /usr/bin/swiftc -swift-version 5 -O -framework AppKit -framework WebKit "$PROJECT/mac-app/main.swift" -o "$BUNDLE/Contents/MacOS/DistributionDesk"
 "$PROJECT/.venv/bin/python" "$PROJECT/mac-app/icon.py" "$BUNDLE/Contents/Resources/DistributionDesk.icns"
 RESOURCE="$BUNDLE/Contents/Resources/Project"
 mkdir -p "$RESOURCE/mac-app" "$RESOURCE/integrations"
-for file in server.py distribution.py library.py account_registry.py channel_observations.py site_import.py adapters.py platform_rules.py wechat_bridge.py requirements.txt; do /bin/cp "$PROJECT/$file" "$RESOURCE/$file"; done
+for file in version.json server.py distribution.py library.py account_registry.py channel_observations.py site_import.py adapters.py platform_rules.py wechat_bridge.py requirements.txt; do /bin/cp "$PROJECT/$file" "$RESOURCE/$file"; done
 /usr/bin/rsync -a --delete "$PROJECT/static/" "$RESOURCE/static/"
 /usr/bin/rsync -a --delete "$PROJECT/.venv/" "$RESOURCE/.venv/"
 # Keep Python entry points inside the app instead of external symbolic links.
