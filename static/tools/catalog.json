@@ -1,0 +1,125 @@
+{
+  "schema": "pixu.tools.v1",
+  "version": "0.3.0",
+  "tools": [
+    {
+      "id": "batch-import",
+      "name": "整批内容入库",
+      "description": "检查整批清单与素材，再导入内容库。",
+      "status": "available",
+      "provider": "片序 MCP",
+      "entry": "preview_library_batch / import_library_batch",
+      "boundary": "先预检，再导入；导入不会自动创建发布任务。",
+      "integration": {
+        "state": "entry_declared",
+        "host_connection": "unknown"
+      },
+      "validation": {
+        "state": "not_recorded",
+        "summary": "尚无绑定当前工具版本的验证记录。"
+      }
+    },
+    {
+      "id": "source-location",
+      "name": "原片区间读取",
+      "description": "读取成片已登记的原片时间区间。",
+      "status": "available",
+      "provider": "片序 MCP",
+      "entry": "desk_source_provenance",
+      "boundary": "需要 package_id 和 video_id；缺少记录返回空。全文语义检索仍待接入。",
+      "integration": {
+        "state": "entry_declared",
+        "host_connection": "unknown"
+      },
+      "validation": {
+        "state": "not_recorded",
+        "summary": "尚无绑定当前工具版本的验证记录。"
+      }
+    },
+    {
+      "id": "edit-plan",
+      "name": "剪辑方案检查",
+      "description": "检查原速硬切方案的区间、输出顺序、时长与重复使用。",
+      "status": "available",
+      "provider": "片序 MCP",
+      "entry": "desk_check_edit_plan",
+      "boundary": "仅检查原速硬切的整数毫秒方案，不执行剪辑、不验证原片实际时长、不判断语义。",
+      "integration": {
+        "state": "entry_declared",
+        "host_connection": "unknown"
+      },
+      "validation": {
+        "state": "not_recorded",
+        "summary": "尚无绑定当前工具版本的验证记录。"
+      }
+    },
+    {
+      "id": "frame-preview",
+      "name": "画面预览",
+      "description": "生成指定工程与时间点的画面。",
+      "status": "adapter_pending",
+      "provider": "ReelMind",
+      "entry": "render_preview",
+      "boundary": "已有实现；需要工程绑定及预览文件交回片序。",
+      "integration": {
+        "state": "adapter_pending",
+        "host_connection": "not_applicable"
+      },
+      "validation": {
+        "state": "not_recorded",
+        "summary": "尚无绑定当前工具版本的验证记录。"
+      }
+    },
+    {
+      "id": "delivery-check",
+      "name": "交付包检查",
+      "description": "核对视频、字幕、封面与来源版本。",
+      "status": "adapter_pending",
+      "provider": "ReelMind 本机开发",
+      "entry": "delivery_bundle / package_status",
+      "boundary": "本机实现与远端分支不同，先固定版本再接入。",
+      "integration": {
+        "state": "adapter_pending",
+        "host_connection": "not_applicable"
+      },
+      "validation": {
+        "state": "not_recorded",
+        "summary": "尚无绑定当前工具版本的验证记录。"
+      }
+    },
+    {
+      "id": "brand-assets",
+      "name": "品牌与个人素材检索",
+      "description": "查找 Logo、照片和使用说明。",
+      "status": "available",
+      "provider": "片序 MCP",
+      "entry": "find_brand_assets",
+      "boundary": "只读查询；使用素材仍需遵循对应使用备注。",
+      "integration": {
+        "state": "entry_declared",
+        "host_connection": "unknown"
+      },
+      "validation": {
+        "state": "not_recorded",
+        "summary": "尚无绑定当前工具版本的验证记录。"
+      }
+    },
+    {
+      "id": "content-history",
+      "name": "内容记录",
+      "description": "读取历史，写入策划、评价与数据。",
+      "status": "available",
+      "provider": "片序 MCP",
+      "entry": "desk_content_history / desk_add_content_record",
+      "boundary": "写入记录不改变审核与发布状态。",
+      "integration": {
+        "state": "entry_declared",
+        "host_connection": "unknown"
+      },
+      "validation": {
+        "state": "not_recorded",
+        "summary": "尚无绑定当前工具版本的验证记录。"
+      }
+    }
+  ]
+}

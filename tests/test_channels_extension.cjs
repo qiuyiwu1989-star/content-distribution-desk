@@ -16,6 +16,12 @@ const context={crypto:require("node:crypto").webcrypto,setTimeout,clearTimeout,M
 context.importScripts=path=>vm.runInContext(fs.readFileSync('extensions/channels-assistant/'+path,'utf8'),context);
 vm.createContext(context);
 vm.runInContext(fs.readFileSync('extensions/channels-assistant/background.js','utf8'),context);
+const progressTask={id:'eligible',account_id:'a',revision:1};
+const remoteProgress={account_id:'a',revision:1,status:'published',confirmed_at:'2026-10-08T10:00:00Z'};
+assert.equal(context.mergePublicationProgress(progressTask,{publication_progress:remoteProgress},null).status,'published');
+assert.equal(context.mergePublicationProgress({...progressTask,revision:2},{publication_progress:remoteProgress},remoteProgress),null,'old revision never hides current version');
+assert.equal(context.mergePublicationProgress(progressTask,{publication_progress:remoteProgress},{...remoteProgress,status:'unconfirmed',confirmed_at:'2026-10-08T11:00:00Z'}).status,'unconfirmed','pending local undo remains visible');
+assert.equal(context.mergePublicationProgress(progressTask,{publication_progress:remoteProgress},{...remoteProgress,account_id:'wrong',status:'unconfirmed'}).status,'published','other account progress cannot override');
 const call=(m,s={})=>new Promise(resolve=>listener(m,s,resolve));
 (async()=>{
  let r=await call({type:'state'});assert.equal(r.ok,true);assert.equal(r.result.tasks.length,1);assert.equal(r.result.tasks[0].id,'eligible');
@@ -25,7 +31,7 @@ const call=(m,s={})=>new Promise(resolve=>listener(m,s,resolve));
  r=await call({type:'asset',id:'a'.repeat(32)},{url:'https://example.com/'});assert.equal(r.ok,false);
  r=await call({type:'asset',id:'../bad'},{url:'https://channels.weixin.qq.com/platform'});assert.equal(r.ok,false);
  r=await call({type:'asset',id:'a'.repeat(32)},{url:'https://channels.weixin.qq.com/platform'});assert.equal(r.ok,true);assert.equal(r.result.base64,'AQID');
- function fakeFrame(frameId,counts){let callback;connectListener({name:'desk-frame',sender:{tab:{id:7},frameId,documentId:'doc-7'},onMessage:{addListener:f=>callback=f},onDisconnect:{addListener:()=>{}},postMessage:m=>queueMicrotask(()=>callback({id:m.id,ok:true,result:m.op==='scan'?{path:'/micro/content/post/create',counts}:{filled:true}}))});}
+ function fakeFrame(frameId,counts){let callback;connectListener({name:'desk-frame',sender:{tab:{id:7},frameId,documentId:'doc-7'},onMessage:{addListener:f=>callback=f},onDisconnect:{addListener:()=>{}},postMessage:m=>queueMicrotask(()=>callback({id:m.id,ok:counts!==null,error:counts===null?'scan disconnected':undefined,result:m.op==='scan'?{path:'/micro/content/post/create',counts}:{filled:true}}))});}
  fakeFrame(0,{video:0,body:0,title:0});fakeFrame(4,{video:1,body:1,title:1});
  const top={tab:{id:7},frameId:0,documentId:'doc-7',url:'https://channels.weixin.qq.com/platform/post/create'};
  r=await call({type:'state'},top);assert.equal(r.ok,true);assert.equal(r.result.tasks[0].sequence,1);assert.equal(r.result.tasks[0].batch_id,'course');
@@ -52,6 +58,7 @@ const call=(m,s={})=>new Promise(resolve=>listener(m,s,resolve));
  r=await call({type:'frames'},top);assert.equal(r.result.length,2);
  r=await call({type:'field',kind:'body',op:'fill',value:'test'},top);assert.equal(r.ok,true);
  r=await call({type:'field',kind:'body',op:'fill',value:'test'},{...top,frameId:4});assert.equal(r.ok,false);
+ fakeFrame(6,null);r=await call({type:'field',kind:'body',op:'fill',value:'test'},top);assert.equal(r.ok,false);assert.match(r.error,/扫描不完整/,'A valid candidate in another frame must not bypass an incomplete scan');fakeFrame(6,{video:0,body:0,title:0});
  fakeFrame(5,{video:1,body:1,title:1});r=await call({type:'field',kind:'body',op:'fill',value:'test'},top);assert.equal(r.ok,false);
  const code=fs.readFileSync('extensions/channels-assistant/content.js','utf8');assert.ok(!/exact\([^\n]*['"]发表['"]/.test(code));
  // Simulate a terminated service worker: fresh globals, same chrome.storage.local and same document.
@@ -68,5 +75,9 @@ const call=(m,s={})=>new Promise(resolve=>listener(m,s,resolve));
  r=await call({type:'publication-undo',task_id:'eligible',revision:1},top);assert.equal(r.ok,true);assert.equal(r.result.status,'unconfirmed');
  r=await call({type:'publication-confirm',task_id:'eligible',revision:999},top);assert.equal(r.ok,false);
  await new Promise(resolve=>setImmediate(resolve));
+ const originalSend=context.chrome.tabs.sendMessage;let wakeups=0;
+ context.chrome.tabs.sendMessage=async(tab,m,options)=>{if(m.type==='desk-frame-wakeup'){wakeups++;fakeFrame(0,{video:1,body:1,title:1});return {ok:true};}return originalSend(tab,m,options);};
+ r=await call({type:'frames'},top);assert.equal(r.ok,true);assert.equal(r.result.length,1,'Frame registry recovers after worker termination');assert.equal(wakeups,1);
+ r=await call({type:'frames'},top);assert.equal(wakeups,1,'A live frame connection is not restarted during an operation');
  console.log('PASS: permissions, task filtering, sender validation, asset validation and transport');
 })().catch(e=>{console.error(e);process.exitCode=1});

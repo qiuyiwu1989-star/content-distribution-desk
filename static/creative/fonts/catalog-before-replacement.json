@@ -1,0 +1,89 @@
+{
+  "collected_at": "2026-10-09",
+  "fonts": [
+    {
+      "id": "source-han-sans",
+      "name": "思源黑体",
+      "use": "正文、字幕、粗标题",
+      "source": "https://github.com/adobe-fonts/source-han-sans",
+      "license": "SIL OFL 1.1",
+      "files": [
+        "source-han-sans/SourceHanSansCN-Bold.otf",
+        "source-han-sans/SourceHanSansCN-Heavy.otf",
+        "source-han-sans/SourceHanSansCN-Regular.otf"
+      ],
+      "sha256": {
+        "source-han-sans/SourceHanSansCN-Bold.otf": "62383707c086a32f3afd5e293f34c7eff64c7fea31f579fdc6cbe34d920519a6",
+        "source-han-sans/SourceHanSansCN-Heavy.otf": "88c749b0a54a0800124ded6544e399302ed224aa49992ea364b88769f825c54c",
+        "source-han-sans/SourceHanSansCN-Regular.otf": "e2bc8a2e7f37474b774fff8db758681ece40bb6947a90d571bce9dd60671a8e4"
+      }
+    },
+    {
+      "id": "source-han-serif",
+      "name": "思源宋体",
+      "use": "访谈标题、课程、长句观点",
+      "source": "https://github.com/adobe-fonts/source-han-serif",
+      "license": "SIL OFL 1.1",
+      "files": [
+        "source-han-serif/SourceHanSerifCN-Bold.otf",
+        "source-han-serif/SourceHanSerifCN-Regular.otf"
+      ],
+      "sha256": {
+        "source-han-serif/SourceHanSerifCN-Bold.otf": "4ee555ae58b3d22f6a95c2c494f2c36b7cccfc1d2224635f6461a03756f0e3c1",
+        "source-han-serif/SourceHanSerifCN-Regular.otf": "3754ea669c530e2473354f8f6d9f79680a44d7e26ec7d00eeabee4a7e0753c5d"
+      }
+    },
+    {
+      "id": "zcoolxiaowei",
+      "name": "站酷小薇",
+      "use": "有性格的宋体标题、栏目",
+      "source": "https://github.com/google/fonts/tree/main/ofl/zcoolxiaowei",
+      "license": "SIL OFL 1.1",
+      "files": [
+        "zcoolxiaowei/ZCOOLXiaoWei-Regular.ttf"
+      ],
+      "sha256": {
+        "zcoolxiaowei/ZCOOLXiaoWei-Regular.ttf": "a42b620140f493db42f741351dfbf343c0936d58588ee8004b8b2a218d997ff1"
+      }
+    },
+    {
+      "id": "zcoolqingkehuangyou",
+      "name": "站酷庆科黄油体",
+      "use": "窄长标题、重点短句",
+      "source": "https://github.com/google/fonts/tree/main/ofl/zcoolqingkehuangyou",
+      "license": "SIL OFL 1.1",
+      "files": [
+        "zcoolqingkehuangyou/ZCOOLQingKeHuangYou-Regular.ttf"
+      ],
+      "sha256": {
+        "zcoolqingkehuangyou/ZCOOLQingKeHuangYou-Regular.ttf": "54f0c0df4308cd74cd0f2fd3494ae054dbc4a1fd6fa7d71f4807eb4cdd8b4136"
+      }
+    },
+    {
+      "id": "mashanzheng",
+      "name": "马善政毛笔楷书",
+      "use": "栏目字、短标题；不用于长字幕",
+      "source": "https://github.com/google/fonts/tree/main/ofl/mashanzheng",
+      "license": "SIL OFL 1.1",
+      "files": [
+        "mashanzheng/MaShanZheng-Regular.ttf"
+      ],
+      "sha256": {
+        "mashanzheng/MaShanZheng-Regular.ttf": "6d2546bb189c732a8ca29af9e22457b152387d158aa459e4ac2ce1e51788b7fb"
+      }
+    },
+    {
+      "id": "longcang",
+      "name": "龙藏体",
+      "use": "手写批注、少量辅助短句",
+      "source": "https://github.com/google/fonts/tree/main/ofl/longcang",
+      "license": "SIL OFL 1.1",
+      "files": [
+        "longcang/LongCang-Regular.ttf"
+      ],
+      "sha256": {
+        "longcang/LongCang-Regular.ttf": "e5bf2c3f24ef2327c6f136d8f73e2f9dfdf44896fdbeb35a9515f44777bb91bc"
+      }
+    }
+  ]
+}

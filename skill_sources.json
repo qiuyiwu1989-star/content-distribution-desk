@@ -1,0 +1,154 @@
+{
+  "skills": [
+    {
+      "id": "platform-onboarding",
+      "label": "Agent 接入规范",
+      "path": "/Users/Apple/Documents/邱懿武03/content-distribution-desk/skills/platform-onboarding",
+      "hint": "统一读取资源、标准与案例，核对开工条件并回流经验"
+    },
+    {
+      "id": "video-cover-design",
+      "label": "封面设计",
+      "path": "/Users/Apple/Documents/邱懿武03/协作资料/技能/video-cover-design",
+      "hint": "先做方案样张，再按选定方向制作封面"
+    },
+    {
+      "id": "course-video-editing",
+      "label": "课程剪辑",
+      "path": "/Users/Apple/Documents/邱懿武03/协作资料/技能/course-video-editing",
+      "hint": "从原声中提炼独立观点，优化口语与节奏"
+    },
+    {
+      "id": "experience-summary",
+      "label": "经验总结",
+      "path": "/Users/Apple/Documents/邱懿武03/content-distribution-desk/skills/experience-summary",
+      "hint": "总结剪辑经验，完成批次交接与内容入库"
+    },
+    {
+      "id": "content-craft",
+      "label": "内容创作",
+      "path": "/Users/Apple/Documents/邱懿武03/协作资料/技能/content-craft",
+      "hint": "为邱懿武的成片组织短标题、正文、话题及文字审校，按任务调用小技能；不代替剪辑、封面设计或平台发布。"
+    },
+    {
+      "id": "content-short-title",
+      "label": "短标题",
+      "path": "/Users/Apple/Documents/邱懿武03/协作资料/技能/content-short-title",
+      "hint": "为课程或观点成片提炼独立成立的发布短标题，区分封面与视频标题；不生成脱离原意的点击诱导。"
+    },
+    {
+      "id": "content-publish-body",
+      "label": "发布正文",
+      "path": "/Users/Apple/Documents/邱懿武03/协作资料/技能/content-publish-body",
+      "hint": "依据当前成片写面向读者的发布正文，优化开头、上下文与观点层次；不把宣传改写作为讲者原话。"
+    },
+    {
+      "id": "content-topic-tags",
+      "label": "话题配置",
+      "path": "/Users/Apple/Documents/邱懿武03/协作资料/技能/content-topic-tags",
+      "hint": "为实际内容选择相关话题并应用批次指定词，去重及分离正文；不为凑数量添加无关热点。"
+    },
+    {
+      "id": "asr-text-correction",
+      "label": "ASR 文本纠错",
+      "path": "/Users/Apple/Documents/邱懿武03/协作资料/技能/asr-text-correction",
+      "hint": "审校中文课程转录的专名、英文、数字和语义疑点，保留原声证据与纠错记录；不自动纠正本人口误或改写字幕。"
+    },
+    {
+      "id": "qiuyiwu-language-style",
+      "label": "邱懿武语言风格",
+      "path": "/Users/Apple/Documents/邱懿武03/协作资料/技能/qiuyiwu-language-style",
+      "hint": "保留邱懿武课程表达的具体经验、类比和判断，优化口语及代写文案；不模仿声音或替本人新增立场。"
+    },
+    {
+      "id": "course-topic-mining",
+      "label": "全片选题与去重",
+      "path": "/Users/Apple/Documents/邱懿武03/协作资料/技能/course-topic-mining",
+      "hint": "对长课全片骨架、既有成片及问答做选题覆盖与去重，寻找未处理的独立观点；不以剪完候选表宣称全片挖完。"
+    },
+    {
+      "id": "clip-standalone-review",
+      "label": "短片独立表达",
+      "path": "/Users/Apple/Documents/邱懿武03/协作资料/技能/clip-standalone-review",
+      "hint": "从首次观看听众角度核对短片的主语、背景、例证、条件与结尾，给出来源忠实的补剪方案；不靠标题遮掩内容断裂。"
+    },
+    {
+      "id": "oral-audio-refinement",
+      "label": "原声口语精修",
+      "path": "/Users/Apple/Documents/邱懿武03/协作资料/技能/oral-audio-refinement",
+      "hint": "逐处判断并处理重复起音、失败开头与纯填充，保护语义和自然听感；不把洁净字幕当成音轨已精修。"
+    },
+    {
+      "id": "classroom-qa-editing",
+      "label": "课堂问答剪辑",
+      "path": "/Users/Apple/Documents/邱懿武03/协作资料/技能/classroom-qa-editing",
+      "hint": "从多人课堂问答中保留问题条件、说话人归属与完整回答，整理为独立短片；不拼接虚构对话。"
+    },
+    {
+      "id": "claims-and-boundaries",
+      "label": "论断与适用边界",
+      "path": "/Users/Apple/Documents/邱懿武03/协作资料/技能/claims-and-boundaries",
+      "hint": "检查课程成片中的数字、客户案例、引述、预测及能力边界，保留限定并追溯证据；不把个人经验包装成普遍事实。"
+    },
+    {
+      "id": "clip-audiovisual-review",
+      "label": "成片声画复核",
+      "path": "/Users/Apple/Documents/邱懿武03/协作资料/技能/clip-audiovisual-review",
+      "hint": "对实际成片核对接缝、字幕、PPT可读性、原声和版本，分别记录技术与听看证据；不以解码或ASR高分替代完整听审。"
+    },
+    {
+      "id": "editing-feedback-learning",
+      "label": "剪辑反馈沉淀",
+      "path": "/Users/Apple/Documents/邱懿武03/协作资料/技能/editing-feedback-learning",
+      "hint": "从具体版本的用户反馈与返工中提炼可复用剪辑经验，回传技能案例和交付记录；不把候选方案或单次参数推广为通用规则。"
+    },
+    {
+      "id": "clip-opening-design",
+      "label": "短片开头",
+      "path": "/Users/Apple/Documents/邱懿武03/协作资料/技能/clip-opening-design",
+      "hint": "为原声课程短片选择自足且有观看理由的开头，按观点、案例、方法、人物或证据组织；不编造钩子或剪掉限制制造冲突。"
+    },
+    {
+      "id": "clip-ending-design",
+      "label": "短片收尾",
+      "path": "/Users/Apple/Documents/邱懿武03/协作资料/技能/clip-ending-design",
+      "hint": "为课程短片寻找真实结论、案例启示或适用范围，回应开头并保留完整语义；不硬卡时长、虚构总结或强加互动引导。"
+    },
+    {
+      "id": "topic-planning",
+      "label": "全文选题策划",
+      "path": "/Users/Apple/Documents/邱懿武03/协作资料/技能/topic-planning",
+      "hint": "按策划师视角通读全文，形成可追溯选题和剪辑交接"
+    },
+    {
+      "id": "qiuyiwu-oral-refiner",
+      "label": "言简 · 本人口语精修",
+      "path": "/Users/Apple/Documents/邱懿武03/协作资料/技能/qiuyiwu-oral-refiner",
+      "hint": "专职处理本人原声口语，保留语气与判断，逐处听辨切口"
+    },
+    {
+      "id": "change-verification",
+      "label": "改动核对",
+      "path": "/Users/Apple/Documents/邱懿武03/协作资料/技能/change-verification",
+      "hint": "改完用独立证据证明没改坏，保留可回退原件"
+    },
+    {
+      "id": "gate-regression",
+      "label": "闸门回归",
+      "path": "/Users/Apple/Documents/邱懿武03/协作资料/技能/gate-regression",
+      "hint": "新规则上线前抽样对比，别把更合规当更好"
+    },
+    {
+      "id": "negative-knowledge",
+      "label": "止损与不做",
+      "path": "/Users/Apple/Documents/邱懿武03/协作资料/技能/negative-knowledge",
+      "hint": "记录实测无效的做法，避免重复付费"
+    },
+    {
+      "id": "doubao-asr",
+      "label": "豆包 ASR 2.0",
+      "path": "/Users/Apple/Documents/邱懿武03/协作资料/技能/doubao-asr",
+      "hint": "共享录音识别工具、缓存和用量记录，原声口语不自动改写"
+    }
+  ]
+}

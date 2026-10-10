@@ -23,6 +23,17 @@ class LibraryTests(unittest.TestCase):
         self.headers = {'X-Desk-Token': token}
         self.pid = self.post('/api/packages', {'title': '同名内容', 'body': '原文'}).json['id']
 
+    def test_annotations_preserve_review_and_version(self):
+        before = self.meta()
+        r = self.post('/api/packages/'+self.pid+'/annotations', {'note':'下次优化开头', 'fingerprint':before['fingerprint']})
+        self.assertEqual(r.status_code, 201)
+        self.assertEqual(self.meta(), before)
+        rows = self.client.get('/api/packages/'+self.pid+'/annotations').json['annotations']
+        self.assertEqual(rows[0]['note'], '下次优化开头')
+        self.assertEqual(rows[0]['fingerprint'], before['fingerprint'])
+        self.assertEqual(self.post('/api/packages/'+self.pid+'/annotations', {'note':'旧版本', 'fingerprint':'stale'}).status_code, 409)
+        self.assertEqual(len(self.client.get('/api/packages/'+self.pid+'/annotations').json['annotations']), 1)
+
     def tearDown(self):
         self.tmp.cleanup()
 

@@ -1,0 +1,107 @@
+{
+  "collected_at": "2026-10-09",
+  "fonts": [
+    {
+      "id": "smiley-sans",
+      "name": "得意黑",
+      "use": "斜体大标题 · 紧凑、有力量，适合两行短句",
+      "source": "https://github.com/atelier-anchor/smiley-sans",
+      "license": "SIL OFL 1.1",
+      "files": [
+        "smiley-sans/SmileySans-Oblique.otf"
+      ],
+      "license_file": "smiley-sans/LICENSE.txt",
+      "sha256": {
+        "smiley-sans/SmileySans-Oblique.otf": "139b5dcbe70d6d52de85a62d148784c6af4bd161e38fdb62ba0c1e7e5065fca6"
+      }
+    },
+    {
+      "id": "harmonyos-sans",
+      "name": "HarmonyOS Sans",
+      "use": "清晰字幕 / 稳重标题 · 常规、粗体、特黑",
+      "source": "https://developer.huawei.com/consumer/cn/design/resource/",
+      "license": "HarmonyOS Sans 字体许可",
+      "files": [
+        "harmonyos-sans/HarmonyOS_Sans_SC_Regular.ttf",
+        "harmonyos-sans/HarmonyOS_Sans_SC_Black.ttf",
+        "harmonyos-sans/HarmonyOS_Sans_SC_Bold.ttf"
+      ],
+      "license_file": "harmonyos-sans/LICENSE.txt",
+      "sha256": {
+        "harmonyos-sans/HarmonyOS_Sans_SC_Regular.ttf": "297b088424be212207df2ce8b98e335468b782aa6b96832af0b8b773d711e2b1",
+        "harmonyos-sans/HarmonyOS_Sans_SC_Black.ttf": "5de9560908e88820df2e0a5ed9465bc44644ae2ce1cd6c194b76f2ed8e8f186e",
+        "harmonyos-sans/HarmonyOS_Sans_SC_Bold.ttf": "43a424b85e47fb53a17b3b32026a71801f86f8e022ca6798d186b47d39fa5f01"
+      }
+    },
+    {
+      "id": "alimama-shuhei",
+      "name": "阿里妈妈数黑体",
+      "use": "厚重标题 · 方正饱满，适合黑底白字和重点结论",
+      "source": "https://www.alibabafonts.com",
+      "license": "阿里巴巴官方字体授权说明",
+      "files": [
+        "alimama-shuhei/AlimamaShuHeiTi-Bold.ttf"
+      ],
+      "license_file": "https://www.alibabafonts.com",
+      "sha256": {
+        "alimama-shuhei/AlimamaShuHeiTi-Bold.ttf": "6401fd0d82f84efe6040599ae3fb5d7c78fd19e315b2c1884d57ac295f5f1bd8"
+      }
+    },
+    {
+      "id": "alibaba-puhuiti",
+      "name": "阿里巴巴普惠体 2.0",
+      "use": "通用标题 / 字幕 · 常规、粗体、特黑",
+      "source": "https://www.alibabafonts.com",
+      "license": "阿里巴巴官方字体授权说明",
+      "files": [
+        "alibaba-puhuiti/AlibabaPuHuiTi-2-55-Regular.ttf",
+        "alibaba-puhuiti/AlibabaPuHuiTi-2-85-Bold.ttf",
+        "alibaba-puhuiti/AlibabaPuHuiTi-2-115-Black.ttf"
+      ],
+      "license_file": "https://www.alibabafonts.com",
+      "sha256": {
+        "alibaba-puhuiti/AlibabaPuHuiTi-2-55-Regular.ttf": "a22ad467d9d6b4c9a0b2e033927ed41592743c987546a7397215ce96b850743b",
+        "alibaba-puhuiti/AlibabaPuHuiTi-2-85-Bold.ttf": "95db198aa30a998fdb38dd0a4b9b44eb383c19c85c43d6506b25e2b4d138fa08",
+        "alibaba-puhuiti/AlibabaPuHuiTi-2-115-Black.ttf": "abe59aa71d082934100cddf1b880c098954549335bf8c0091d0627aa5d1f2e67"
+      }
+    },
+    {
+      "id": "source-han-sans",
+      "name": "思源黑体",
+      "use": "正文、字幕、粗标题",
+      "source": "https://github.com/adobe-fonts/source-han-sans",
+      "license": "SIL OFL 1.1",
+      "files": [
+        "source-han-sans/SourceHanSansCN-Bold.otf",
+        "source-han-sans/SourceHanSansCN-Heavy.otf",
+        "source-han-sans/SourceHanSansCN-Regular.otf"
+      ],
+      "sha256": {
+        "source-han-sans/SourceHanSansCN-Bold.otf": "62383707c086a32f3afd5e293f34c7eff64c7fea31f579fdc6cbe34d920519a6",
+        "source-han-sans/SourceHanSansCN-Heavy.otf": "88c749b0a54a0800124ded6544e399302ed224aa49992ea364b88769f825c54c",
+        "source-han-sans/SourceHanSansCN-Regular.otf": "e2bc8a2e7f37474b774fff8db758681ece40bb6947a90d571bce9dd60671a8e4"
+      }
+    },
+    {
+      "id": "source-han-serif",
+      "name": "思源宋体",
+      "use": "访谈标题、课程、长句观点",
+      "source": "https://github.com/adobe-fonts/source-han-serif",
+      "license": "SIL OFL 1.1",
+      "files": [
+        "source-han-serif/SourceHanSerifCN-Bold.otf",
+        "source-han-serif/SourceHanSerifCN-Regular.otf"
+      ],
+      "sha256": {
+        "source-han-serif/SourceHanSerifCN-Bold.otf": "4ee555ae58b3d22f6a95c2c494f2c36b7cccfc1d2224635f6461a03756f0e3c1",
+        "source-han-serif/SourceHanSerifCN-Regular.otf": "3754ea669c530e2473354f8f6d9f79680a44d7e26ec7d00eeabee4a7e0753c5d"
+      }
+    }
+  ],
+  "removed_candidates": [
+    "zcoolxiaowei",
+    "zcoolqingkehuangyou",
+    "mashanzheng",
+    "longcang"
+  ]
+}

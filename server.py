@@ -378,6 +378,8 @@ def create_app(data_dir=None):
             b = io.BytesIO()
             with zipfile.ZipFile(b, 'w', zipfile.ZIP_DEFLATED) as z:
                 z.write(target, 'desk.sqlite3')
+                for f in (data / 'brand-assets').glob('*'):
+                    if f.is_file():z.write(f, 'brand-assets/' + f.name)
                 for f in (data / 'files').iterdir():
                     if f.is_file():
                         z.write(f, 'files/' + f.name)
@@ -396,6 +398,30 @@ def create_app(data_dir=None):
     install_channel_observations(app,data,db,get,fail,text,now)
     from site_import import install as install_site_import
     install_site_import(app,db,fail,text,now)
+    from content_assignment import install as install_content_assignment
+    install_content_assignment(app,db,get,fail,text,now,event)
+    from creative_library import install as install_creative_library
+    install_creative_library(app,db,get,fail,now)
+    from cover_template_management import install as install_cover_template_management
+    install_cover_template_management(app,db,fail,now)
+    from editor_attribution import install as install_editor_attribution
+    install_editor_attribution(app,db,get,fail,now)
+    from skill_center import install as install_skill_center
+    install_skill_center(app,db,get,fail,text,now)
+    from brand_assets import install as install_brand_assets
+    install_brand_assets(app,data,db,get,fail,text,now)
+    from content_lifecycle import install as install_content_lifecycle
+    install_content_lifecycle(app,db,get,fail,text,now)
+    from content_versions import install as install_content_versions
+    install_content_versions(app,data,db,get,fail,text,now)
+    from production_tasks import install as install_production_tasks
+    install_production_tasks(app,db,get,fail,text,now)
+    from excellent_cases import install as install_excellent_cases
+    install_excellent_cases(app,data,db,get,fail,text,now)
+    from hotwords import install as install_hotwords
+    install_hotwords(app,data,fail,text,now)
+    from oral_cases import install as install_oral_cases
+    install_oral_cases(app,data,db,get,fail,text,now)
     return app
 
 if __name__ == '__main__':

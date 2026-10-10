@@ -1,5 +1,5 @@
 (()=>{
- const visible=el=>el.getClientRects().length>0;
+ const visible=el=>{if(!el.getClientRects().length)return false;if(typeof getComputedStyle!=='function')return true;for(let p=el;p;p=p.parentElement){const style=getComputedStyle(p);if(style.display==='none'||style.visibility==='hidden'||style.visibility==='collapse'||Number(style.opacity)===0)return false;}return true;};
  function query(selector){const roots=[document];for(let i=0;i<roots.length;i++)for(const el of roots[i].querySelectorAll('*'))if(el.shadowRoot&&el.id!=='desk-channels-assistant')roots.push(el.shadowRoot);return roots.flatMap(root=>[...root.querySelectorAll(selector)]);}
  function candidates(kind){
   if(['original','collection'].includes(kind)&&globalThis.DeskFormOptions)return globalThis.DeskFormOptions.candidates(kind);
@@ -18,6 +18,7 @@
    return explicit.length?explicit:all.filter(x=>x.isContentEditable||x.tagName==='TEXTAREA');
   }
   if(kind==='title')return query('input,textarea').filter(x=>visible(x)&&/短标题/.test((x.placeholder||'')+(x.getAttribute('aria-label')||'')));
+  if(kind==='label')return query('span,div,li,button').filter(x=>visible(x)&&['选择视频标注','个人观点，仅供参考'].includes(normalizeText(x.textContent))&&!x.closest?.('[role="option"],[role="listbox"]')&&![...x.children].some(c=>normalizeText(c.textContent)===normalizeText(x.textContent)));
   const text=kind==='collection'?'选择合集':kind==='schedule'?'定时':kind==='save'?'保存草稿':kind==='label'?'选择视频标注':'个人观点';
   return query(kind==='save'?'button':'span,div,li,button').filter(x=>visible(x)&&x.textContent.trim()===text&&![...x.children].some(c=>c.textContent.trim()===text));
  }
@@ -69,8 +70,9 @@
   let thumb;
   for(let i=0;i<60;i++){await pause(250);try{scope=coverScope(findInput());}catch{continue;}if(!scope)continue;const all=readyThumbs(scope);if(all.length>1)throw Error('封面上传区域有多个候选，请手动核对本条封面');if(all.length===1){thumb=all[0];break;}}
   if(!thumb)return {submitted:false,fileAssigned:true,previewReady:false,phase:'candidate_missing',removedPrevious,reason:(removedPrevious?'已清除旧候选，':'')+'平台未生成新封面候选；请先下载本条封面，再点击平台“上传封面”手动选择下载文件'};
+  const src=thumb.currentSrc||thumb.src;if(src&&findCrop(scope).some(x=>(x.currentSrc||x.src)===src))return {submitted:true,thumbnailSelected:true,previewReady:true};
   const target=coverSelectionTarget(thumb,scope);if(!target)return {submitted:true,previewReady:false,reason:'封面候选的选择按钮无法识别，请手动点击候选并核对裁切预览'};
-  const src=thumb.currentSrc||thumb.src;target.click();
+  target.click();
   for(let i=0;i<40;i++){await pause(250);if(src&&findCrop(scope).some(x=>(x.currentSrc||x.src)===src))return {submitted:true,thumbnailSelected:true,previewReady:true};}
   return {submitted:true,thumbnailSelected:true,previewReady:false,reason:'封面候选已选择，裁切图未能确认切换（canvas 或平台裁切地址无法核实），请手动核对'};
  }
@@ -82,17 +84,20 @@
   childStructure:[...scope.children].slice(0,12).map(x=>({tag:x.tagName,className:String(x.className||'').slice(0,180),role:x.getAttribute('role')||'',childTags:[...x.children].slice(0,8).map(y=>y.tagName)}))
  }));}
  async function perform(m){
-  if(m.op==='scan')return {agent_version:'0.7.1',path:location.pathname,coverUploaders:coverDiagnostics(),formOptions:globalThis.DeskFormOptions?.diagnostics?.()||[],counts:Object.fromEntries(['video','cover','body','title','original','label','personal','save','collection','schedule','coverEdit','coverUpload','coverConfirm','existingVideo'].map(k=>[k,candidates(k).length])),inputs:query('input[type=file]').map(x=>({accept:x.accept,disabled:x.disabled})),editors:query('[contenteditable],textarea').map(x=>({tag:x.tagName,editable:x.getAttribute('contenteditable'),placeholder:x.getAttribute('data-placeholder')||x.getAttribute('placeholder')||'',visible:visible(x)}))};
+  if(m.op==='scan')return {agent_version:'0.7.10',selectedVideoFiles:candidates('video').reduce((n,x)=>n+(x.files?.length||0),0),videoProcessing:query('span,div,button').filter(x=>visible(x)&&/^(正在处理文件|正在上传|上传中|正在转码|取消上传|\d{1,3}%)$/.test(x.textContent?.trim()||'')&&![...x.children].some(c=>c.textContent?.trim()===x.textContent?.trim())).length,path:location.pathname,coverUploaders:coverDiagnostics(),formOptions:globalThis.DeskFormOptions?.diagnostics?.()||[],counts:Object.fromEntries(['video','cover','body','title','original','label','personal','save','collection','schedule','coverEdit','coverUpload','coverConfirm','existingVideo'].map(k=>[k,candidates(k).length])),inputs:query('input[type=file]').map(x=>({accept:x.accept,disabled:x.disabled})),editors:query('[contenteditable],textarea').map(x=>({tag:x.tagName,editable:x.getAttribute('contenteditable'),placeholder:x.getAttribute('data-placeholder')||x.getAttribute('placeholder')||'',visible:visible(x)}))};
   if(m.op==='select'&&['original','collection'].includes(m.kind)){if(!globalThis.DeskFormOptions)throw Error('表单选项模块未连接，请重载扩展');return globalThis.DeskFormOptions.perform(m.kind,m.value);}
   if(m.op==='select'){
    if(!['label','collection'].includes(m.kind))throw Error('不支持的选择');
    const value=m.kind==='label'?'个人观点，仅供参考':m.value;
    if(m.kind==='collection'&&!value)return {skipped:true};
    const exact=()=>query('span,div,li,button,[role=option]').filter(x=>visible(x)&&x.textContent.trim()===value&&![...x.children].some(c=>c.textContent.trim()===value));
-   get(m.kind).click();
+   const trigger=get(m.kind);if(m.kind==='label'&&normalizeText(trigger.textContent)===value)return {selected:true,value,alreadySelected:true};
+   trigger.click();
    let options=[];for(let i=0;i<20;i++){await new Promise(r=>setTimeout(r,150));options=exact();if(options.length===1)break;}
    if(options.length!==1)throw Error('选项 '+value+' 未唯一识别，请在平台手动选择');
-   options[0].click();return {selected:true,value};
+   options[0].click();
+   if(m.kind==='label'){for(let i=0;i<20;i++){await new Promise(r=>setTimeout(r,150));const controls=candidates('label');if(controls.length===1&&normalizeText(controls[0].textContent)===value)return {selected:true,value};}throw Error('视频标注选择后未保留，请核对平台显示');}
+   return {selected:true,value};
   }
   if(m.op==='schedule'){
    const date=new Date(m.value);if(!Number.isFinite(date.getTime())||date<=new Date())throw Error('计划时间无效或已经过去');
@@ -114,11 +119,10 @@
   }
   if(m.op==='upload'){
    if(!['video','cover'].includes(m.kind))throw Error('非法素材类型');
-   const r=await chrome.runtime.sendMessage({type:'asset',id:m.asset.id});if(!r.ok)throw Error(r.error);
-   const bytes=Uint8Array.from(atob(r.result.base64),c=>c.charCodeAt(0));
-   const f=new File([bytes],m.asset.name,{type:m.asset.mime||r.result.mime});
+   const f=await DeskAssetTransfer.file(m.asset);
    if(m.kind==='cover')return uploadCover(f);
-   const dt=new DataTransfer();dt.items.add(f);const target=get(m.kind);target.value='';target.files=dt.files;target.dispatchEvent(new Event('input',{bubbles:true}));target.dispatchEvent(new Event('change',{bubbles:true}));
+   if(candidates('existingVideo').length||candidates('video').some(x=>x.files?.length))throw Error('页面已经接收视频，请核对后继续准备，不重复上传');
+   const dt=new DataTransfer();dt.items.add(f);const target=get(m.kind);target.value='';target.files=dt.files;target.dispatchEvent(new Event('change',{bubbles:true}));
    return {submitted:true};
   }
   if(m.op==='click'){
@@ -127,7 +131,9 @@
   }
   throw Error('未知操作');
  }
- function connect(){const port=chrome.runtime.connect({name:'desk-frame'});port.onMessage.addListener(m=>perform(m).then(result=>port.postMessage({id:m.id,ok:true,result}),error=>port.postMessage({id:m.id,ok:false,error:error.message})));port.onDisconnect.addListener(()=>setTimeout(connect,1000));}
+ let activePort=null;
+ function connect(force=false){if(activePort&&!force)return;const old=activePort;activePort=null;try{old?.disconnect();}catch{}const port=chrome.runtime.connect({name:'desk-frame'});activePort=port;port.onMessage.addListener(m=>perform(m).then(result=>port.postMessage({id:m.id,ok:true,result}),error=>port.postMessage({id:m.id,ok:false,error:error.message})));port.onDisconnect.addListener(()=>{if(activePort!==port)return;activePort=null;setTimeout(()=>{if(!activePort)connect();},1000);});}
  if(typeof module!=='undefined'&&module.exports){module.exports={uploadCover,coverDeleteButtons,coverSelectionTarget};return;}
+ chrome.runtime.onMessage?.addListener((m,_sender,reply)=>{if(m.type==='desk-frame-wakeup'){connect(true);reply({ok:true});}});
  connect();
 })();

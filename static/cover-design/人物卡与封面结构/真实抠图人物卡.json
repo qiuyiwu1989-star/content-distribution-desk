@@ -1,0 +1,82 @@
+[
+  {
+    "id": "REAL-01",
+    "name": "讲台正面",
+    "source_type": "原始照片前景分割",
+    "photo_path": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-讲台正面-原图.jpg",
+    "cutout_path": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-讲台正面-原像素抠图.png",
+    "brand_asset_id": "62600c17839c4fd98433b16336cfc6db",
+    "status": "real-photo-cutout",
+    "review": "真实像素，不重绘；细边缘按最终背景复核"
+  },
+  {
+    "id": "REAL-02",
+    "name": "讲台侧面",
+    "source_type": "原始照片前景分割",
+    "photo_path": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-讲台侧面-原图.jpg",
+    "cutout_path": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-讲台侧面-原像素抠图.png",
+    "brand_asset_id": "25e6a8601a554021b30f0f061c8bb044",
+    "status": "real-photo-cutout",
+    "review": "真实像素，不重绘；细边缘按最终背景复核"
+  },
+  {
+    "id": "REAL-03",
+    "name": "持麦微笑",
+    "source_type": "原始照片前景分割",
+    "photo_path": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-持麦微笑-原图.jpg",
+    "cutout_path": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-持麦微笑-原像素抠图.png",
+    "brand_asset_id": "1aaa86e0139e4e75887fe69d0ea680ed",
+    "status": "real-photo-cutout",
+    "review": "真实像素，不重绘；细边缘按最终背景复核"
+  },
+  {
+    "id": "REAL-04",
+    "name": "手势讲解",
+    "source_type": "原始照片前景分割",
+    "photo_path": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-手势讲解-原图.jpg",
+    "cutout_path": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-手势讲解-原像素抠图.png",
+    "brand_asset_id": "e4e2279714f64fd9bdf55d3b78f1dacb",
+    "status": "real-photo-cutout",
+    "review": "真实像素，不重绘；细边缘按最终背景复核"
+  },
+  {
+    "id": "REAL-05",
+    "name": "浅色毛衣举手",
+    "source_type": "原始照片前景分割",
+    "photo_path": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-浅色毛衣举手-原图.jpg",
+    "cutout_path": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-浅色毛衣举手-原像素抠图.png",
+    "brand_asset_id": "b9de12022ed743a6a50530ead0b6e84b",
+    "status": "real-photo-cutout",
+    "review": "真实像素，不重绘；细边缘按最终背景复核"
+  },
+  {
+    "id": "REAL-06",
+    "name": "白T侧身讲解",
+    "source_type": "原始照片前景分割",
+    "photo_path": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-白T侧身讲解-原图.jpg",
+    "cutout_path": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-白T侧身讲解-原像素抠图.png",
+    "brand_asset_id": "117102810999478e948113ef2bcf8017",
+    "status": "real-photo-cutout",
+    "review": "真实像素，不重绘；细边缘按最终背景复核"
+  },
+  {
+    "id": "REAL-07",
+    "name": "灰毛衣座谈",
+    "source_type": "原始照片前景分割",
+    "photo_path": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-灰毛衣座谈-原图.jpg",
+    "cutout_path": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-灰毛衣座谈-原像素抠图.png",
+    "brand_asset_id": "ff3003b70e8c417b949c89af931098a4",
+    "status": "real-photo-cutout",
+    "review": "真实像素，不重绘；细边缘按最终背景复核"
+  },
+  {
+    "id": "REAL-08",
+    "name": "深蓝外套课堂",
+    "source_type": "原始照片前景分割",
+    "photo_path": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-深蓝外套课堂-原图.jpg",
+    "cutout_path": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-深蓝外套课堂-原像素抠图.png",
+    "brand_asset_id": "a13a95550cad4d86ba4be9f9d41b39cf",
+    "status": "real-photo-cutout",
+    "review": "真实像素，不重绘；细边缘按最终背景复核"
+  }
+]

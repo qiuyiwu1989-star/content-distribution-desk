@@ -240,11 +240,18 @@ def install(app, data, db, get, fail, text, now, event, validate_task):
                 if not isinstance(target,dict):fail('任务格式错误')
                 a=get(c,'accounts',target.get('account_id'));fmt=target.get('format')
                 if not rules_for(a['platform'],fmt):fail('渠道不支持此类型')
-                existing=c.execute('SELECT id FROM tasks WHERE package_id=? AND account_id=? AND format=?',(pid,a['id'],fmt)).fetchone()
+                existing=c.execute("SELECT id FROM tasks WHERE package_id=? AND account_id=? AND format=? AND status<>'canceled'",(pid,a['id'],fmt)).fetchone()
                 if existing:skipped.append(existing['id']);continue
-                ids=images if fmt=='gallery' else videos[:1] if fmt=='video' else []
+                row=c.execute('SELECT value FROM package_meta WHERE package_id=?',(pid,)).fetchone()
+                defaults=json.loads(row['value']).get('content_defaults',{}) if row else {}
+                canceled=c.execute("SELECT * FROM tasks WHERE package_id=? AND account_id=? AND format=? AND status='canceled'",(pid,a['id'],fmt)).fetchone()
+                if canceled:
+                    c.execute("UPDATE tasks SET status='draft',title=?,body=?,tags=?,scheduled=NULL,revision=revision+1,updated=? WHERE id=?",(defaults.get('short_title',p['title']) if fmt=='video' else p['title'],p['body'],defaults.get('tags',''),now(),canceled['id']))
+                    event(c,canceled['id'],'用户重新选择账号，下派任务')
+                    created.append(canceled['id']);continue
+                ids=images if fmt=='gallery' else ([defaults['video_id']] if defaults.get('video_id') in videos else videos[:1]) if fmt=='video' else []
                 tid=uuid.uuid4().hex;ts=now()
-                c.execute('INSERT INTO tasks VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',(tid,pid,a['id'],fmt,p['title'],p['body'],'',json.dumps(ids),images[0] if images else None,'draft',None,'','',1,ts,ts))
+                c.execute('INSERT INTO tasks VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',(tid,pid,a['id'],fmt,defaults.get('short_title',p['title']) if fmt=='video' else p['title'],p['body'],defaults.get('tags',''),json.dumps(ids),defaults.get('cover_id') or (images[0] if images else None),'draft',None,'','',1,ts,ts))
                 event(c,tid,'批量分发创建任务；自动选取素材，请预览后确认')
                 created.append(tid)
         return jsonify(created=created,skipped=skipped),201

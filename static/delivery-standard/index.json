@@ -1,0 +1,17 @@
+{
+  "title": "内容交付标准",
+  "document_version": "1.4",
+  "schema": "distribution.delivery.v1",
+  "standard_url": "/static/delivery-standard/standard.md",
+  "example_url": "/static/delivery-standard/example.json",
+  "agent_prompt": "请先读取 http://127.0.0.1:4318/static/delivery-standard/standard.md，按标准文档 1.4、数据格式 distribution.delivery.v1 交付。复用已有转录、策划和当前选定版本，不重复制作已完成内容。\n\n每条让陌生观众独立听懂一个完整观点，开头交代必要背景，结尾说完；保留否定、条件、因果、时间和数字。口语精修处理实际音轨，可靠定位并回听；未完成听审或词内精修如实记录。字幕跟随最终音轨，使用成片时间，不拿技术校验或 ASR 比较冒充完整听审。\n\n输出 UTF-8 batch.json、delivery-quality.json、实际素材、成片字幕及可修改剪辑/封面源文件。固定 content_id 和顺序；指定唯一当前视频、唯一选定封面。封面、画面标题、平台短标题分开；当前工作台 short_title 上限 16 字符含空格。封面标题由当前成片支持，检查实际图与手机缩略图；按本次选定风格、尺寸和标识要求制作，未经选择的方案不设为定稿。\n\nbody 为公开纯文本，正文与 tags 分开；本批每条至少 10 个不重复相关标签，精确含造物云、FDE，两个标签位置不固定，优先呈现具体主题，不靠泛标签凑数。内部意见与疑点写 issues，不混进公开正文。\n\n计算真实文件 SHA-256，保留源片、选段、成片版本、模板/剪辑师/技能版本、技术检查、听审覆盖、封面检查及用户决定。缺项写 null/pending/none 与 issues，不编造时长、指纹或通过结果。质量附录见 http://127.0.0.1:4318/static/delivery-standard/quality-example.json，当前导入器尚未自动读取这份附录。\n\n内容先入库，目标账号在下派时选择；更新沿用 content_id，保留历史和库内用户修改，不重复建包。封面更新不重传未变的视频。默认可分发是流转规则，不是质量通过；生产交付不填写平台已发布。排期采用本次已确认的时间和节奏，不把旧的每小时计划当通用默认。\n\nbatch 示例见 http://127.0.0.1:4318/static/delivery-standard/example.json。示例无真实素材，仅示范格式；本机地址供分发台所在电脑使用。当前适配器范围以标准文档说明为准。",
+  "scope": "本地文件交付；通用导入API尚未实现",
+  "quality_example_url": "/static/delivery-standard/quality-example.json",
+  "highlights": [
+    "固定内容 ID，唯一当前视频与封面；版本与来源可追溯。",
+    "陌生观众能独立看懂一个点；口语精修落实到真实音轨。",
+    "字幕跟随最终原声，封面承诺与当前成片一致。",
+    "正文与标签分开；本批至少 10 个相关标签，包含造物云、FDE。",
+    "技术检查、听审、用户审核和平台发布分别记录；缺项如实交接。"
+  ]
+}

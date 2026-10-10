@@ -1,0 +1,82 @@
+{
+  "schema": "distribution.delivery-quality.v1",
+  "batch_id": "example-course",
+  "example_only": true,
+  "source_coverage": {
+    "sources": [
+      {
+        "source_id": "source-example",
+        "local_path": null,
+        "sha256": null,
+        "duration_seconds": null,
+        "scanned_ranges_ms": [],
+        "unconfirmed_ranges_ms": []
+      }
+    ],
+    "status": "pending"
+  },
+  "items": [
+    {
+      "content_id": "example-course/clip-001",
+      "video_revision": null,
+      "video_sha256": null,
+      "cover_revision": null,
+      "cover_sha256": null,
+      "editorial": {
+        "audience_question": "为什么要到不同场景讲 AI？",
+        "core_point": "仅为格式示例，实际观点需对照原声与当前成片确认",
+        "source_segments": [],
+        "timeline_mapping": []
+      },
+      "production_choices": {
+        "template_id": null,
+        "editor_id": null,
+        "skill_id": null,
+        "skill_revision": null,
+        "selection_status": "not_selected"
+      },
+      "checks": {
+        "technical": {
+          "status": "pending",
+          "video_revision": null,
+          "reviewer": null,
+          "reviewed_at": null,
+          "measurements": null
+        },
+        "standalone_meaning": {
+          "status": "pending",
+          "video_revision": null,
+          "reviewer": null,
+          "reviewed_at": null
+        },
+        "listening": {
+          "status": "pending",
+          "coverage": "none",
+          "video_revision": null,
+          "reviewer": null,
+          "reviewed_at": null
+        },
+        "cover_visual": {
+          "status": "pending",
+          "cover_revision": null,
+          "thumbnail_width_px": 180,
+          "reviewer": null,
+          "reviewed_at": null
+        },
+        "user_review": {
+          "status": "pending",
+          "video_revision": null,
+          "cover_revision": null,
+          "reviewer": null,
+          "reviewed_at": null
+        }
+      },
+      "feedback": [],
+      "issues": [
+        "结构示例：没有真实视频与封面，不能直接作为完成交付",
+        "听审未完成",
+        "封面未制作"
+      ]
+    }
+  ]
+}

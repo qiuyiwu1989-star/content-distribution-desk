@@ -9,6 +9,7 @@ dist/
 # Private content, accounts, browser sessions and logs
 data/
 backups/
+artifacts/
 *.sqlite3
 *.sqlite3-*
 *.db

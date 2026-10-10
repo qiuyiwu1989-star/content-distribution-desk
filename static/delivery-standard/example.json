@@ -1,0 +1,41 @@
+{
+  "schema": "distribution.delivery.v1",
+  "batch_id": "example-course",
+  "batch_name": "课程分享示例",
+  "created_at": "2026-10-08T22:49:15.588852+08:00",
+  "items": [
+    {
+      "content_id": "example-course/clip-001",
+      "sequence": 1,
+      "title": "我上课从来不只是为了上课",
+      "body": "我上课从来不只是为了上课。\n\n大概从 ChatGPT 来的那一年开始，特别多的人叫我去上课。\n\n小到给六年级的小朋友上过，大到给六十岁的老教授上；上到去部委给干部讲过，下到最接地气的义乌老板娘，我也给她们讲人工智能。\n\n讲这么多，我真正想要的是——感受真实世界跟 AI 之间那个映射关系。",
+      "tags": [
+        "造物云",
+        "FDE",
+        "AI教育",
+        "人工智能",
+        "一线",
+        "认知",
+        "课程分享",
+        "企业认知",
+        "AI实践",
+        "教学交流"
+      ],
+      "assets": {
+        "video": null,
+        "cover": null
+      },
+      "source": {
+        "film": "clip-001"
+      },
+      "issues": [
+        "结构示例：没有真实视频与封面，不能直接作为完成交付",
+        "听审未完成",
+        "封面未制作"
+      ],
+      "publication_state": "unpublished",
+      "revision": "EXAMPLE-ONLY-NOT-A-FILE-FINGERPRINT",
+      "short_title": "我上课从来不只是为了上课"
+    }
+  ]
+}

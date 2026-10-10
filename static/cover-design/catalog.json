@@ -1,0 +1,3049 @@
+{
+  "schema": "desk-cover-design.v1",
+  "name": "封面设计",
+  "skill_url": "/static/cover-design/SKILL.md",
+  "source_skill": "/Users/Apple/.codex/skills/video-cover-design/SKILL.md",
+  "workflow": [
+    "核对当前成片、字幕、编号和版本，提炼一个完整观点",
+    "主标题按完整短语断行；疑问小字必须由视频内容回答",
+    "指定模板决定字体、颜色与质感，主体和构图按内容原创",
+    "使用图像模型整图生成标题与画面；不使用 SVG 或代码绘图代替",
+    "生成实际3:4图片，检查中文与约180px手机缩略图",
+    "保留图片、原始生成图、提示词、依据及版本记录，再交用户确认"
+  ],
+  "templates": [
+    {
+      "id": "COVER-FUSION-COMIC",
+      "name": "真人漫画叙事融合",
+      "version": "1.0",
+      "use": "真人讲解、课程观点、主题物件说明",
+      "preview": "/static/cover-design/examples/cover-fusion-comic-v1.png",
+      "examples": [
+        "/static/cover-design/examples/cover-fusion-comic-v1.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "真人整图融合",
+      "layout": "真人居右；漫画纸流绕进真实前景，上方黄黑标题；奶油紫橙套色",
+      "typography": "清晰粗体中文，关键词强调；描边或投影服务缩略图阅读",
+      "rules": [
+        "真实原图作为人物身份和动作参考",
+        "整图统一生成人物、场景、物件与字体",
+        "检查共同光源、景深、透视和自然遮挡",
+        "相似度需本人审核"
+      ],
+      "text_rules": {
+        "headline": "8–16字优先，2–3行完整短语；保留否定、条件；本片必须支持标题。",
+        "question": "支持层可换问题、范围、条件或案例线索，不强制提问。",
+        "emphasis": "仅强调一处关键词；描边投影不吞没字形。",
+        "metadata": "未经核实不加日期、学校或活动名称。"
+      },
+      "migration": {
+        "keep": [
+          "人物居中，流程路径环绕；红底，上方白黄两行大字，底部支持条",
+          "真人、主题物件与字的分层关系"
+        ],
+        "replace": [
+          "当前真实照片",
+          "主标题与可选问题",
+          "依据本片的主题物件"
+        ],
+        "adapt": "人物身份与文字需逐张检查，不能只换背景颜色。"
+      },
+      "generation_method": "image-model-whole-image-with-real-reference",
+      "generation_prompt": "/static/cover-design/prompts/cover-fusion-comic-v1.txt",
+      "generation_original": "/static/cover-design/originals/cover-fusion-comic-v1.png",
+      "prompt_template": "制作完整3:4知识视频海报。主题依据【原句/时码】，受众【】。主标题准确「【】」按完整短语断行；支持层「【可选问题/范围/线索】」，不需要则省略。真实人物原图【素材ID/路径】用于身份、原动作与服装参考，保留本人面貌、眼镜、发型、身形，不以旧生成脸替代。构图与媒介：真人居右；漫画纸流绕进真实前景，上方黄黑标题；奶油紫橙套色。人物与物件【本片概念】共享光源、景深、透视、空间遮挡，光线与材料彼此呼应，标题不遮脸。整张通过图像模型生成，不生成空背景再机械贴人，不加抠图白边。只用指定文字，无虚构日期、数据、案例与背书。保存原图、实际提示词及缩略图，检查人像相似度、手部、中文字及观看顺序。",
+      "prompt_template_url": "/static/cover-design/prompts/cover-fusion-comic-v1-template-zh.txt",
+      "model_record": "built-in image_gen; exact model version not exposed",
+      "sample": {
+        "basis": "沿用已有主题作视觉样稿，本轮未重新核对具体成片",
+        "headline": "换了工具 / 效率没变？"
+      },
+      "reference_portrait": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-持麦微笑-原图.jpg",
+      "review_note": "已检查实际整图与180px缩略图；人物由模型融合生成，需要本人确认相似度。不是现场纪实。",
+      "agent_request": "用 $video-cover-design，模板 COVER-FUSION-COMIC，真实原图驱动整图生成人物、主题物件与设计字体，不默认程序贴图；匹配当前成片文案，检查相似度后交我审核。"
+    },
+    {
+      "id": "COVER-FUSION-NOIR",
+      "name": "真人黑金案例调查",
+      "version": "1.0",
+      "use": "真人讲解、课程观点、主题物件说明",
+      "preview": "/static/cover-design/examples/cover-fusion-noir-v1.png",
+      "examples": [
+        "/static/cover-design/examples/cover-fusion-noir-v1.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "真人整图融合",
+      "layout": "真人左中讲述；桌上证据纸与单一流程缺口；黑金侧光，标题右上白金",
+      "typography": "清晰粗体中文，关键词强调；描边或投影服务缩略图阅读",
+      "rules": [
+        "真实原图作为人物身份和动作参考",
+        "整图统一生成人物、场景、物件与字体",
+        "检查共同光源、景深、透视和自然遮挡",
+        "相似度需本人审核"
+      ],
+      "text_rules": {
+        "headline": "8–16字优先，2–3行完整短语；保留否定、条件；本片必须支持标题。",
+        "question": "支持层可换问题、范围、条件或案例线索，不强制提问。",
+        "emphasis": "仅强调一处关键词；描边投影不吞没字形。",
+        "metadata": "未经核实不加日期、学校或活动名称。"
+      },
+      "migration": {
+        "keep": [
+          "人物居中，流程路径环绕；红底，上方白黄两行大字，底部支持条",
+          "真人、主题物件与字的分层关系"
+        ],
+        "replace": [
+          "当前真实照片",
+          "主标题与可选问题",
+          "依据本片的主题物件"
+        ],
+        "adapt": "人物身份与文字需逐张检查，不能只换背景颜色。"
+      },
+      "generation_method": "image-model-whole-image-with-real-reference",
+      "generation_prompt": "/static/cover-design/prompts/cover-fusion-noir-v1.txt",
+      "generation_original": "/static/cover-design/originals/cover-fusion-noir-v1.png",
+      "prompt_template": "制作完整3:4知识视频海报。主题依据【原句/时码】，受众【】。主标题准确「【】」按完整短语断行；支持层「【可选问题/范围/线索】」，不需要则省略。真实人物原图【素材ID/路径】用于身份、原动作与服装参考，保留本人面貌、眼镜、发型、身形，不以旧生成脸替代。构图与媒介：真人左中讲述；桌上证据纸与单一流程缺口；黑金侧光，标题右上白金。人物与物件【本片概念】共享光源、景深、透视、空间遮挡，光线与材料彼此呼应，标题不遮脸。整张通过图像模型生成，不生成空背景再机械贴人，不加抠图白边。只用指定文字，无虚构日期、数据、案例与背书。保存原图、实际提示词及缩略图，检查人像相似度、手部、中文字及观看顺序。",
+      "prompt_template_url": "/static/cover-design/prompts/cover-fusion-noir-v1-template-zh.txt",
+      "model_record": "built-in image_gen; exact model version not exposed",
+      "sample": {
+        "basis": "沿用已有主题作视觉样稿，本轮未重新核对具体成片",
+        "headline": "换了工具 / 效率没变？"
+      },
+      "reference_portrait": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-灰毛衣座谈-原图.jpg",
+      "review_note": "已检查实际整图与180px缩略图；人物由模型融合生成，需要本人确认相似度。不是现场纪实。",
+      "agent_request": "用 $video-cover-design，模板 COVER-FUSION-NOIR，真实原图驱动整图生成人物、主题物件与设计字体，不默认程序贴图；匹配当前成片文案，检查相似度后交我审核。"
+    },
+    {
+      "id": "COVER-FUSION-GREEN",
+      "name": "真人绿色组织沙盘",
+      "version": "1.0",
+      "use": "真人讲解、课程观点、主题物件说明",
+      "preview": "/static/cover-design/examples/cover-fusion-green-v1.png",
+      "examples": [
+        "/static/cover-design/examples/cover-fusion-green-v1.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "真人整图融合",
+      "layout": "真人后中手势讲解；前景绿色组织沙盘、相连部门小屋；上方白黄完整标题",
+      "typography": "清晰粗体中文，关键词强调；描边或投影服务缩略图阅读",
+      "rules": [
+        "真实原图作为人物身份和动作参考",
+        "整图统一生成人物、场景、物件与字体",
+        "检查共同光源、景深、透视和自然遮挡",
+        "相似度需本人审核"
+      ],
+      "text_rules": {
+        "headline": "8–16字优先，2–3行完整短语；保留否定、条件；本片必须支持标题。",
+        "question": "支持层可换问题、范围、条件或案例线索，不强制提问。",
+        "emphasis": "仅强调一处关键词；描边投影不吞没字形。",
+        "metadata": "未经核实不加日期、学校或活动名称。"
+      },
+      "migration": {
+        "keep": [
+          "人物居中，流程路径环绕；红底，上方白黄两行大字，底部支持条",
+          "真人、主题物件与字的分层关系"
+        ],
+        "replace": [
+          "当前真实照片",
+          "主标题与可选问题",
+          "依据本片的主题物件"
+        ],
+        "adapt": "人物身份与文字需逐张检查，不能只换背景颜色。"
+      },
+      "generation_method": "image-model-whole-image-with-real-reference",
+      "generation_prompt": "/static/cover-design/prompts/cover-fusion-green-v1.txt",
+      "generation_original": "/static/cover-design/originals/cover-fusion-green-v1.png",
+      "prompt_template": "制作完整3:4知识视频海报。主题依据【原句/时码】，受众【】。主标题准确「【】」按完整短语断行；支持层「【可选问题/范围/线索】」，不需要则省略。真实人物原图【素材ID/路径】用于身份、原动作与服装参考，保留本人面貌、眼镜、发型、身形，不以旧生成脸替代。构图与媒介：真人后中手势讲解；前景绿色组织沙盘、相连部门小屋；上方白黄完整标题。人物与物件【本片概念】共享光源、景深、透视、空间遮挡，光线与材料彼此呼应，标题不遮脸。整张通过图像模型生成，不生成空背景再机械贴人，不加抠图白边。只用指定文字，无虚构日期、数据、案例与背书。保存原图、实际提示词及缩略图，检查人像相似度、手部、中文字及观看顺序。",
+      "prompt_template_url": "/static/cover-design/prompts/cover-fusion-green-v1-template-zh.txt",
+      "model_record": "built-in image_gen; exact model version not exposed",
+      "sample": {
+        "basis": "沿用已有主题作视觉样稿，本轮未重新核对具体成片",
+        "headline": "AI项目 / 要有跨部门 / 试验田"
+      },
+      "reference_portrait": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-手势讲解-原图.jpg",
+      "review_note": "已检查实际整图与180px缩略图；人物由模型融合生成，需要本人确认相似度。不是现场纪实。",
+      "agent_request": "用 $video-cover-design，模板 COVER-FUSION-GREEN，真实原图驱动整图生成人物、主题物件与设计字体，不默认程序贴图；匹配当前成片文案，检查相似度后交我审核。"
+    },
+    {
+      "id": "COVER-FUSION-RED",
+      "name": "真人红棚物件融合",
+      "version": "1.0",
+      "use": "真人讲解、课程观点、主题物件说明",
+      "preview": "/static/cover-design/examples/cover-fusion-red-v1.png",
+      "examples": [
+        "/static/cover-design/examples/cover-fusion-red-v1.png"
+      ],
+      "status": "style-confirmed",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "真人整图融合",
+      "layout": "红色棚拍空间；人物右中与纸流电脑共景，标题上方白黄粗字",
+      "typography": "清晰粗体中文，关键词强调；描边或投影服务缩略图阅读",
+      "rules": [
+        "真实原图作为人物身份和动作参考",
+        "整图统一生成人物、场景、物件与字体",
+        "检查共同光源、景深、透视和自然遮挡",
+        "相似度需本人审核"
+      ],
+      "text_rules": {
+        "headline": "8–16字优先，2–3行完整短语；保留否定、条件；本片必须支持标题。",
+        "question": "支持层可换问题、范围、条件或案例线索，不强制提问。",
+        "emphasis": "仅强调一处关键词；描边投影不吞没字形。",
+        "metadata": "未经核实不加日期、学校或活动名称。"
+      },
+      "migration": {
+        "keep": [
+          "人物居中，流程路径环绕；红底，上方白黄两行大字，底部支持条",
+          "真人、主题物件与字的分层关系"
+        ],
+        "replace": [
+          "当前真实照片",
+          "主标题与可选问题",
+          "依据本片的主题物件"
+        ],
+        "adapt": "人物身份与文字需逐张检查，不能只换背景颜色。"
+      },
+      "generation_method": "image-model-whole-image-with-real-reference",
+      "generation_prompt": "/static/cover-design/prompts/cover-fusion-red-v1.txt",
+      "generation_original": "/static/cover-design/originals/cover-fusion-red-v1.png",
+      "prompt_template": "制作完整3:4知识视频海报。主题依据【原句/时码】，受众【】。主标题准确「【】」按完整短语断行；支持层「【可选问题/范围/线索】」，不需要则省略。真实人物原图【素材ID/路径】用于身份、原动作与服装参考，保留本人面貌、眼镜、发型、身形，不以旧生成脸替代。构图与媒介：红色棚拍空间；人物右中与纸流电脑共景，标题上方白黄粗字。人物与物件【本片概念】共享光源、景深、透视、空间遮挡，光线与材料彼此呼应，标题不遮脸。整张通过图像模型生成，不生成空背景再机械贴人，不加抠图白边。只用指定文字，无虚构日期、数据、案例与背书。保存原图、实际提示词及缩略图，检查人像相似度、手部、中文字及观看顺序。",
+      "prompt_template_url": "/static/cover-design/prompts/cover-fusion-red-v1-template-zh.txt",
+      "model_record": "built-in image_gen; exact model version not exposed",
+      "sample": {
+        "basis": "沿用已有主题作视觉样稿，本轮未重新核对具体成片",
+        "headline": "换了工具 / 效率没变？"
+      },
+      "reference_portrait": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-浅色毛衣举手-原图.jpg",
+      "review_note": "已检查实际整图与180px缩略图；人物由模型融合生成，需要本人确认相似度。不是现场纪实。",
+      "agent_request": "用 $video-cover-design，模板 COVER-FUSION-RED，真实原图驱动整图生成人物、主题物件与设计字体，不默认程序贴图；匹配当前成片文案，检查相似度后交我审核。",
+      "style_feedback": "用户认可整图融合设计方向；不是逐片内容或相似度全面验收"
+    },
+    {
+      "id": "COVER-FUSION-BLUE",
+      "name": "真人协作实验场",
+      "version": "1.0",
+      "use": "真人讲解、课程观点、主题物件说明",
+      "preview": "/static/cover-design/examples/cover-fusion-blue-v1.png",
+      "examples": [
+        "/static/cover-design/examples/cover-fusion-blue-v1.png"
+      ],
+      "status": "style-confirmed",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "真人整图融合",
+      "layout": "冷蓝实验场；侧身讲者与相连模块共享景深和青橙光，标题上左",
+      "typography": "清晰粗体中文，关键词强调；描边或投影服务缩略图阅读",
+      "rules": [
+        "真实原图作为人物身份和动作参考",
+        "整图统一生成人物、场景、物件与字体",
+        "检查共同光源、景深、透视和自然遮挡",
+        "相似度需本人审核"
+      ],
+      "text_rules": {
+        "headline": "8–16字优先，2–3行完整短语；保留否定、条件；本片必须支持标题。",
+        "question": "支持层可换问题、范围、条件或案例线索，不强制提问。",
+        "emphasis": "仅强调一处关键词；描边投影不吞没字形。",
+        "metadata": "未经核实不加日期、学校或活动名称。"
+      },
+      "migration": {
+        "keep": [
+          "人物居中，流程路径环绕；红底，上方白黄两行大字，底部支持条",
+          "真人、主题物件与字的分层关系"
+        ],
+        "replace": [
+          "当前真实照片",
+          "主标题与可选问题",
+          "依据本片的主题物件"
+        ],
+        "adapt": "人物身份与文字需逐张检查，不能只换背景颜色。"
+      },
+      "generation_method": "image-model-whole-image-with-real-reference",
+      "generation_prompt": "/static/cover-design/prompts/cover-fusion-blue-v1.txt",
+      "generation_original": "/static/cover-design/originals/cover-fusion-blue-v1.png",
+      "prompt_template": "制作完整3:4知识视频海报。主题依据【原句/时码】，受众【】。主标题准确「【】」按完整短语断行；支持层「【可选问题/范围/线索】」，不需要则省略。真实人物原图【素材ID/路径】用于身份、原动作与服装参考，保留本人面貌、眼镜、发型、身形，不以旧生成脸替代。构图与媒介：冷蓝实验场；侧身讲者与相连模块共享景深和青橙光，标题上左。人物与物件【本片概念】共享光源、景深、透视、空间遮挡，光线与材料彼此呼应，标题不遮脸。整张通过图像模型生成，不生成空背景再机械贴人，不加抠图白边。只用指定文字，无虚构日期、数据、案例与背书。保存原图、实际提示词及缩略图，检查人像相似度、手部、中文字及观看顺序。",
+      "prompt_template_url": "/static/cover-design/prompts/cover-fusion-blue-v1-template-zh.txt",
+      "model_record": "built-in image_gen; exact model version not exposed",
+      "sample": {
+        "basis": "沿用已有主题作视觉样稿，本轮未重新核对具体成片",
+        "headline": "AI项目 / 要有跨部门 / 试验田"
+      },
+      "reference_portrait": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-白T侧身讲解-原图.jpg",
+      "review_note": "已检查实际整图与180px缩略图；人物由模型融合生成，需要本人确认相似度。不是现场纪实。",
+      "agent_request": "用 $video-cover-design，模板 COVER-FUSION-BLUE，真实原图驱动整图生成人物、主题物件与设计字体，不默认程序贴图；匹配当前成片文案，检查相似度后交我审核。",
+      "style_feedback": "用户认可整图融合设计方向；不是逐片内容或相似度全面验收"
+    },
+    {
+      "id": "COVER-FUSION-AMBER",
+      "name": "真人暖白决策隐喻",
+      "version": "1.0",
+      "use": "真人讲解、课程观点、主题物件说明",
+      "preview": "/static/cover-design/examples/cover-fusion-amber-v1.png",
+      "examples": [
+        "/static/cover-design/examples/cover-fusion-amber-v1.png"
+      ],
+      "status": "style-confirmed",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "真人整图融合",
+      "layout": "暖白概念摄影；深蓝外套讲者居左中，琥珀阀门右前景，黑橙观点字",
+      "typography": "清晰粗体中文，关键词强调；描边或投影服务缩略图阅读",
+      "rules": [
+        "真实原图作为人物身份和动作参考",
+        "整图统一生成人物、场景、物件与字体",
+        "检查共同光源、景深、透视和自然遮挡",
+        "相似度需本人审核"
+      ],
+      "text_rules": {
+        "headline": "8–16字优先，2–3行完整短语；保留否定、条件；本片必须支持标题。",
+        "question": "支持层可换问题、范围、条件或案例线索，不强制提问。",
+        "emphasis": "仅强调一处关键词；描边投影不吞没字形。",
+        "metadata": "未经核实不加日期、学校或活动名称。"
+      },
+      "migration": {
+        "keep": [
+          "人物居中，流程路径环绕；红底，上方白黄两行大字，底部支持条",
+          "真人、主题物件与字的分层关系"
+        ],
+        "replace": [
+          "当前真实照片",
+          "主标题与可选问题",
+          "依据本片的主题物件"
+        ],
+        "adapt": "人物身份与文字需逐张检查，不能只换背景颜色。"
+      },
+      "generation_method": "image-model-whole-image-with-real-reference",
+      "generation_prompt": "/static/cover-design/prompts/cover-fusion-amber-v1.txt",
+      "generation_original": "/static/cover-design/originals/cover-fusion-amber-v1.png",
+      "prompt_template": "制作完整3:4知识视频海报。主题依据【原句/时码】，受众【】。主标题准确「【】」按完整短语断行；支持层「【可选问题/范围/线索】」，不需要则省略。真实人物原图【素材ID/路径】用于身份、原动作与服装参考，保留本人面貌、眼镜、发型、身形，不以旧生成脸替代。构图与媒介：暖白概念摄影；深蓝外套讲者居左中，琥珀阀门右前景，黑橙观点字。人物与物件【本片概念】共享光源、景深、透视、空间遮挡，光线与材料彼此呼应，标题不遮脸。整张通过图像模型生成，不生成空背景再机械贴人，不加抠图白边。只用指定文字，无虚构日期、数据、案例与背书。保存原图、实际提示词及缩略图，检查人像相似度、手部、中文字及观看顺序。",
+      "prompt_template_url": "/static/cover-design/prompts/cover-fusion-amber-v1-template-zh.txt",
+      "model_record": "built-in image_gen; exact model version not exposed",
+      "sample": {
+        "basis": "沿用已有主题作视觉样稿，本轮未重新核对具体成片",
+        "headline": "智能密度 / 不是使用率"
+      },
+      "reference_portrait": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-深蓝外套课堂-原图.jpg",
+      "review_note": "已检查实际整图与180px缩略图；人物由模型融合生成，需要本人确认相似度。不是现场纪实。",
+      "agent_request": "用 $video-cover-design，模板 COVER-FUSION-AMBER，真实原图驱动整图生成人物、主题物件与设计字体，不默认程序贴图；匹配当前成片文案，检查相似度后交我审核。",
+      "style_feedback": "用户认可整图融合设计方向；不是逐片内容或相似度全面验收"
+    },
+    {
+      "id": "COVER-PORTRAIT-CENTER",
+      "name": "中心人物环绕",
+      "version": "1.0",
+      "use": "真人讲解、课程观点、主题物件说明",
+      "preview": "/static/cover-design/examples/cover-portrait-center-v1.png",
+      "examples": [
+        "/static/cover-design/examples/cover-portrait-center-v1.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "真人主题封面",
+      "layout": "人物居中，流程路径环绕；红底，上方白黄两行大字，底部支持条",
+      "typography": "清晰粗体中文，关键词强调；描边或投影服务缩略图阅读",
+      "rules": [
+        "明确标题→人物→物件的观看顺序",
+        "支持层只选一种，可省略",
+        "人像相似度待本人确认，非现场纪实"
+      ],
+      "text_rules": {
+        "headline": "8–16字优先，2–3行完整短语；保留否定、条件；本片必须支持标题。",
+        "question": "支持层可换问题、范围、条件或案例线索，不强制提问。",
+        "emphasis": "仅强调一处关键词；描边投影不吞没字形。",
+        "metadata": "未经核实不加日期、学校或活动名称。"
+      },
+      "migration": {
+        "keep": [
+          "人物居中，流程路径环绕；红底，上方白黄两行大字，底部支持条",
+          "真人、主题物件与字的分层关系"
+        ],
+        "replace": [
+          "当前真实照片",
+          "主标题与可选问题",
+          "依据本片的主题物件"
+        ],
+        "adapt": "人物身份与文字需逐张检查，不能只换背景颜色。"
+      },
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-portrait-center-v1.txt",
+      "generation_original": "/static/cover-design/originals/cover-portrait-center-v1.png",
+      "prompt_template": "用途：3:4本人知识视频封面。\n内容依据：【原句或时码】。\n主标题：【完整判断或问题】，按完整短语断行。\n支持层：【可选问题/范围/条件/案例线索，只选一个】，可省略。\n人物：品牌库【真实照片或本人确认过的姿势卡ID】，保留身份特征。\n构图：人物居中，流程路径环绕；红底，上方白黄两行大字，底部支持条。\n物件：【能解释本片的单一对象或关系】；勿继承电脑、纸张样例。\n字号、字重与关键词色服务观看顺序；脸不被字遮挡。只用指定文字，不编造背书、数据、日期。整图通过图像模型制作，保存实际输入与原图；检查本人相似度和180px缩略图。\n",
+      "prompt_template_url": "/static/cover-design/prompts/cover-portrait-center-v1-template-zh.txt",
+      "model_record": "built-in image_gen; exact model version not exposed",
+      "sample": {
+        "headline": "换了工具 / 效率没变？",
+        "question": "流程要不要重做？",
+        "basis": "已有工具与流程主题用于视觉样稿；本轮未重新听审成片"
+      },
+      "reference_portrait": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-持麦微笑-原图.jpg",
+      "review_note": "已查看实际生成图片及缩略图；生成合成的人像仍需本人确认相似度。",
+      "agent_request": "用 $video-cover-design，模板 COVER-PORTRAIT-CENTER，读取人物卡与结构化设计规范，依据当前成片生成封面交我审核。"
+    },
+    {
+      "id": "COVER-PORTRAIT-EDITORIAL",
+      "name": "左文右人编辑部",
+      "version": "1.0",
+      "use": "真人讲解、课程观点、主题物件说明",
+      "preview": "/static/cover-design/examples/cover-portrait-editorial-v1.png",
+      "examples": [
+        "/static/cover-design/examples/cover-portrait-editorial-v1.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "真人主题封面",
+      "layout": "左文右人，左下小物件；米白背景，黑色三行标题，橙色强调",
+      "typography": "清晰粗体中文，关键词强调；描边或投影服务缩略图阅读",
+      "rules": [
+        "明确标题→人物→物件的观看顺序",
+        "支持层只选一种，可省略",
+        "人像相似度待本人确认，非现场纪实"
+      ],
+      "text_rules": {
+        "headline": "8–16字优先，2–3行完整短语；保留否定、条件；本片必须支持标题。",
+        "question": "支持层可换问题、范围、条件或案例线索，不强制提问。",
+        "emphasis": "仅强调一处关键词；描边投影不吞没字形。",
+        "metadata": "未经核实不加日期、学校或活动名称。"
+      },
+      "migration": {
+        "keep": [
+          "左文右人，左下小物件；米白背景，黑色三行标题，橙色强调",
+          "真人、主题物件与字的分层关系"
+        ],
+        "replace": [
+          "当前真实照片",
+          "主标题与可选问题",
+          "依据本片的主题物件"
+        ],
+        "adapt": "人物身份与文字需逐张检查，不能只换背景颜色。"
+      },
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-portrait-editorial-v1.txt",
+      "generation_original": "/static/cover-design/originals/cover-portrait-editorial-v1.png",
+      "prompt_template": "用途：3:4本人知识视频封面。\n内容依据：【原句或时码】。\n主标题：【完整判断或问题】，按完整短语断行。\n支持层：【可选问题/范围/条件/案例线索，只选一个】，可省略。\n人物：品牌库【真实照片或本人确认过的姿势卡ID】，保留身份特征。\n构图：左文右人，左下小物件；米白背景，黑色三行标题，橙色强调。\n物件：【能解释本片的单一对象或关系】；勿继承电脑、纸张样例。\n字号、字重与关键词色服务观看顺序；脸不被字遮挡。只用指定文字，不编造背书、数据、日期。整图通过图像模型制作，保存实际输入与原图；检查本人相似度和180px缩略图。\n",
+      "prompt_template_url": "/static/cover-design/prompts/cover-portrait-editorial-v1-template-zh.txt",
+      "model_record": "built-in image_gen; exact model version not exposed",
+      "sample": {
+        "headline": "换了工具 / 效率没变？",
+        "question": "流程要不要重做？",
+        "basis": "已有工具与流程主题用于视觉样稿；本轮未重新听审成片"
+      },
+      "reference_portrait": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-持麦微笑-原图.jpg",
+      "review_note": "已查看实际生成图片及缩略图；生成合成的人像仍需本人确认相似度。",
+      "agent_request": "用 $video-cover-design，模板 COVER-PORTRAIT-EDITORIAL，读取人物卡与结构化设计规范，依据当前成片生成封面交我审核。"
+    },
+    {
+      "id": "COVER-PORTRAIT-POP",
+      "name": "真人撞色物件大字",
+      "version": "1.0",
+      "use": "真人讲解、课程观点、主题物件说明",
+      "preview": "/static/cover-design/examples/cover-portrait-pop-v1.png",
+      "examples": [
+        "/static/cover-design/examples/cover-portrait-pop-v1.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "真人主题封面",
+      "layout": "人物右下，工具物件左中；上半部黄白两行粗体，黑描边轻投影；蓝色背景",
+      "typography": "清晰粗体中文，关键词强调；描边或投影服务缩略图阅读",
+      "rules": [
+        "真人、主题物件、关键词三个焦点",
+        "不以参考博主的具体人物或文案作为素材",
+        "脸部不被标题遮挡，保留真实人物特征"
+      ],
+      "text_rules": {
+        "headline": "8–16字优先，2–3行完整短语；保留否定、条件；本片必须支持标题。",
+        "question": "可选6–12字，补充观看理由，成片能回答。",
+        "emphasis": "仅强调一处关键词；描边投影不吞没字形。",
+        "metadata": "未经核实不加日期、学校或活动名称。"
+      },
+      "migration": {
+        "keep": [
+          "本套人物位置",
+          "本套字体层级",
+          "本套背景与物件关系"
+        ],
+        "replace": [
+          "当前真实照片",
+          "主标题与可选问题",
+          "依据本片的主题物件"
+        ],
+        "adapt": "人物身份与文字需逐张检查，不能只换背景颜色。"
+      },
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-portrait-pop-v1.txt",
+      "generation_original": "/static/cover-design/originals/cover-portrait-pop-v1.png",
+      "prompt_template": "用途：3:4知识短视频封面。\n内容依据：【本片原句或时码】。\n人物：使用【品牌库中选定真实照片】，保留本人面貌、眼镜、发型及原动作；不要生成替身。\n标题：准确生成【完整主标题】，按完整短语分2–3行。\n补充问题：【可选问题】，视频内能回答；标题足够时省略。\n构图与字体：人物右下，工具物件左中；上半部黄白两行粗体，黑描边轻投影；蓝色背景。\n主题物件：【能解释主题的一个核心物件或结构】，不沿用电脑与纸张；不得增加假数据。\n人物的脸不被文字和物件遮挡；抠图边缘自然。标题只强调一个关键词，可描边、投影或字重变化，避免扭曲字形。主体和文字均由图像模型生成。\n边界：只用指定文字；不编造表情、行为、经历、第三方人物或背书。Logo如需要，按品牌库原图放置。保留原图与实际提示词，核对中文、本人相似度与180px缩略图。\n",
+      "prompt_template_url": "/static/cover-design/prompts/cover-portrait-pop-v1-template-zh.txt",
+      "model_record": "built-in image_gen; exact model version not exposed",
+      "sample": {
+        "headline": "换了工具 / 效率没变？",
+        "question": "流程要不要重做？",
+        "basis": "已有工具与流程主题用于视觉样稿；本轮未重新听审成片"
+      },
+      "reference_portrait": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-持麦微笑-原图.jpg",
+      "review_note": "已查看实际生成图片及缩略图；生成合成的人像仍需本人确认相似度。",
+      "agent_request": "使用 $video-cover-design，模板 COVER-PORTRAIT-POP，先查品牌库真实照片与当前成片，读取文本规则及中文提示词，制作真人＋主题物件封面交我审核。"
+    },
+    {
+      "id": "COVER-PORTRAIT-DOSSIER",
+      "name": "真人档案悬念拼贴",
+      "version": "1.0",
+      "use": "真人讲解、课程观点、主题物件说明",
+      "preview": "/static/cover-design/examples/cover-portrait-dossier-v1.png",
+      "examples": [
+        "/static/cover-design/examples/cover-portrait-dossier-v1.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "真人主题封面",
+      "layout": "人物左中，旧纸与流程路径右侧；下半部白黄红阶梯标题；深棕黑底",
+      "typography": "清晰粗体中文，关键词强调；描边或投影服务缩略图阅读",
+      "rules": [
+        "真人、主题物件、关键词三个焦点",
+        "不以参考博主的具体人物或文案作为素材",
+        "脸部不被标题遮挡，保留真实人物特征"
+      ],
+      "text_rules": {
+        "headline": "8–16字优先，2–3行完整短语；保留否定、条件；本片必须支持标题。",
+        "question": "可选6–12字，补充观看理由，成片能回答。",
+        "emphasis": "仅强调一处关键词；描边投影不吞没字形。",
+        "metadata": "未经核实不加日期、学校或活动名称。"
+      },
+      "migration": {
+        "keep": [
+          "本套人物位置",
+          "本套字体层级",
+          "本套背景与物件关系"
+        ],
+        "replace": [
+          "当前真实照片",
+          "主标题与可选问题",
+          "依据本片的主题物件"
+        ],
+        "adapt": "人物身份与文字需逐张检查，不能只换背景颜色。"
+      },
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-portrait-dossier-v1.txt",
+      "generation_original": "/static/cover-design/originals/cover-portrait-dossier-v1.png",
+      "prompt_template": "用途：3:4知识短视频封面。\n内容依据：【本片原句或时码】。\n人物：使用【品牌库中选定真实照片】，保留本人面貌、眼镜、发型及原动作；不要生成替身。\n标题：准确生成【完整主标题】，按完整短语分2–3行。\n补充问题：【可选问题】，视频内能回答；标题足够时省略。\n构图与字体：人物左中，旧纸与流程路径右侧；下半部白黄红阶梯标题；深棕黑底。\n主题物件：【能解释主题的一个核心物件或结构】，不沿用电脑与纸张；不得增加假数据。\n人物的脸不被文字和物件遮挡；抠图边缘自然。标题只强调一个关键词，可描边、投影或字重变化，避免扭曲字形。主体和文字均由图像模型生成。\n边界：只用指定文字；不编造表情、行为、经历、第三方人物或背书。Logo如需要，按品牌库原图放置。保留原图与实际提示词，核对中文、本人相似度与180px缩略图。\n",
+      "prompt_template_url": "/static/cover-design/prompts/cover-portrait-dossier-v1-template-zh.txt",
+      "model_record": "built-in image_gen; exact model version not exposed",
+      "sample": {
+        "headline": "换了工具 / 效率没变？",
+        "question": "流程要不要重做？",
+        "basis": "已有工具与流程主题用于视觉样稿；本轮未重新听审成片"
+      },
+      "reference_portrait": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-持麦微笑-原图.jpg",
+      "review_note": "已查看实际生成图片及缩略图；生成合成的人像仍需本人确认相似度。",
+      "agent_request": "使用 $video-cover-design，模板 COVER-PORTRAIT-DOSSIER，先查品牌库真实照片与当前成片，读取文本规则及中文提示词，制作真人＋主题物件封面交我审核。"
+    },
+    {
+      "id": "COVER-PORTRAIT-EXPLAINER",
+      "name": "真人科技结构讲解",
+      "version": "1.0",
+      "use": "真人讲解、课程观点、主题物件说明",
+      "preview": "/static/cover-design/examples/cover-portrait-explainer-v1.png",
+      "examples": [
+        "/static/cover-design/examples/cover-portrait-explainer-v1.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "真人主题封面",
+      "layout": "人物右下，流程物件左下；上方冷白标题与青色关键词，深蓝网格",
+      "typography": "清晰粗体中文，关键词强调；描边或投影服务缩略图阅读",
+      "rules": [
+        "真人、主题物件、关键词三个焦点",
+        "不以参考博主的具体人物或文案作为素材",
+        "脸部不被标题遮挡，保留真实人物特征"
+      ],
+      "text_rules": {
+        "headline": "8–16字优先，2–3行完整短语；保留否定、条件；本片必须支持标题。",
+        "question": "可选6–12字，补充观看理由，成片能回答。",
+        "emphasis": "仅强调一处关键词；描边投影不吞没字形。",
+        "metadata": "未经核实不加日期、学校或活动名称。"
+      },
+      "migration": {
+        "keep": [
+          "本套人物位置",
+          "本套字体层级",
+          "本套背景与物件关系"
+        ],
+        "replace": [
+          "当前真实照片",
+          "主标题与可选问题",
+          "依据本片的主题物件"
+        ],
+        "adapt": "人物身份与文字需逐张检查，不能只换背景颜色。"
+      },
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-portrait-explainer-v1.txt",
+      "generation_original": "/static/cover-design/originals/cover-portrait-explainer-v1.png",
+      "prompt_template": "用途：3:4知识短视频封面。\n内容依据：【本片原句或时码】。\n人物：使用【品牌库中选定真实照片】，保留本人面貌、眼镜、发型及原动作；不要生成替身。\n标题：准确生成【完整主标题】，按完整短语分2–3行。\n补充问题：【可选问题】，视频内能回答；标题足够时省略。\n构图与字体：人物右下，流程物件左下；上方冷白标题与青色关键词，深蓝网格。\n主题物件：【能解释主题的一个核心物件或结构】，不沿用电脑与纸张；不得增加假数据。\n人物的脸不被文字和物件遮挡；抠图边缘自然。标题只强调一个关键词，可描边、投影或字重变化，避免扭曲字形。主体和文字均由图像模型生成。\n边界：只用指定文字；不编造表情、行为、经历、第三方人物或背书。Logo如需要，按品牌库原图放置。保留原图与实际提示词，核对中文、本人相似度与180px缩略图。\n",
+      "prompt_template_url": "/static/cover-design/prompts/cover-portrait-explainer-v1-template-zh.txt",
+      "model_record": "built-in image_gen; exact model version not exposed",
+      "sample": {
+        "headline": "换了工具 / 效率没变？",
+        "question": "流程要不要重做？",
+        "basis": "已有工具与流程主题用于视觉样稿；本轮未重新听审成片"
+      },
+      "reference_portrait": "/Users/Apple/Documents/邱懿武03/协作资料/品牌素材/邱懿武/邱懿武-持麦微笑-原图.jpg",
+      "review_note": "已查看实际生成图片及缩略图；生成合成的人像仍需本人确认相似度。",
+      "agent_request": "使用 $video-cover-design，模板 COVER-PORTRAIT-EXPLAINER，先查品牌库真实照片与当前成片，读取文本规则及中文提示词，制作真人＋主题物件封面交我审核。"
+    },
+    {
+      "id": "COVER-COMIC-SEQUENCE",
+      "name": "三格故事漫画",
+      "version": "1.0",
+      "use": "过程转折、组织摩擦、工具与流程",
+      "preview": "/static/cover-design/examples/cover-comic-sequence-v1.png",
+      "examples": [
+        "/static/cover-design/examples/cover-comic-sequence-v1.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "分镜漫画",
+      "layout": "三格动作按上中下推进；主标题跨中间留白；问题收尾。",
+      "typography": "清晰粗体中文；纹理与字形遵循媒介，优先可读",
+      "rules": [
+        "三格动作按上中下推进；主标题跨中间留白；问题收尾。",
+        "逐格指定动作，并说明跨格哪些对象必须保持一致。",
+        "整图通过图像模型生成；不使用SVG或代码绘图",
+        "画面解释观点，物件不可当作真实案例证据"
+      ],
+      "text_rules": {
+        "headline": "本片真实支持的完整观点或问题，优先8–16字；否定、条件不删除。示例仅用于视觉比较，不继承效率没变。",
+        "question": "可选6–12字，补充条件或观看理由；不重复标题，不编造收益。主标题已足够时可以省略。",
+        "line_break": "每行完整短语，最多2–3行；不能为求视觉变化扭曲中文字形。按实际大图及180px宽缩略图核对。",
+        "emphasis": "依本套媒介强调一个核心词或一处障碍；不得所有文字同等抢眼。",
+        "visual_labels": "默认无图注，无虚构数据和图表。概念剖面或影子不标真实结构和测量指标。",
+        "metadata": "系列、讲者、学校和日期为可选第三层，仅使用已核实信息。",
+        "avoid": "不伪造原话、人物、客户证据或性能收益；生成摄影明确概念示意。"
+      },
+      "composition_variants": [
+        "三格动作按上中下推进；主标题跨中间留白；问题收尾。"
+      ],
+      "migration": {
+        "keep": [
+          "本套媒介与材料质感",
+          "本套观看顺序与构图",
+          "强调方法与层级"
+        ],
+        "replace": [
+          "本片主标题与问题",
+          "本片观点对应主体",
+          "真实署名与来源"
+        ],
+        "adapt": "按新主题重画对象关系。指定准确文字、材料、视角、留白和约束；不要只改颜色。"
+      },
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-comic-sequence-v1.txt",
+      "generation_original": "/static/cover-design/originals/cover-comic-sequence-v1.png",
+      "prompt_template": "用途：为【账号受众】制作一张完整的3:4知识视频封面。\n主题与依据：【成片核心观点】【支持原句或时码】。\n主标题：准确写出「【完整主标题】」，按【完整短语断行】排版。\n问题：准确写出「【可选问题】」；没有问题时不生成该层。\n视觉媒介：三格故事漫画。\n构图：三格动作按上中下推进；主标题跨中间留白；问题收尾。\n核心主体：【能解释本片观点的单一对象或关系】，不要机械继承示例里的电脑和纸张。\n提示词关键控制：逐格指定动作，并说明跨格哪些对象必须保持一致。\n生成要求：标题和主体由图像模型整图生成；中文字清楚，约180px宽仍能读；关键文字留出适当边距。\n约束：只出现指定文字；不加姓名、日期、商标、虚构图表、装饰小字或无依据的AI符号。保持本套媒介和观看顺序，不退回统一的米白宋体立体场景。\n交付：1080×1440 PNG，另保存生成原图、实际提示词、参考材料、观点依据和检查结果。\n",
+      "prompt_template_url": "/static/cover-design/prompts/cover-comic-sequence-v1-template-zh.txt",
+      "capability": "叙事分镜与跨格对象连续性",
+      "prompt_technique": "逐格指定动作，并说明跨格哪些对象必须保持一致。",
+      "model_record": "built-in image_gen; exact model version not exposed",
+      "sample": {
+        "headline": "换了工具 / 效率没变？",
+        "question": "流程要不要重做？",
+        "basis": "沿用已有工具与流程主题，用同文案测试视觉能力；本轮未重新听审成片。"
+      },
+      "review_note": "概念样稿；检查了主标题与画面，正式适配仍需当前成片依据和裁切核对。",
+      "agent_request": "使用 $video-cover-design，模板 COVER-COMIC-SEQUENCE@1.0「三格故事漫画」，为【当前视频】制作封面。先读取样图、text_rules、migration和prompt_template，依据当前成片替换占位内容；按本套媒介和观看顺序用图像模型整图生成。保留标题条件，不机械继承示例电脑/纸张，不用SVG。保存实际提示词、原图、1080×1440主图、180px缩略图与观点依据；核对中文、留白与概念示意边界后交我审核。",
+      "thumbnail_review": "已检查180px宽预览，主标题可识别；样稿属视觉候选。 三格细节和问题小字偏小，正式使用放大问题或删去该层。"
+    },
+    {
+      "id": "COVER-NOIR-INK",
+      "name": "黑白悬疑漫画",
+      "version": "1.0",
+      "use": "问题追问、隐藏障碍、决策误区",
+      "preview": "/static/cover-design/examples/cover-noir-ink-v1.png",
+      "examples": [
+        "/static/cover-design/examples/cover-noir-ink-v1.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "黑白漫画",
+      "layout": "单格强阴影与环形主体；标题下部白字；问题在左上留白。",
+      "typography": "清晰粗体中文；纹理与字形遵循媒介，优先可读",
+      "rules": [
+        "单格强阴影与环形主体；标题下部白字；问题在左上留白。",
+        "用主体动作、阴影面积与唯一强调色描述冲突，而不是只写漫画风。",
+        "整图通过图像模型生成；不使用SVG或代码绘图",
+        "画面解释观点，物件不可当作真实案例证据"
+      ],
+      "text_rules": {
+        "headline": "本片真实支持的完整观点或问题，优先8–16字；否定、条件不删除。示例仅用于视觉比较，不继承效率没变。",
+        "question": "可选6–12字，补充条件或观看理由；不重复标题，不编造收益。主标题已足够时可以省略。",
+        "line_break": "每行完整短语，最多2–3行；不能为求视觉变化扭曲中文字形。按实际大图及180px宽缩略图核对。",
+        "emphasis": "依本套媒介强调一个核心词或一处障碍；不得所有文字同等抢眼。",
+        "visual_labels": "默认无图注，无虚构数据和图表。概念剖面或影子不标真实结构和测量指标。",
+        "metadata": "系列、讲者、学校和日期为可选第三层，仅使用已核实信息。",
+        "avoid": "不伪造原话、人物、客户证据或性能收益；生成摄影明确概念示意。"
+      },
+      "composition_variants": [
+        "单格强阴影与环形主体；标题下部白字；问题在左上留白。"
+      ],
+      "migration": {
+        "keep": [
+          "本套媒介与材料质感",
+          "本套观看顺序与构图",
+          "强调方法与层级"
+        ],
+        "replace": [
+          "本片主标题与问题",
+          "本片观点对应主体",
+          "真实署名与来源"
+        ],
+        "adapt": "按新主题重画对象关系。指定准确文字、材料、视角、留白和约束；不要只改颜色。"
+      },
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-noir-ink-v1.txt",
+      "generation_original": "/static/cover-design/originals/cover-noir-ink-v1.png",
+      "prompt_template": "用途：为【账号受众】制作一张完整的3:4知识视频封面。\n主题与依据：【成片核心观点】【支持原句或时码】。\n主标题：准确写出「【完整主标题】」，按【完整短语断行】排版。\n问题：准确写出「【可选问题】」；没有问题时不生成该层。\n视觉媒介：黑白悬疑漫画。\n构图：单格强阴影与环形主体；标题下部白字；问题在左上留白。\n核心主体：【能解释本片观点的单一对象或关系】，不要机械继承示例里的电脑和纸张。\n提示词关键控制：用主体动作、阴影面积与唯一强调色描述冲突，而不是只写漫画风。\n生成要求：标题和主体由图像模型整图生成；中文字清楚，约180px宽仍能读；关键文字留出适当边距。\n约束：只出现指定文字；不加姓名、日期、商标、虚构图表、装饰小字或无依据的AI符号。保持本套媒介和观看顺序，不退回统一的米白宋体立体场景。\n交付：1080×1440 PNG，另保存生成原图、实际提示词、参考材料、观点依据和检查结果。\n",
+      "prompt_template_url": "/static/cover-design/prompts/cover-noir-ink-v1-template-zh.txt",
+      "capability": "单格叙事、墨线风格、强明暗",
+      "prompt_technique": "用主体动作、阴影面积与唯一强调色描述冲突，而不是只写漫画风。",
+      "model_record": "built-in image_gen; exact model version not exposed",
+      "sample": {
+        "headline": "换了工具 / 效率没变？",
+        "question": "流程要不要重做？",
+        "basis": "沿用已有工具与流程主题，用同文案测试视觉能力；本轮未重新听审成片。"
+      },
+      "review_note": "概念样稿；检查了主标题与画面，正式适配仍需当前成片依据和裁切核对。 右侧文字较近边缘，正式制作加宽留白；重纹理不得损伤中文字形。",
+      "agent_request": "使用 $video-cover-design，模板 COVER-NOIR-INK@1.0「黑白悬疑漫画」，为【当前视频】制作封面。先读取样图、text_rules、migration和prompt_template，依据当前成片替换占位内容；按本套媒介和观看顺序用图像模型整图生成。保留标题条件，不机械继承示例电脑/纸张，不用SVG。保存实际提示词、原图、1080×1440主图、180px缩略图与观点依据；核对中文、留白与概念示意边界后交我审核。",
+      "thumbnail_review": "已检查180px宽预览，主标题可识别；样稿属视觉候选。"
+    },
+    {
+      "id": "COVER-CUT-PAPER",
+      "name": "俯视剪纸路径",
+      "version": "1.0",
+      "use": "流程、组织边界、路径重构",
+      "preview": "/static/cover-design/examples/cover-cut-paper-v1.png",
+      "examples": [
+        "/static/cover-design/examples/cover-cut-paper-v1.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "剪纸工艺",
+      "layout": "主体左侧，标题右上；俯视剪纸短阴影；一条粗路径穿越主体。",
+      "typography": "清晰粗体中文；纹理与字形遵循媒介，优先可读",
+      "rules": [
+        "主体左侧，标题右上；俯视剪纸短阴影；一条粗路径穿越主体。",
+        "指定物理材质和拍摄视角；限制阴影深度，避免变成立体建筑。",
+        "整图通过图像模型生成；不使用SVG或代码绘图",
+        "画面解释观点，物件不可当作真实案例证据"
+      ],
+      "text_rules": {
+        "headline": "本片真实支持的完整观点或问题，优先8–16字；否定、条件不删除。示例仅用于视觉比较，不继承效率没变。",
+        "question": "可选6–12字，补充条件或观看理由；不重复标题，不编造收益。主标题已足够时可以省略。",
+        "line_break": "每行完整短语，最多2–3行；不能为求视觉变化扭曲中文字形。按实际大图及180px宽缩略图核对。",
+        "emphasis": "依本套媒介强调一个核心词或一处障碍；不得所有文字同等抢眼。",
+        "visual_labels": "默认无图注，无虚构数据和图表。概念剖面或影子不标真实结构和测量指标。",
+        "metadata": "系列、讲者、学校和日期为可选第三层，仅使用已核实信息。",
+        "avoid": "不伪造原话、人物、客户证据或性能收益；生成摄影明确概念示意。"
+      },
+      "composition_variants": [
+        "主体左侧，标题右上；俯视剪纸短阴影；一条粗路径穿越主体。"
+      ],
+      "migration": {
+        "keep": [
+          "本套媒介与材料质感",
+          "本套观看顺序与构图",
+          "强调方法与层级"
+        ],
+        "replace": [
+          "本片主标题与问题",
+          "本片观点对应主体",
+          "真实署名与来源"
+        ],
+        "adapt": "按新主题重画对象关系。指定准确文字、材料、视角、留白和约束；不要只改颜色。"
+      },
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-cut-paper-v1.txt",
+      "generation_original": "/static/cover-design/originals/cover-cut-paper-v1.png",
+      "prompt_template": "用途：为【账号受众】制作一张完整的3:4知识视频封面。\n主题与依据：【成片核心观点】【支持原句或时码】。\n主标题：准确写出「【完整主标题】」，按【完整短语断行】排版。\n问题：准确写出「【可选问题】」；没有问题时不生成该层。\n视觉媒介：俯视剪纸路径。\n构图：主体左侧，标题右上；俯视剪纸短阴影；一条粗路径穿越主体。\n核心主体：【能解释本片观点的单一对象或关系】，不要机械继承示例里的电脑和纸张。\n提示词关键控制：指定物理材质和拍摄视角；限制阴影深度，避免变成立体建筑。\n生成要求：标题和主体由图像模型整图生成；中文字清楚，约180px宽仍能读；关键文字留出适当边距。\n约束：只出现指定文字；不加姓名、日期、商标、虚构图表、装饰小字或无依据的AI符号。保持本套媒介和观看顺序，不退回统一的米白宋体立体场景。\n交付：1080×1440 PNG，另保存生成原图、实际提示词、参考材料、观点依据和检查结果。\n",
+      "prompt_template_url": "/static/cover-design/prompts/cover-cut-paper-v1-template-zh.txt",
+      "capability": "材质控制、俯视构图、关系可视化",
+      "prompt_technique": "指定物理材质和拍摄视角；限制阴影深度，避免变成立体建筑。",
+      "model_record": "built-in image_gen; exact model version not exposed",
+      "sample": {
+        "headline": "换了工具 / 效率没变？",
+        "question": "流程要不要重做？",
+        "basis": "沿用已有工具与流程主题，用同文案测试视觉能力；本轮未重新听审成片。"
+      },
+      "review_note": "概念样稿；检查了主标题与画面，正式适配仍需当前成片依据和裁切核对。 右侧文字较近边缘，正式制作加宽留白；重纹理不得损伤中文字形。",
+      "agent_request": "使用 $video-cover-design，模板 COVER-CUT-PAPER@1.0「俯视剪纸路径」，为【当前视频】制作封面。先读取样图、text_rules、migration和prompt_template，依据当前成片替换占位内容；按本套媒介和观看顺序用图像模型整图生成。保留标题条件，不机械继承示例电脑/纸张，不用SVG。保存实际提示词、原图、1080×1440主图、180px缩略图与观点依据；核对中文、留白与概念示意边界后交我审核。",
+      "thumbnail_review": "已检查180px宽预览，主标题可识别；样稿属视觉候选。"
+    },
+    {
+      "id": "COVER-SHADOW-METAPHOR",
+      "name": "影子揭示隐喻",
+      "version": "1.0",
+      "use": "表面改变与底层问题、核心判断",
+      "preview": "/static/cover-design/examples/cover-shadow-metaphor-v1.png",
+      "examples": [
+        "/static/cover-design/examples/cover-shadow-metaphor-v1.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "观念摄影",
+      "layout": "右中单物件，左侧大影子；标题左上；问题左下。",
+      "typography": "清晰粗体中文；纹理与字形遵循媒介，优先可读",
+      "rules": [
+        "右中单物件，左侧大影子；标题左上；问题左下。",
+        "分别指定物件形状与影子含义，明确它是刻意的超现实隐喻。",
+        "整图通过图像模型生成；不使用SVG或代码绘图",
+        "画面解释观点，物件不可当作真实案例证据"
+      ],
+      "text_rules": {
+        "headline": "本片真实支持的完整观点或问题，优先8–16字；否定、条件不删除。示例仅用于视觉比较，不继承效率没变。",
+        "question": "可选6–12字，补充条件或观看理由；不重复标题，不编造收益。主标题已足够时可以省略。",
+        "line_break": "每行完整短语，最多2–3行；不能为求视觉变化扭曲中文字形。按实际大图及180px宽缩略图核对。",
+        "emphasis": "依本套媒介强调一个核心词或一处障碍；不得所有文字同等抢眼。",
+        "visual_labels": "默认无图注，无虚构数据和图表。概念剖面或影子不标真实结构和测量指标。",
+        "metadata": "系列、讲者、学校和日期为可选第三层，仅使用已核实信息。",
+        "avoid": "不伪造原话、人物、客户证据或性能收益；生成摄影明确概念示意。"
+      },
+      "composition_variants": [
+        "右中单物件，左侧大影子；标题左上；问题左下。"
+      ],
+      "migration": {
+        "keep": [
+          "本套媒介与材料质感",
+          "本套观看顺序与构图",
+          "强调方法与层级"
+        ],
+        "replace": [
+          "本片主标题与问题",
+          "本片观点对应主体",
+          "真实署名与来源"
+        ],
+        "adapt": "按新主题重画对象关系。指定准确文字、材料、视角、留白和约束；不要只改颜色。"
+      },
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-shadow-metaphor-v1.txt",
+      "generation_original": "/static/cover-design/originals/cover-shadow-metaphor-v1.png",
+      "prompt_template": "用途：为【账号受众】制作一张完整的3:4知识视频封面。\n主题与依据：【成片核心观点】【支持原句或时码】。\n主标题：准确写出「【完整主标题】」，按【完整短语断行】排版。\n问题：准确写出「【可选问题】」；没有问题时不生成该层。\n视觉媒介：影子揭示隐喻。\n构图：右中单物件，左侧大影子；标题左上；问题左下。\n核心主体：【能解释本片观点的单一对象或关系】，不要机械继承示例里的电脑和纸张。\n提示词关键控制：分别指定物件形状与影子含义，明确它是刻意的超现实隐喻。\n生成要求：标题和主体由图像模型整图生成；中文字清楚，约180px宽仍能读；关键文字留出适当边距。\n约束：只出现指定文字；不加姓名、日期、商标、虚构图表、装饰小字或无依据的AI符号。保持本套媒介和观看顺序，不退回统一的米白宋体立体场景。\n交付：1080×1440 PNG，另保存生成原图、实际提示词、参考材料、观点依据和检查结果。\n",
+      "prompt_template_url": "/static/cover-design/prompts/cover-shadow-metaphor-v1-template-zh.txt",
+      "capability": "观念隐喻、物件与影子双层含义",
+      "prompt_technique": "分别指定物件形状与影子含义，明确它是刻意的超现实隐喻。",
+      "model_record": "built-in image_gen; exact model version not exposed",
+      "sample": {
+        "headline": "换了工具 / 效率没变？",
+        "question": "流程要不要重做？",
+        "basis": "沿用已有工具与流程主题，用同文案测试视觉能力；本轮未重新听审成片。"
+      },
+      "review_note": "概念样稿；检查了主标题与画面，正式适配仍需当前成片依据和裁切核对。 影子为超现实隐喻，正式迁移要检查含义能否快速理解。",
+      "agent_request": "使用 $video-cover-design，模板 COVER-SHADOW-METAPHOR@1.0「影子揭示隐喻」，为【当前视频】制作封面。先读取样图、text_rules、migration和prompt_template，依据当前成片替换占位内容；按本套媒介和观看顺序用图像模型整图生成。保留标题条件，不机械继承示例电脑/纸张，不用SVG。保存实际提示词、原图、1080×1440主图、180px缩略图与观点依据；核对中文、留白与概念示意边界后交我审核。",
+      "thumbnail_review": "已检查180px宽预览，主标题可识别；样稿属视觉候选。"
+    },
+    {
+      "id": "COVER-XRAY-BOTTLENECK",
+      "name": "透视剖面瓶颈",
+      "version": "1.0",
+      "use": "机制拆解、约束、技术与组织",
+      "preview": "/static/cover-design/examples/cover-xray-bottleneck-v1.png",
+      "examples": [
+        "/static/cover-design/examples/cover-xray-bottleneck-v1.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "科学概念视觉",
+      "layout": "斜向半透明主体贯穿画面；琥珀色只标瓶颈；标题左中。",
+      "typography": "清晰粗体中文；纹理与字形遵循媒介，优先可读",
+      "rules": [
+        "斜向半透明主体贯穿画面；琥珀色只标瓶颈；标题左中。",
+        "指定可见内部结构与一个需强调的障碍；删除虚构指标和多余图注。",
+        "整图通过图像模型生成；不使用SVG或代码绘图",
+        "画面解释观点，物件不可当作真实案例证据"
+      ],
+      "text_rules": {
+        "headline": "本片真实支持的完整观点或问题，优先8–16字；否定、条件不删除。示例仅用于视觉比较，不继承效率没变。",
+        "question": "可选6–12字，补充条件或观看理由；不重复标题，不编造收益。主标题已足够时可以省略。",
+        "line_break": "每行完整短语，最多2–3行；不能为求视觉变化扭曲中文字形。按实际大图及180px宽缩略图核对。",
+        "emphasis": "依本套媒介强调一个核心词或一处障碍；不得所有文字同等抢眼。",
+        "visual_labels": "默认无图注，无虚构数据和图表。概念剖面或影子不标真实结构和测量指标。",
+        "metadata": "系列、讲者、学校和日期为可选第三层，仅使用已核实信息。",
+        "avoid": "不伪造原话、人物、客户证据或性能收益；生成摄影明确概念示意。"
+      },
+      "composition_variants": [
+        "斜向半透明主体贯穿画面；琥珀色只标瓶颈；标题左中。"
+      ],
+      "migration": {
+        "keep": [
+          "本套媒介与材料质感",
+          "本套观看顺序与构图",
+          "强调方法与层级"
+        ],
+        "replace": [
+          "本片主标题与问题",
+          "本片观点对应主体",
+          "真实署名与来源"
+        ],
+        "adapt": "按新主题重画对象关系。指定准确文字、材料、视角、留白和约束；不要只改颜色。"
+      },
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-xray-bottleneck-v1.txt",
+      "generation_original": "/static/cover-design/originals/cover-xray-bottleneck-v1.png",
+      "prompt_template": "用途：为【账号受众】制作一张完整的3:4知识视频封面。\n主题与依据：【成片核心观点】【支持原句或时码】。\n主标题：准确写出「【完整主标题】」，按【完整短语断行】排版。\n问题：准确写出「【可选问题】」；没有问题时不生成该层。\n视觉媒介：透视剖面瓶颈。\n构图：斜向半透明主体贯穿画面；琥珀色只标瓶颈；标题左中。\n核心主体：【能解释本片观点的单一对象或关系】，不要机械继承示例里的电脑和纸张。\n提示词关键控制：指定可见内部结构与一个需强调的障碍；删除虚构指标和多余图注。\n生成要求：标题和主体由图像模型整图生成；中文字清楚，约180px宽仍能读；关键文字留出适当边距。\n约束：只出现指定文字；不加姓名、日期、商标、虚构图表、装饰小字或无依据的AI符号。保持本套媒介和观看顺序，不退回统一的米白宋体立体场景。\n交付：1080×1440 PNG，另保存生成原图、实际提示词、参考材料、观点依据和检查结果。\n",
+      "prompt_template_url": "/static/cover-design/prompts/cover-xray-bottleneck-v1-template-zh.txt",
+      "capability": "剖面与透明材质、重点隔离",
+      "prompt_technique": "指定可见内部结构与一个需强调的障碍；删除虚构指标和多余图注。",
+      "model_record": "built-in image_gen; exact model version not exposed",
+      "sample": {
+        "headline": "换了工具 / 效率没变？",
+        "question": "流程要不要重做？",
+        "basis": "沿用已有工具与流程主题，用同文案测试视觉能力；本轮未重新听审成片。"
+      },
+      "review_note": "概念样稿；检查了主标题与画面，正式适配仍需当前成片依据和裁切核对。 电脑内部迷宫是概念剖面，不是硬件真实结构。",
+      "agent_request": "使用 $video-cover-design，模板 COVER-XRAY-BOTTLENECK@1.0「透视剖面瓶颈」，为【当前视频】制作封面。先读取样图、text_rules、migration和prompt_template，依据当前成片替换占位内容；按本套媒介和观看顺序用图像模型整图生成。保留标题条件，不机械继承示例电脑/纸张，不用SVG。保存实际提示词、原图、1080×1440主图、180px缩略图与观点依据；核对中文、留白与概念示意边界后交我审核。",
+      "thumbnail_review": "已检查180px宽预览，主标题可识别；样稿属视觉候选。"
+    },
+    {
+      "id": "COVER-LINOCUT",
+      "name": "红黑木刻判断",
+      "version": "1.0",
+      "use": "组织惯性、生产机制、强判断",
+      "preview": "/static/cover-design/examples/cover-linocut-v1.png",
+      "examples": [
+        "/static/cover-design/examples/cover-linocut-v1.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "版画",
+      "layout": "上半木刻主体，下半雕刻大字；中部白条放问题。",
+      "typography": "清晰粗体中文；纹理与字形遵循媒介，优先可读",
+      "rules": [
+        "上半木刻主体，下半雕刻大字；中部白条放问题。",
+        "明确限色与刻痕，字体跟随媒介；避免泛泛的复古滤镜。",
+        "整图通过图像模型生成；不使用SVG或代码绘图",
+        "画面解释观点，物件不可当作真实案例证据"
+      ],
+      "text_rules": {
+        "headline": "本片真实支持的完整观点或问题，优先8–16字；否定、条件不删除。示例仅用于视觉比较，不继承效率没变。",
+        "question": "可选6–12字，补充条件或观看理由；不重复标题，不编造收益。主标题已足够时可以省略。",
+        "line_break": "每行完整短语，最多2–3行；不能为求视觉变化扭曲中文字形。按实际大图及180px宽缩略图核对。",
+        "emphasis": "依本套媒介强调一个核心词或一处障碍；不得所有文字同等抢眼。",
+        "visual_labels": "默认无图注，无虚构数据和图表。概念剖面或影子不标真实结构和测量指标。",
+        "metadata": "系列、讲者、学校和日期为可选第三层，仅使用已核实信息。",
+        "avoid": "不伪造原话、人物、客户证据或性能收益；生成摄影明确概念示意。"
+      },
+      "composition_variants": [
+        "上半木刻主体，下半雕刻大字；中部白条放问题。"
+      ],
+      "migration": {
+        "keep": [
+          "本套媒介与材料质感",
+          "本套观看顺序与构图",
+          "强调方法与层级"
+        ],
+        "replace": [
+          "本片主标题与问题",
+          "本片观点对应主体",
+          "真实署名与来源"
+        ],
+        "adapt": "按新主题重画对象关系。指定准确文字、材料、视角、留白和约束；不要只改颜色。"
+      },
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-linocut-v1.txt",
+      "generation_original": "/static/cover-design/originals/cover-linocut-v1.png",
+      "prompt_template": "用途：为【账号受众】制作一张完整的3:4知识视频封面。\n主题与依据：【成片核心观点】【支持原句或时码】。\n主标题：准确写出「【完整主标题】」，按【完整短语断行】排版。\n问题：准确写出「【可选问题】」；没有问题时不生成该层。\n视觉媒介：红黑木刻判断。\n构图：上半木刻主体，下半雕刻大字；中部白条放问题。\n核心主体：【能解释本片观点的单一对象或关系】，不要机械继承示例里的电脑和纸张。\n提示词关键控制：明确限色与刻痕，字体跟随媒介；避免泛泛的复古滤镜。\n生成要求：标题和主体由图像模型整图生成；中文字清楚，约180px宽仍能读；关键文字留出适当边距。\n约束：只出现指定文字；不加姓名、日期、商标、虚构图表、装饰小字或无依据的AI符号。保持本套媒介和观看顺序，不退回统一的米白宋体立体场景。\n交付：1080×1440 PNG，另保存生成原图、实际提示词、参考材料、观点依据和检查结果。\n",
+      "prompt_template_url": "/static/cover-design/prompts/cover-linocut-v1-template-zh.txt",
+      "capability": "非摄影媒介、刻痕纹理、强轮廓",
+      "prompt_technique": "明确限色与刻痕，字体跟随媒介；避免泛泛的复古滤镜。",
+      "model_record": "built-in image_gen; exact model version not exposed",
+      "sample": {
+        "headline": "换了工具 / 效率没变？",
+        "question": "流程要不要重做？",
+        "basis": "沿用已有工具与流程主题，用同文案测试视觉能力；本轮未重新听审成片。"
+      },
+      "review_note": "概念样稿；检查了主标题与画面，正式适配仍需当前成片依据和裁切核对。 右侧文字较近边缘，正式制作加宽留白；重纹理不得损伤中文字形。",
+      "agent_request": "使用 $video-cover-design，模板 COVER-LINOCUT@1.0「红黑木刻判断」，为【当前视频】制作封面。先读取样图、text_rules、migration和prompt_template，依据当前成片替换占位内容；按本套媒介和观看顺序用图像模型整图生成。保留标题条件，不机械继承示例电脑/纸张，不用SVG。保存实际提示词、原图、1080×1440主图、180px缩略图与观点依据；核对中文、留白与概念示意边界后交我审核。",
+      "thumbnail_review": "已检查180px宽预览，主标题可识别；样稿属视觉候选。"
+    },
+    {
+      "id": "COVER-CLAY-STOPMOTION",
+      "name": "黏土荒诞隐喻",
+      "version": "1.0",
+      "use": "抽象误区、认知、轻松课程",
+      "preview": "/static/cover-design/examples/cover-clay-stopmotion-v1.png",
+      "examples": [
+        "/static/cover-design/examples/cover-clay-stopmotion-v1.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "黏土定格",
+      "layout": "上右标题、下左大型黏土主体；双色场地；问题右下。",
+      "typography": "清晰粗体中文；纹理与字形遵循媒介，优先可读",
+      "rules": [
+        "上右标题、下左大型黏土主体；双色场地；问题右下。",
+        "指定荒诞的物理障碍和手工痕迹，限制主体数量，避免儿童化。",
+        "整图通过图像模型生成；不使用SVG或代码绘图",
+        "画面解释观点，物件不可当作真实案例证据"
+      ],
+      "text_rules": {
+        "headline": "本片真实支持的完整观点或问题，优先8–16字；否定、条件不删除。示例仅用于视觉比较，不继承效率没变。",
+        "question": "可选6–12字，补充条件或观看理由；不重复标题，不编造收益。主标题已足够时可以省略。",
+        "line_break": "每行完整短语，最多2–3行；不能为求视觉变化扭曲中文字形。按实际大图及180px宽缩略图核对。",
+        "emphasis": "依本套媒介强调一个核心词或一处障碍；不得所有文字同等抢眼。",
+        "visual_labels": "默认无图注，无虚构数据和图表。概念剖面或影子不标真实结构和测量指标。",
+        "metadata": "系列、讲者、学校和日期为可选第三层，仅使用已核实信息。",
+        "avoid": "不伪造原话、人物、客户证据或性能收益；生成摄影明确概念示意。"
+      },
+      "composition_variants": [
+        "上右标题、下左大型黏土主体；双色场地；问题右下。"
+      ],
+      "migration": {
+        "keep": [
+          "本套媒介与材料质感",
+          "本套观看顺序与构图",
+          "强调方法与层级"
+        ],
+        "replace": [
+          "本片主标题与问题",
+          "本片观点对应主体",
+          "真实署名与来源"
+        ],
+        "adapt": "按新主题重画对象关系。指定准确文字、材料、视角、留白和约束；不要只改颜色。"
+      },
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-clay-stopmotion-v1.txt",
+      "generation_original": "/static/cover-design/originals/cover-clay-stopmotion-v1.png",
+      "prompt_template": "用途：为【账号受众】制作一张完整的3:4知识视频封面。\n主题与依据：【成片核心观点】【支持原句或时码】。\n主标题：准确写出「【完整主标题】」，按【完整短语断行】排版。\n问题：准确写出「【可选问题】」；没有问题时不生成该层。\n视觉媒介：黏土荒诞隐喻。\n构图：上右标题、下左大型黏土主体；双色场地；问题右下。\n核心主体：【能解释本片观点的单一对象或关系】，不要机械继承示例里的电脑和纸张。\n提示词关键控制：指定荒诞的物理障碍和手工痕迹，限制主体数量，避免儿童化。\n生成要求：标题和主体由图像模型整图生成；中文字清楚，约180px宽仍能读；关键文字留出适当边距。\n约束：只出现指定文字；不加姓名、日期、商标、虚构图表、装饰小字或无依据的AI符号。保持本套媒介和观看顺序，不退回统一的米白宋体立体场景。\n交付：1080×1440 PNG，另保存生成原图、实际提示词、参考材料、观点依据和检查结果。\n",
+      "prompt_template_url": "/static/cover-design/prompts/cover-clay-stopmotion-v1-template-zh.txt",
+      "capability": "触感造型、视觉幽默、摄影光影",
+      "prompt_technique": "指定荒诞的物理障碍和手工痕迹，限制主体数量，避免儿童化。",
+      "model_record": "built-in image_gen; exact model version not exposed",
+      "sample": {
+        "headline": "换了工具 / 效率没变？",
+        "question": "流程要不要重做？",
+        "basis": "沿用已有工具与流程主题，用同文案测试视觉能力；本轮未重新听审成片。"
+      },
+      "review_note": "概念样稿；检查了主标题与画面，正式适配仍需当前成片依据和裁切核对。 右侧文字较近边缘，正式制作加宽留白；重纹理不得损伤中文字形。 已用局部图像编辑去除未经要求的上升图表，并保留其他主要设计。",
+      "agent_request": "使用 $video-cover-design，模板 COVER-CLAY-STOPMOTION@1.0「黏土荒诞隐喻」，为【当前视频】制作封面。先读取样图、text_rules、migration和prompt_template，依据当前成片替换占位内容；按本套媒介和观看顺序用图像模型整图生成。保留标题条件，不机械继承示例电脑/纸张，不用SVG。保存实际提示词、原图、1080×1440主图、180px缩略图与观点依据；核对中文、留白与概念示意边界后交我审核。",
+      "thumbnail_review": "已检查180px宽预览，主标题可识别；样稿属视觉候选。"
+    },
+    {
+      "id": "COVER-INK-NEGATIVE",
+      "name": "水墨负空间",
+      "version": "1.0",
+      "use": "认知、组织惯性、反思判断",
+      "preview": "/static/cover-design/examples/cover-ink-negative-v1.png",
+      "examples": [
+        "/static/cover-design/examples/cover-ink-negative-v1.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "当代水墨",
+      "layout": "左侧墨迹主体与大留白相互构成；标题右中；问题右上。",
+      "typography": "清晰粗体中文；纹理与字形遵循媒介，优先可读",
+      "rules": [
+        "左侧墨迹主体与大留白相互构成；标题右中；问题右上。",
+        "同时规定墨迹覆盖范围和必须留白的区域；抽象图仍要表达路径障碍。",
+        "整图通过图像模型生成；不使用SVG或代码绘图",
+        "画面解释观点，物件不可当作真实案例证据"
+      ],
+      "text_rules": {
+        "headline": "本片真实支持的完整观点或问题，优先8–16字；否定、条件不删除。示例仅用于视觉比较，不继承效率没变。",
+        "question": "可选6–12字，补充条件或观看理由；不重复标题，不编造收益。主标题已足够时可以省略。",
+        "line_break": "每行完整短语，最多2–3行；不能为求视觉变化扭曲中文字形。按实际大图及180px宽缩略图核对。",
+        "emphasis": "依本套媒介强调一个核心词或一处障碍；不得所有文字同等抢眼。",
+        "visual_labels": "默认无图注，无虚构数据和图表。概念剖面或影子不标真实结构和测量指标。",
+        "metadata": "系列、讲者、学校和日期为可选第三层，仅使用已核实信息。",
+        "avoid": "不伪造原话、人物、客户证据或性能收益；生成摄影明确概念示意。"
+      },
+      "composition_variants": [
+        "左侧墨迹主体与大留白相互构成；标题右中；问题右上。"
+      ],
+      "migration": {
+        "keep": [
+          "本套媒介与材料质感",
+          "本套观看顺序与构图",
+          "强调方法与层级"
+        ],
+        "replace": [
+          "本片主标题与问题",
+          "本片观点对应主体",
+          "真实署名与来源"
+        ],
+        "adapt": "按新主题重画对象关系。指定准确文字、材料、视角、留白和约束；不要只改颜色。"
+      },
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-ink-negative-v1.txt",
+      "generation_original": "/static/cover-design/originals/cover-ink-negative-v1.png",
+      "prompt_template": "用途：为【账号受众】制作一张完整的3:4知识视频封面。\n主题与依据：【成片核心观点】【支持原句或时码】。\n主标题：准确写出「【完整主标题】」，按【完整短语断行】排版。\n问题：准确写出「【可选问题】」；没有问题时不生成该层。\n视觉媒介：水墨负空间。\n构图：左侧墨迹主体与大留白相互构成；标题右中；问题右上。\n核心主体：【能解释本片观点的单一对象或关系】，不要机械继承示例里的电脑和纸张。\n提示词关键控制：同时规定墨迹覆盖范围和必须留白的区域；抽象图仍要表达路径障碍。\n生成要求：标题和主体由图像模型整图生成；中文字清楚，约180px宽仍能读；关键文字留出适当边距。\n约束：只出现指定文字；不加姓名、日期、商标、虚构图表、装饰小字或无依据的AI符号。保持本套媒介和观看顺序，不退回统一的米白宋体立体场景。\n交付：1080×1440 PNG，另保存生成原图、实际提示词、参考材料、观点依据和检查结果。\n",
+      "prompt_template_url": "/static/cover-design/prompts/cover-ink-negative-v1-template-zh.txt",
+      "capability": "笔触控制、留白、抽象关系",
+      "prompt_technique": "同时规定墨迹覆盖范围和必须留白的区域；抽象图仍要表达路径障碍。",
+      "model_record": "built-in image_gen; exact model version not exposed",
+      "sample": {
+        "headline": "换了工具 / 效率没变？",
+        "question": "流程要不要重做？",
+        "basis": "沿用已有工具与流程主题，用同文案测试视觉能力；本轮未重新听审成片。"
+      },
+      "review_note": "概念样稿；检查了主标题与画面，正式适配仍需当前成片依据和裁切核对。 留白方向适合反思内容，视觉冲击程度低于红底单物件。",
+      "agent_request": "使用 $video-cover-design，模板 COVER-INK-NEGATIVE@1.0「水墨负空间」，为【当前视频】制作封面。先读取样图、text_rules、migration和prompt_template，依据当前成片替换占位内容；按本套媒介和观看顺序用图像模型整图生成。保留标题条件，不机械继承示例电脑/纸张，不用SVG。保存实际提示词、原图、1080×1440主图、180px缩略图与观点依据；核对中文、留白与概念示意边界后交我审核。",
+      "thumbnail_review": "已检查180px宽预览，主标题可识别；样稿属视觉候选。"
+    },
+    {
+      "id": "COVER-TYPE-PUNCH",
+      "name": "荧光巨字节奏",
+      "version": "1.0",
+      "use": "管理误区、直接问题、明确判断",
+      "preview": "/static/cover-design/examples/cover-type-punch-v1.png",
+      "examples": [
+        "/static/cover-design/examples/cover-type-punch-v1.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "rules": [
+        "荧光黄、黑、少量电蓝；粗黑体主导",
+        "文字本身就是主体；字号和错位产生节奏",
+        "强调否定与疑问，关键字完整保留",
+        "用图像模型整图生成，不使用SVG或代码绘图。"
+      ],
+      "category": "文字主导",
+      "layout": "标题占画面约75%；错位两组大字；问题靠底部；不安排插画区。",
+      "typography": "清晰粗无衬线中文；漫画使用清晰手绘黑体",
+      "composition_variants": [
+        "标题占画面约75%；错位两组大字；问题靠底部；不安排插画区。"
+      ],
+      "text_rules": {
+        "headline": "优先8–16字，写一个本片支持的完整问题或判断；不继承示例里的效率没变。此样稿固定相同文案用于视觉比较。",
+        "question": "可选6–12字，补充观看理由；主标题已完整提问时可省略，不强制每张加问题。",
+        "line_break": "按完整短语断行；不、没、未必、条件词必须与结论一起保留；生成后逐字检查率、变等字形。",
+        "emphasis": "荧光黄、黑、少量电蓝；粗黑体主导",
+        "visual_labels": "默认无图注。只有真实内容需要才加1–3个标签；不编造数据和客户名。",
+        "metadata": "系列名、讲者、地点日期可选，处于第三层；样稿不堆署名。",
+        "avoid": "不编造引号、背书、效率提升和虚构本人肖像；摄影感生成图明确为概念示意。"
+      },
+      "migration": {
+        "keep": [
+          "该套观看顺序与版式",
+          "该套图片语言",
+          "该套强调方法"
+        ],
+        "replace": [
+          "当前片标题与问题",
+          "当前观点对应主体",
+          "真实素材及出处"
+        ],
+        "adapt": "先选表达机制，再按当前内容重画。禁止所有方向退回米白底、宋体标题、下部立体模型。"
+      },
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-type-punch-v1.txt",
+      "generation_original": "/static/cover-design/originals/cover-type-punch-v1.png",
+      "model_record": "built-in image_gen; exact version not exposed",
+      "sample": {
+        "headline": "换了工具 / 效率没变？",
+        "question": "流程要不要重做？",
+        "basis": "沿用已有工具与流程主题；本轮未重新听审成片"
+      },
+      "review_note": "视觉候选；主标题中文已检查，需匹配实际成片并核实裁切。 巨字字形较重且靠边较紧；正式适配加大边距并减轻字形变形。",
+      "agent_request": "使用 $video-cover-design，模板 COVER-TYPE-PUNCH@1.0「荧光巨字节奏」，为【当前内容】设计3:4封面。先读本模板 text_rules、migration、示例与当前成片，保留该套图片语言、观看顺序和构图；不要退回米白宋体立体模型。用图像模型整图生成中文标题、可选问题与主体，不用SVG或代码绘图。替换示例事实，标题由成片支持。交付1080×1440PNG、180px缩略图、原始图、提示词与依据记录。检查中文、边距、构图及摄影示意与真实素材的界限。用户指定型号但工具不能选择时如实说明。"
+    },
+    {
+      "id": "COVER-REPORT-COLLAGE",
+      "name": "调查档案拼贴",
+      "version": "1.0",
+      "use": "企业案例、机制追问、证据分析",
+      "preview": "/static/cover-design/examples/cover-report-collage-v1.png",
+      "examples": [
+        "/static/cover-design/examples/cover-report-collage-v1.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "rules": [
+        "冷白钴蓝与红；摄影剪贴边缘、复印质感",
+        "只圈出与观点相关的一处，不满屏箭头",
+        "拼贴属概念示意，不冒称真实企业现场",
+        "用图像模型整图生成，不使用SVG或代码绘图。"
+      ],
+      "category": "编辑拼贴",
+      "layout": "左侧标题约40%，右侧照片拼贴约60%；红圈标一处矛盾；问题放白色底条。",
+      "typography": "清晰粗无衬线中文；漫画使用清晰手绘黑体",
+      "composition_variants": [
+        "左侧标题约40%，右侧照片拼贴约60%；红圈标一处矛盾；问题放白色底条。"
+      ],
+      "text_rules": {
+        "headline": "优先8–16字，写一个本片支持的完整问题或判断；不继承示例里的效率没变。此样稿固定相同文案用于视觉比较。",
+        "question": "可选6–12字，补充观看理由；主标题已完整提问时可省略，不强制每张加问题。",
+        "line_break": "按完整短语断行；不、没、未必、条件词必须与结论一起保留；生成后逐字检查率、变等字形。",
+        "emphasis": "冷白钴蓝与红；摄影剪贴边缘、复印质感",
+        "visual_labels": "默认无图注。只有真实内容需要才加1–3个标签；不编造数据和客户名。",
+        "metadata": "系列名、讲者、地点日期可选，处于第三层；样稿不堆署名。",
+        "avoid": "不编造引号、背书、效率提升和虚构本人肖像；摄影感生成图明确为概念示意。"
+      },
+      "migration": {
+        "keep": [
+          "该套观看顺序与版式",
+          "该套图片语言",
+          "该套强调方法"
+        ],
+        "replace": [
+          "当前片标题与问题",
+          "当前观点对应主体",
+          "真实素材及出处"
+        ],
+        "adapt": "先选表达机制，再按当前内容重画。禁止所有方向退回米白底、宋体标题、下部立体模型。"
+      },
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-report-collage-v1.txt",
+      "generation_original": "/static/cover-design/originals/cover-report-collage-v1.png",
+      "model_record": "built-in image_gen; exact version not exposed",
+      "sample": {
+        "headline": "换了工具 / 效率没变？",
+        "question": "流程要不要重做？",
+        "basis": "沿用已有工具与流程主题；本轮未重新听审成片"
+      },
+      "review_note": "视觉候选；主标题中文已检查，需匹配实际成片并核实裁切。",
+      "agent_request": "使用 $video-cover-design，模板 COVER-REPORT-COLLAGE@1.0「调查档案拼贴」，为【当前内容】设计3:4封面。先读本模板 text_rules、migration、示例与当前成片，保留该套图片语言、观看顺序和构图；不要退回米白宋体立体模型。用图像模型整图生成中文标题、可选问题与主体，不用SVG或代码绘图。替换示例事实，标题由成片支持。交付1080×1440PNG、180px缩略图、原始图、提示词与依据记录。检查中文、边距、构图及摄影示意与真实素材的界限。用户指定型号但工具不能选择时如实说明。"
+    },
+    {
+      "id": "COVER-COMIC-TENSION",
+      "name": "漫画双声部",
+      "version": "1.0",
+      "use": "业务与技术沟通、组织摩擦、课堂问答",
+      "preview": "/static/cover-design/examples/cover-comic-tension-v1.png",
+      "examples": [
+        "/static/cover-design/examples/cover-comic-tension-v1.png"
+      ],
+      "status": "style-confirmed",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "rules": [
+        "粗线手绘、珊瑚橙与淡紫；成人编辑漫画",
+        "对话框可承载概括，不能编造讲者原话",
+        "左右对象形成叙事，不堆叠小人物",
+        "用图像模型整图生成，不使用SVG或代码绘图。"
+      ],
+      "category": "叙事漫画",
+      "layout": "两段标题分别进入两个对话框；斜线切开场景；提问收在下方。",
+      "typography": "清晰粗无衬线中文；漫画使用清晰手绘黑体",
+      "composition_variants": [
+        "两段标题分别进入两个对话框；斜线切开场景；提问收在下方。"
+      ],
+      "text_rules": {
+        "headline": "优先8–16字，写一个本片支持的完整问题或判断；不继承示例里的效率没变。此样稿固定相同文案用于视觉比较。",
+        "question": "可选6–12字，补充观看理由；主标题已完整提问时可省略，不强制每张加问题。",
+        "line_break": "按完整短语断行；不、没、未必、条件词必须与结论一起保留；生成后逐字检查率、变等字形。",
+        "emphasis": "粗线手绘、珊瑚橙与淡紫；成人编辑漫画",
+        "visual_labels": "默认无图注。只有真实内容需要才加1–3个标签；不编造数据和客户名。",
+        "metadata": "系列名、讲者、地点日期可选，处于第三层；样稿不堆署名。",
+        "avoid": "不编造引号、背书、效率提升和虚构本人肖像；摄影感生成图明确为概念示意。"
+      },
+      "migration": {
+        "keep": [
+          "该套观看顺序与版式",
+          "该套图片语言",
+          "该套强调方法"
+        ],
+        "replace": [
+          "当前片标题与问题",
+          "当前观点对应主体",
+          "真实素材及出处"
+        ],
+        "adapt": "先选表达机制，再按当前内容重画。禁止所有方向退回米白底、宋体标题、下部立体模型。"
+      },
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-comic-tension-v1.txt",
+      "generation_original": "/static/cover-design/originals/cover-comic-tension-v1.png",
+      "model_record": "built-in image_gen; exact version not exposed",
+      "sample": {
+        "headline": "换了工具 / 效率没变？",
+        "question": "流程要不要重做？",
+        "basis": "沿用已有工具与流程主题；本轮未重新听审成片"
+      },
+      "review_note": "视觉候选；主标题中文已检查，需匹配实际成片并核实裁切。",
+      "agent_request": "使用 $video-cover-design，模板 COVER-COMIC-TENSION@1.0「漫画双声部」，为【当前内容】设计3:4封面。先读本模板 text_rules、migration、示例与当前成片，保留该套图片语言、观看顺序和构图；不要退回米白宋体立体模型。用图像模型整图生成中文标题、可选问题与主体，不用SVG或代码绘图。替换示例事实，标题由成片支持。交付1080×1440PNG、180px缩略图、原始图、提示词与依据记录。检查中文、边距、构图及摄影示意与真实素材的界限。用户指定型号但工具不能选择时如实说明。",
+      "style_feedback": "用户认可漫画与红底单物件方向，强调风格差异与视觉冲击；不等于本片内容已审核。"
+    },
+    {
+      "id": "COVER-SINGLE-METAPHOR",
+      "name": "红底单物件隐喻",
+      "version": "1.0",
+      "use": "工具与流程、认知反差、抽象机制",
+      "preview": "/static/cover-design/examples/cover-single-metaphor-v1.png",
+      "examples": [
+        "/static/cover-design/examples/cover-single-metaphor-v1.png"
+      ],
+      "status": "style-confirmed",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "rules": [
+        "正红底、白字、一处蓝；硬光单物件",
+        "物件必须能解释问题，不能只是好看",
+        "主体占主要面积；标题不固定放顶部",
+        "用图像模型整图生成，不使用SVG或代码绘图。"
+      ],
+      "category": "单物件摄影",
+      "layout": "单物件居中放大；上方留空；主标题在左下两行，与主体错开。",
+      "typography": "清晰粗无衬线中文；漫画使用清晰手绘黑体",
+      "composition_variants": [
+        "单物件居中放大；上方留空；主标题在左下两行，与主体错开。"
+      ],
+      "text_rules": {
+        "headline": "优先8–16字，写一个本片支持的完整问题或判断；不继承示例里的效率没变。此样稿固定相同文案用于视觉比较。",
+        "question": "可选6–12字，补充观看理由；主标题已完整提问时可省略，不强制每张加问题。",
+        "line_break": "按完整短语断行；不、没、未必、条件词必须与结论一起保留；生成后逐字检查率、变等字形。",
+        "emphasis": "正红底、白字、一处蓝；硬光单物件",
+        "visual_labels": "默认无图注。只有真实内容需要才加1–3个标签；不编造数据和客户名。",
+        "metadata": "系列名、讲者、地点日期可选，处于第三层；样稿不堆署名。",
+        "avoid": "不编造引号、背书、效率提升和虚构本人肖像；摄影感生成图明确为概念示意。"
+      },
+      "migration": {
+        "keep": [
+          "该套观看顺序与版式",
+          "该套图片语言",
+          "该套强调方法"
+        ],
+        "replace": [
+          "当前片标题与问题",
+          "当前观点对应主体",
+          "真实素材及出处"
+        ],
+        "adapt": "先选表达机制，再按当前内容重画。禁止所有方向退回米白底、宋体标题、下部立体模型。"
+      },
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-single-metaphor-v1.txt",
+      "generation_original": "/static/cover-design/originals/cover-single-metaphor-v1.png",
+      "model_record": "built-in image_gen; exact version not exposed",
+      "sample": {
+        "headline": "换了工具 / 效率没变？",
+        "question": "流程要不要重做？",
+        "basis": "沿用已有工具与流程主题；本轮未重新听审成片"
+      },
+      "review_note": "视觉候选；主标题中文已检查，需匹配实际成片并核实裁切。",
+      "agent_request": "使用 $video-cover-design，模板 COVER-SINGLE-METAPHOR@1.0「红底单物件隐喻」，为【当前内容】设计3:4封面。先读本模板 text_rules、migration、示例与当前成片，保留该套图片语言、观看顺序和构图；不要退回米白宋体立体模型。用图像模型整图生成中文标题、可选问题与主体，不用SVG或代码绘图。替换示例事实，标题由成片支持。交付1080×1440PNG、180px缩略图、原始图、提示词与依据记录。检查中文、边距、构图及摄影示意与真实素材的界限。用户指定型号但工具不能选择时如实说明。",
+      "style_feedback": "用户认可漫画与红底单物件方向，强调风格差异与视觉冲击；不等于本片内容已审核。"
+    },
+    {
+      "id": "COVER-DOCUMENTARY-BAND",
+      "name": "黑白纪实横条",
+      "version": "1.0",
+      "use": "生产组织、效率、工作现场",
+      "preview": "/static/cover-design/examples/cover-documentary-band-v1.png",
+      "examples": [
+        "/static/cover-design/examples/cover-documentary-band-v1.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "rules": [
+        "黑白摄影与一条青色强调带",
+        "先看到现场，再读中部标题；确保条带不遮关键证据",
+        "示例为概念场景；正式真实纪实必须用可追溯素材",
+        "用图像模型整图生成，不使用SVG或代码绘图。"
+      ],
+      "category": "纪实场景",
+      "layout": "黑白场景满幅；青色横条穿过中部放标题；问题置于暗处。",
+      "typography": "清晰粗无衬线中文；漫画使用清晰手绘黑体",
+      "composition_variants": [
+        "黑白场景满幅；青色横条穿过中部放标题；问题置于暗处。"
+      ],
+      "text_rules": {
+        "headline": "优先8–16字，写一个本片支持的完整问题或判断；不继承示例里的效率没变。此样稿固定相同文案用于视觉比较。",
+        "question": "可选6–12字，补充观看理由；主标题已完整提问时可省略，不强制每张加问题。",
+        "line_break": "按完整短语断行；不、没、未必、条件词必须与结论一起保留；生成后逐字检查率、变等字形。",
+        "emphasis": "黑白摄影与一条青色强调带",
+        "visual_labels": "默认无图注。只有真实内容需要才加1–3个标签；不编造数据和客户名。",
+        "metadata": "系列名、讲者、地点日期可选，处于第三层；样稿不堆署名。",
+        "avoid": "不编造引号、背书、效率提升和虚构本人肖像；摄影感生成图明确为概念示意。"
+      },
+      "migration": {
+        "keep": [
+          "该套观看顺序与版式",
+          "该套图片语言",
+          "该套强调方法"
+        ],
+        "replace": [
+          "当前片标题与问题",
+          "当前观点对应主体",
+          "真实素材及出处"
+        ],
+        "adapt": "先选表达机制，再按当前内容重画。禁止所有方向退回米白底、宋体标题、下部立体模型。"
+      },
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-documentary-band-v1.txt",
+      "generation_original": "/static/cover-design/originals/cover-documentary-band-v1.png",
+      "model_record": "built-in image_gen; exact version not exposed",
+      "sample": {
+        "headline": "换了工具 / 效率没变？",
+        "question": "流程要不要重做？",
+        "basis": "沿用已有工具与流程主题；本轮未重新听审成片"
+      },
+      "review_note": "视觉候选；主标题中文已检查，需匹配实际成片并核实裁切。",
+      "agent_request": "使用 $video-cover-design，模板 COVER-DOCUMENTARY-BAND@1.0「黑白纪实横条」，为【当前内容】设计3:4封面。先读本模板 text_rules、migration、示例与当前成片，保留该套图片语言、观看顺序和构图；不要退回米白宋体立体模型。用图像模型整图生成中文标题、可选问题与主体，不用SVG或代码绘图。替换示例事实，标题由成片支持。交付1080×1440PNG、180px缩略图、原始图、提示词与依据记录。检查中文、边距、构图及摄影示意与真实素材的界限。用户指定型号但工具不能选择时如实说明。"
+    },
+    {
+      "id": "COVER-DUOTONE-CONTRAST",
+      "name": "双色切面对照",
+      "version": "1.0",
+      "use": "新旧方法、前后对照、工具与组织差异",
+      "preview": "/static/cover-design/examples/cover-duotone-contrast-v1.png",
+      "examples": [
+        "/static/cover-design/examples/cover-duotone-contrast-v1.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "rules": [
+        "双色摄影与斜切形成对比",
+        "相同对象同尺度；不要暗示未经证实的效率提升",
+        "明确比较维度，保留条件与否定",
+        "用图像模型整图生成，不使用SVG或代码绘图。"
+      ],
+      "category": "对照摄影",
+      "layout": "蓝与洋红斜切；两个主体同尺度；标题右上、问题右下，主体跨左中与下中。",
+      "typography": "清晰粗无衬线中文；漫画使用清晰手绘黑体",
+      "composition_variants": [
+        "蓝与洋红斜切；两个主体同尺度；标题右上、问题右下，主体跨左中与下中。"
+      ],
+      "text_rules": {
+        "headline": "优先8–16字，写一个本片支持的完整问题或判断；不继承示例里的效率没变。此样稿固定相同文案用于视觉比较。",
+        "question": "可选6–12字，补充观看理由；主标题已完整提问时可省略，不强制每张加问题。",
+        "line_break": "按完整短语断行；不、没、未必、条件词必须与结论一起保留；生成后逐字检查率、变等字形。",
+        "emphasis": "双色摄影与斜切形成对比",
+        "visual_labels": "默认无图注。只有真实内容需要才加1–3个标签；不编造数据和客户名。",
+        "metadata": "系列名、讲者、地点日期可选，处于第三层；样稿不堆署名。",
+        "avoid": "不编造引号、背书、效率提升和虚构本人肖像；摄影感生成图明确为概念示意。"
+      },
+      "migration": {
+        "keep": [
+          "该套观看顺序与版式",
+          "该套图片语言",
+          "该套强调方法"
+        ],
+        "replace": [
+          "当前片标题与问题",
+          "当前观点对应主体",
+          "真实素材及出处"
+        ],
+        "adapt": "先选表达机制，再按当前内容重画。禁止所有方向退回米白底、宋体标题、下部立体模型。"
+      },
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-duotone-contrast-v1.txt",
+      "generation_original": "/static/cover-design/originals/cover-duotone-contrast-v1.png",
+      "model_record": "built-in image_gen; exact version not exposed",
+      "sample": {
+        "headline": "换了工具 / 效率没变？",
+        "question": "流程要不要重做？",
+        "basis": "沿用已有工具与流程主题；本轮未重新听审成片"
+      },
+      "review_note": "视觉候选；主标题中文已检查，需匹配实际成片并核实裁切。 对照物尺度并非完全一致；正式比较应重画校准，不能当性能前后证据。",
+      "agent_request": "使用 $video-cover-design，模板 COVER-DUOTONE-CONTRAST@1.0「双色切面对照」，为【当前内容】设计3:4封面。先读本模板 text_rules、migration、示例与当前成片，保留该套图片语言、观看顺序和构图；不要退回米白宋体立体模型。用图像模型整图生成中文标题、可选问题与主体，不用SVG或代码绘图。替换示例事实，标题由成片支持。交付1080×1440PNG、180px缩略图、原始图、提示词与依据记录。检查中文、边距、构图及摄影示意与真实素材的界限。用户指定型号但工具不能选择时如实说明。"
+    },
+    {
+      "id": "COVER-PAPER-BLUE",
+      "name": "成熟纸感黑蓝大字",
+      "version": "1.1",
+      "use": "AI观点、企业转型、教育与创造力",
+      "preview": "/static/cover-design/examples/paper-020.png",
+      "examples": [
+        "/static/cover-design/examples/paper-020.png",
+        "/static/cover-design/examples/paper-079.png",
+        "/static/cover-design/examples/paper-105.png",
+        "/static/cover-design/examples/paper-133.png"
+      ],
+      "status": "style-confirmed",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "rules": [
+        "超粗无衬线中文，第一行黑色、重点行亮蓝色，手绘蓝色下划线",
+        "暖白纸张底，纸感拼贴插画；少量深灰、青绿和暖黄点缀",
+        "疑问小字放标题下方，清楚可读，不抢主标题",
+        "企业用流程、设备、文件、结构；教育用阅读、作品、实践与探索",
+        "器物近景、俯视、剖面、对照、局部动作等构图交替使用",
+        "避免儿童化、重复小孩与纸飞机、重复办公桌和机械换标题"
+      ],
+      "agent_request": "使用 $video-cover-design，模板 COVER-PAPER-BLUE@1.1「成熟纸感黑蓝大字」，为【内容编号/视频路径】设计封面。先读取本模板 text_rules、migration、示例和当前成片字幕。使用图像模型直接生成包含中文标题、问题和主体的完整3:4封面，禁止用SVG、HTML或代码绘图代替。按当前内容重新构图，不复制示例事实。交付1080×1440 PNG、180px缩略图、原始生成图、提示词、依据与版本记录。用户指定模型时优先使用；工具不暴露模型选择或版本时如实记录，不假称已使用指定版本。完成中文与缩略图检查后交我审核。",
+      "composition_variants": [
+        "器物近景",
+        "俯视剖面",
+        "局部动作",
+        "两端对照"
+      ],
+      "slots": {
+        "headline": "完整观点",
+        "question": "有依据的问题",
+        "visual": "每条原创主体",
+        "footer": "可选已核实信息"
+      },
+      "text_rules": {
+        "headline": "用直接判断或具体问题，优先8–16字；黑色交代对象，蓝色承载观点。",
+        "question": "一句观众会问且本片能回答的问题；与主标题互补，不重复，不新增未讲过的收益。",
+        "line_break": "按完整短语断行；“不一定”“不是”“还要”等跟随结论。长标题先调断行，不能压成手机难读小字。",
+        "emphasis": "强调第二行核心结论，手绘下划线只出现一次。",
+        "visual_labels": "图中最多3–5个短标签；生成插画内不塞难读小字。",
+        "metadata": "系列、讲者、学校、日期只在已核实时使用；示例信息不继承。",
+        "avoid": "不写唯一、必然、人人都能、保证翻倍等缺乏原声依据的承诺；不添加伪引号。"
+      },
+      "migration": {
+        "keep": [
+          "主次层级",
+          "配色职责",
+          "版式留白",
+          "字体气质"
+        ],
+        "replace": [
+          "标题与问题",
+          "主体与图注",
+          "讲者、地点、日期"
+        ],
+        "adapt": "依据题长调字级、依据观点选主体；只换颜色不算新方案。"
+      },
+      "category": "概念插画",
+      "generation_method": "image-model"
+    },
+    {
+      "id": "COVER-WARM-SONGTI",
+      "name": "暖白蓝色宋体观点",
+      "version": "1.1",
+      "use": "克制、偏理性的课程观点与概念表达",
+      "preview": "/static/cover-design/examples/warm-12.png",
+      "examples": [
+        "/static/cover-design/examples/warm-12.png",
+        "/static/cover-design/examples/warm-18.png",
+        "/static/cover-design/examples/warm-30.png"
+      ],
+      "status": "style-confirmed",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "rules": [
+        "暖白与钴蓝，粗宋体标题，完整短语自然断行",
+        "概念插画置于下半部，文字与插画保留清楚留白",
+        "按标题长度调整字号和行距，不把长标题硬挤进固定位置",
+        "主体表达本条观点，不连续复用相同几何图案"
+      ],
+      "agent_request": "使用 $video-cover-design，模板 COVER-WARM-SONGTI@1.1「暖白蓝色宋体观点」，为【内容编号/视频路径】设计封面。先读取本模板 text_rules、migration、示例和当前成片字幕。使用图像模型直接生成包含中文标题、问题和主体的完整3:4封面，禁止用SVG、HTML或代码绘图代替。按当前内容重新构图，不复制示例事实。交付1080×1440 PNG、180px缩略图、原始生成图、提示词、依据与版本记录。用户指定模型时优先使用；工具不暴露模型选择或版本时如实记录，不假称已使用指定版本。完成中文与缩略图检查后交我审核。",
+      "composition_variants": [
+        "器物近景",
+        "俯视剖面",
+        "局部动作",
+        "两端对照"
+      ],
+      "slots": {
+        "headline": "完整观点",
+        "question": "有依据的问题",
+        "visual": "每条原创主体",
+        "footer": "可选已核实信息"
+      },
+      "text_rules": {
+        "headline": "使用克制的完整观点，避免感叹句；短语2–3行，宋体字形统一。",
+        "question": "一句观众会问且本片能回答的问题；与主标题互补，不重复，不新增未讲过的收益。",
+        "line_break": "按完整短语断行；“不一定”“不是”“还要”等跟随结论。长标题先调断行，不能压成手机难读小字。",
+        "emphasis": "蓝色突出概念区别，正文保持深色。",
+        "visual_labels": "图中最多3–5个短标签；生成插画内不塞难读小字。",
+        "metadata": "系列、讲者、学校、日期只在已核实时使用；示例信息不继承。",
+        "avoid": "不写唯一、必然、人人都能、保证翻倍等缺乏原声依据的承诺；不添加伪引号。"
+      },
+      "migration": {
+        "keep": [
+          "主次层级",
+          "配色职责",
+          "版式留白",
+          "字体气质"
+        ],
+        "replace": [
+          "标题与问题",
+          "主体与图注",
+          "讲者、地点、日期"
+        ],
+        "adapt": "依据题长调字级、依据观点选主体；只换颜色不算新方案。"
+      },
+      "category": "概念插画",
+      "generation_method": "image-model"
+    },
+    {
+      "id": "COVER-FOREST-ISO",
+      "name": "深绿宋体立体概念",
+      "version": "1.1",
+      "use": "AI与组织、课程系列、企业知识与变革",
+      "preview": "/static/cover-design/examples/green-R01.png",
+      "examples": [
+        "/static/cover-design/examples/green-R01.png",
+        "/static/cover-design/examples/green-T15.png",
+        "/static/cover-design/examples/green-T16.png"
+      ],
+      "status": "style-confirmed",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "rules": [
+        "墨绿纹理底，象牙白粗宋体，黄绿仅强调一个关键词",
+        "标题占上半部，问题紧随标题，立体概念插画置于下半部",
+        "每条原创主体；用连接、层次、迁移等关系表达观点",
+        "日期、学校和姓名是可替换字段，不默认沿用浙大信息",
+        "不在插画里生成难读小标签"
+      ],
+      "palette": [
+        "#053d2a",
+        "#f2eedf",
+        "#d3ec65"
+      ],
+      "typography": "粗宋体标题＋清晰无衬线问题",
+      "layout": "上文字、下概念插画；约8%边缘留白",
+      "composition_variants": [
+        "连接平台",
+        "器物近景",
+        "生长迁移",
+        "环形反馈"
+      ],
+      "slots": {
+        "headline": "本条完整观点，2–3行，保留条件和否定",
+        "question": "视频能回答的问题，可选",
+        "series": "可选系列名",
+        "visual": "本条专属主体或真实关系",
+        "footer": "已核实的讲者、地点、日期，可选"
+      },
+      "agent_request": "使用 $video-cover-design，模板 COVER-FOREST-ISO@1.1「深绿宋体立体概念」，为【内容编号/视频路径】设计封面。先读取本模板 text_rules、migration、示例和当前成片字幕。使用图像模型直接生成包含中文标题、问题和主体的完整3:4封面，禁止用SVG、HTML或代码绘图代替。按当前内容重新构图，不复制示例事实。交付1080×1440 PNG、180px缩略图、原始生成图、提示词、依据与版本记录。用户指定模型时优先使用；工具不暴露模型选择或版本时如实记录，不假称已使用指定版本。完成中文与缩略图检查后交我审核。",
+      "text_rules": {
+        "headline": "主标题写清对象与组织关系；优先两行，长句最多三行，不删条件。",
+        "question": "一句观众会问且本片能回答的问题；与主标题互补，不重复，不新增未讲过的收益。",
+        "line_break": "按完整短语断行；“不一定”“不是”“还要”等跟随结论。长标题先调断行，不能压成手机难读小字。",
+        "emphasis": "黄绿只用于一个核心动作或判断，其余为象牙白。",
+        "visual_labels": "图中最多3–5个短标签；生成插画内不塞难读小字。",
+        "metadata": "系列、讲者、学校、日期只在已核实时使用；示例信息不继承。",
+        "avoid": "不写唯一、必然、人人都能、保证翻倍等缺乏原声依据的承诺；不添加伪引号。"
+      },
+      "migration": {
+        "keep": [
+          "主次层级",
+          "配色职责",
+          "版式留白",
+          "字体气质"
+        ],
+        "replace": [
+          "标题与问题",
+          "主体与图注",
+          "讲者、地点、日期"
+        ],
+        "adapt": "依据题长调字级、依据观点选主体；只换颜色不算新方案。"
+      },
+      "category": "概念插画",
+      "generation_method": "image-model"
+    },
+    {
+      "id": "COVER-GOLD-EDITORIAL",
+      "name": "黑金曲线观点",
+      "version": "1.1",
+      "use": "商业判断、战略、访谈观点",
+      "preview": "/static/cover-design/examples/cover-gold-editorial-image-v11.png",
+      "examples": [
+        "/static/cover-design/examples/cover-gold-editorial-image-v11.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "rules": [
+        "近黑底、米白粗体、哑金强调，避免大面积亮金",
+        "左对齐完整短语，最多三个辅助要点",
+        "细曲线只停留边角，不穿过标题",
+        "示例中的课程、编号和条件只作为构图示意，不带入新视频",
+        "图像模型直接生成整张封面；材质、透视、光线服务观点，禁止代码绘图代替。"
+      ],
+      "palette": [
+        "#101615",
+        "#f7f5eb",
+        "#d6b66d"
+      ],
+      "typography": "清晰粗无衬线中文，按完整短语断行",
+      "layout": "上部标题与问题，下部有材质、光线与空间关系的原创概念主体",
+      "composition_variants": [
+        "单一判断",
+        "三个条件",
+        "标题与引文"
+      ],
+      "slots": {
+        "headline": "本条完整观点，2–3行，保留条件和否定",
+        "question": "视频能回答的问题，可选",
+        "series": "可选系列名",
+        "visual": "本条专属主体或真实关系",
+        "footer": "已核实的讲者、地点、日期，可选"
+      },
+      "agent_request": "使用 $video-cover-design，模板 COVER-GOLD-EDITORIAL@1.1「黑金曲线观点」，为【内容编号/视频路径】设计封面。先读取本模板 text_rules、migration、示例和当前成片字幕。使用图像模型直接生成包含中文标题、问题和主体的完整3:4封面，禁止用SVG、HTML或代码绘图代替。按当前内容重新构图，不复制示例事实。交付1080×1440 PNG、180px缩略图、原始生成图、提示词、依据与版本记录。用户指定模型时优先使用；工具不暴露模型选择或版本时如实记录，不假称已使用指定版本。完成中文与缩略图检查后交我审核。",
+      "text_rules": {
+        "headline": "先写商业判断，再用最多三个要点支持；数量必须有原文依据。",
+        "question": "一句观众会问且本片能回答的问题；与主标题互补，不重复，不新增未讲过的收益。",
+        "line_break": "按完整短语断行；“不一定”“不是”“还要”等跟随结论。长标题先调断行，不能压成手机难读小字。",
+        "emphasis": "哑金强调判断维度，避免整篇金色。",
+        "visual_labels": "默认不加图注；确有必要时仅放本片支持的短标签，不编造指标。",
+        "metadata": "系列、讲者、学校、日期只在已核实时使用；示例信息不继承。",
+        "avoid": "不写唯一、必然、人人都能、保证翻倍等缺乏原声依据的承诺；不添加伪引号。"
+      },
+      "migration": {
+        "keep": [
+          "主次层级",
+          "配色职责",
+          "版式留白",
+          "字体气质"
+        ],
+        "replace": [
+          "标题与问题",
+          "主体与图注",
+          "讲者、地点、日期"
+        ],
+        "adapt": "依据题长调字级、依据观点选主体；只换颜色不算新方案。"
+      },
+      "category": "文字与关系",
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-gold-editorial-image-v11.txt",
+      "generation_original": "/static/cover-design/originals/cover-gold-editorial-image-v11.png",
+      "model_record": "built-in image_gen; exact model version not exposed",
+      "sample": {
+        "headline": "哪些场景 / 适合AI？",
+        "question": "企业该从哪个AI任务开始？"
+      }
+    },
+    {
+      "id": "COVER-BLUE-SYSTEM",
+      "name": "科技蓝图关系",
+      "version": "1.1",
+      "use": "AI方法、数据流程、技术结构",
+      "preview": "/static/cover-design/examples/cover-blue-system-image-v11.png",
+      "examples": [
+        "/static/cover-design/examples/cover-blue-system-image-v11.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "rules": [
+        "深海蓝底、青蓝强调，网格低对比",
+        "标题在上，最多3–5个关系节点在下",
+        "连线和箭头只表达成片真实支持的关系",
+        "不虚构数值、因果或性能提升",
+        "图像模型直接生成整张封面；材质、透视、光线服务观点，禁止代码绘图代替。"
+      ],
+      "palette": [
+        "#081a31",
+        "#ffffff",
+        "#64d8ef"
+      ],
+      "typography": "清晰粗无衬线中文，按完整短语断行",
+      "layout": "上部标题与问题，下部有材质、光线与空间关系的原创概念主体",
+      "composition_variants": [
+        "三角结构",
+        "链路流程",
+        "两端对照"
+      ],
+      "slots": {
+        "headline": "本条完整观点，2–3行，保留条件和否定",
+        "question": "视频能回答的问题，可选",
+        "series": "可选系列名",
+        "visual": "本条专属主体或真实关系",
+        "footer": "已核实的讲者、地点、日期，可选"
+      },
+      "agent_request": "使用 $video-cover-design，模板 COVER-BLUE-SYSTEM@1.1「科技蓝图关系」，为【内容编号/视频路径】设计封面。先读取本模板 text_rules、migration、示例和当前成片字幕。使用图像模型直接生成包含中文标题、问题和主体的完整3:4封面，禁止用SVG、HTML或代码绘图代替。按当前内容重新构图，不复制示例事实。交付1080×1440 PNG、180px缩略图、原始生成图、提示词、依据与版本记录。用户指定模型时优先使用；工具不暴露模型选择或版本时如实记录，不假称已使用指定版本。完成中文与缩略图检查后交我审核。",
+      "text_rules": {
+        "headline": "主标题说明系统回答什么问题；节点名使用短名词或动作，不把整句话塞进节点。",
+        "question": "一句观众会问且本片能回答的问题；与主标题互补，不重复，不新增未讲过的收益。",
+        "line_break": "按完整短语断行；“不一定”“不是”“还要”等跟随结论。长标题先调断行，不能压成手机难读小字。",
+        "emphasis": "青蓝用于关键节点或关键词，线条不抢主标题。",
+        "visual_labels": "默认不加图注；确有必要时仅放本片支持的短标签，不编造指标。",
+        "metadata": "系列、讲者、学校、日期只在已核实时使用；示例信息不继承。",
+        "avoid": "不写唯一、必然、人人都能、保证翻倍等缺乏原声依据的承诺；不添加伪引号。"
+      },
+      "migration": {
+        "keep": [
+          "主次层级",
+          "配色职责",
+          "版式留白",
+          "字体气质"
+        ],
+        "replace": [
+          "标题与问题",
+          "主体与图注",
+          "讲者、地点、日期"
+        ],
+        "adapt": "依据题长调字级、依据观点选主体；只换颜色不算新方案。"
+      },
+      "category": "文字与关系",
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-blue-system-image-v11.txt",
+      "generation_original": "/static/cover-design/originals/cover-blue-system-image-v11.png",
+      "model_record": "built-in image_gen; exact model version not exposed",
+      "sample": {
+        "headline": "哪些场景 / 适合AI？",
+        "question": "企业该从哪个AI任务开始？"
+      }
+    },
+    {
+      "id": "COVER-RED-QUESTION",
+      "name": "浅纸红线提问",
+      "version": "1.1",
+      "use": "问题导向、反思、管理误区",
+      "preview": "/static/cover-design/examples/cover-red-question-image-v11.png",
+      "examples": [
+        "/static/cover-design/examples/cover-red-question-image-v11.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "rules": [
+        "暖灰纸底，炭黑大字，砖红强调一个问题",
+        "大问号为背景装饰，不能压住字",
+        "辅助文字最多一句，避免把未证实的结论写成口号",
+        "图像模型直接生成整张封面；材质、透视、光线服务观点，禁止代码绘图代替。"
+      ],
+      "palette": [
+        "#f5f1e8",
+        "#242824",
+        "#b84435"
+      ],
+      "typography": "清晰粗无衬线中文，按完整短语断行",
+      "layout": "上部标题与问题，下部有材质、光线与空间关系的原创概念主体",
+      "composition_variants": [
+        "纯问题大字",
+        "前后对照",
+        "一条行动路径"
+      ],
+      "slots": {
+        "headline": "本条完整观点，2–3行，保留条件和否定",
+        "question": "视频能回答的问题，可选",
+        "series": "可选系列名",
+        "visual": "本条专属主体或真实关系",
+        "footer": "已核实的讲者、地点、日期，可选"
+      },
+      "agent_request": "使用 $video-cover-design，模板 COVER-RED-QUESTION@1.1「浅纸红线提问」，为【内容编号/视频路径】设计封面。先读取本模板 text_rules、migration、示例和当前成片字幕。使用图像模型直接生成包含中文标题、问题和主体的完整3:4封面，禁止用SVG、HTML或代码绘图代替。按当前内容重新构图，不复制示例事实。交付1080×1440 PNG、180px缩略图、原始生成图、提示词、依据与版本记录。用户指定模型时优先使用；工具不暴露模型选择或版本时如实记录，不假称已使用指定版本。完成中文与缩略图检查后交我审核。",
+      "text_rules": {
+        "headline": "主标题是一个真正可回答的问题，不夸大矛盾；问题小字补条件而不重复主标题。",
+        "question": "一句观众会问且本片能回答的问题；与主标题互补，不重复，不新增未讲过的收益。",
+        "line_break": "按完整短语断行；“不一定”“不是”“还要”等跟随结论。长标题先调断行，不能压成手机难读小字。",
+        "emphasis": "砖红强调关键疑问，问号是装饰而不是结论。",
+        "visual_labels": "默认不加图注；确有必要时仅放本片支持的短标签，不编造指标。",
+        "metadata": "系列、讲者、学校、日期只在已核实时使用；示例信息不继承。",
+        "avoid": "不写唯一、必然、人人都能、保证翻倍等缺乏原声依据的承诺；不添加伪引号。"
+      },
+      "migration": {
+        "keep": [
+          "主次层级",
+          "配色职责",
+          "版式留白",
+          "字体气质"
+        ],
+        "replace": [
+          "标题与问题",
+          "主体与图注",
+          "讲者、地点、日期"
+        ],
+        "adapt": "依据题长调字级、依据观点选主体；只换颜色不算新方案。"
+      },
+      "category": "文字与关系",
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-red-question-image-v11.txt",
+      "generation_original": "/static/cover-design/originals/cover-red-question-image-v11.png",
+      "model_record": "built-in image_gen; exact model version not exposed",
+      "sample": {
+        "headline": "换上新技术 / 为什么效率没变",
+        "question": "工具换新了，流程为什么还要变？"
+      }
+    },
+    {
+      "id": "COVER-ORG-MAP",
+      "name": "鼠尾草组织关系",
+      "version": "1.1",
+      "use": "反馈闭环、团队协作、知识系统",
+      "preview": "/static/cover-design/examples/cover-org-map-image-v11.png",
+      "examples": [
+        "/static/cover-design/examples/cover-org-map-image-v11.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "rules": [
+        "浅鼠尾草底，墨绿标题，米白节点",
+        "最多3–5个节点，关系比装饰更醒目",
+        "节点名短而准确，不把概念图当成真实数据图",
+        "需要复杂流程时缩减到本条核心关系",
+        "图像模型直接生成整张封面；材质、透视、光线服务观点，禁止代码绘图代替。"
+      ],
+      "palette": [
+        "#eaece5",
+        "#243d35",
+        "#638270"
+      ],
+      "typography": "清晰粗宋体，按完整短语断行",
+      "layout": "上部标题与问题，下部有材质、光线与空间关系的原创概念主体",
+      "composition_variants": [
+        "反馈环",
+        "两端桥接",
+        "并列对照"
+      ],
+      "slots": {
+        "headline": "本条完整观点，2–3行，保留条件和否定",
+        "question": "视频能回答的问题，可选",
+        "series": "可选系列名",
+        "visual": "本条专属主体或真实关系",
+        "footer": "已核实的讲者、地点、日期，可选"
+      },
+      "agent_request": "使用 $video-cover-design，模板 COVER-ORG-MAP@1.1「鼠尾草组织关系」，为【内容编号/视频路径】设计封面。先读取本模板 text_rules、migration、示例和当前成片字幕。使用图像模型直接生成包含中文标题、问题和主体的完整3:4封面，禁止用SVG、HTML或代码绘图代替。按当前内容重新构图，不复制示例事实。交付1080×1440 PNG、180px缩略图、原始生成图、提示词、依据与版本记录。用户指定模型时优先使用；工具不暴露模型选择或版本时如实记录，不假称已使用指定版本。完成中文与缩略图检查后交我审核。",
+      "text_rules": {
+        "headline": "先写组织动作与目的；节点文字彼此同类，例如统一为数据、决策、反馈。",
+        "question": "一句观众会问且本片能回答的问题；与主标题互补，不重复，不新增未讲过的收益。",
+        "line_break": "按完整短语断行；“不一定”“不是”“还要”等跟随结论。长标题先调断行，不能压成手机难读小字。",
+        "emphasis": "核心动作加重，不能让所有节点同时醒目。",
+        "visual_labels": "默认不加图注；确有必要时仅放本片支持的短标签，不编造指标。",
+        "metadata": "系列、讲者、学校、日期只在已核实时使用；示例信息不继承。",
+        "avoid": "不写唯一、必然、人人都能、保证翻倍等缺乏原声依据的承诺；不添加伪引号。"
+      },
+      "migration": {
+        "keep": [
+          "主次层级",
+          "配色职责",
+          "版式留白",
+          "字体气质"
+        ],
+        "replace": [
+          "标题与问题",
+          "主体与图注",
+          "讲者、地点、日期"
+        ],
+        "adapt": "依据题长调字级、依据观点选主体；只换颜色不算新方案。"
+      },
+      "category": "文字与关系",
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-org-map-image-v11.txt",
+      "generation_original": "/static/cover-design/originals/cover-org-map-image-v11.png",
+      "model_record": "built-in image_gen; exact model version not exposed",
+      "sample": {
+        "headline": "高频反馈 / 怎样训练组织",
+        "question": "数据、决策、反馈，怎样形成闭环？"
+      }
+    },
+    {
+      "id": "COVER-QUIET-GRAY",
+      "name": "高级灰留白观点",
+      "version": "1.1",
+      "use": "认知、生活、深度学习与迁移",
+      "preview": "/static/cover-design/examples/cover-quiet-gray-image-v11.png",
+      "examples": [
+        "/static/cover-design/examples/cover-quiet-gray-image-v11.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "rules": [
+        "暖灰、炭黑与低饱和灰绿，保持安静留白",
+        "标题2行，问题一行，主体最多两组形状",
+        "使用大小、距离、方向表达概念，不堆装饰",
+        "不默认杂志栏目、纸飞机或办公桌",
+        "图像模型直接生成整张封面；材质、透视、光线服务观点，禁止代码绘图代替。"
+      ],
+      "palette": [
+        "#e9e7e1",
+        "#323937",
+        "#6d8076"
+      ],
+      "typography": "清晰粗宋体，按完整短语断行",
+      "layout": "上部标题与问题，下部有材质、光线与空间关系的原创概念主体",
+      "composition_variants": [
+        "大小关系",
+        "迁移弧线",
+        "局部对照"
+      ],
+      "slots": {
+        "headline": "本条完整观点，2–3行，保留条件和否定",
+        "question": "视频能回答的问题，可选",
+        "series": "可选系列名",
+        "visual": "本条专属主体或真实关系",
+        "footer": "已核实的讲者、地点、日期，可选"
+      },
+      "agent_request": "使用 $video-cover-design，模板 COVER-QUIET-GRAY@1.1「高级灰留白观点」，为【内容编号/视频路径】设计封面。先读取本模板 text_rules、migration、示例和当前成片字幕。使用图像模型直接生成包含中文标题、问题和主体的完整3:4封面，禁止用SVG、HTML或代码绘图代替。按当前内容重新构图，不复制示例事实。交付1080×1440 PNG、180px缩略图、原始生成图、提示词、依据与版本记录。用户指定模型时优先使用；工具不暴露模型选择或版本时如实记录，不假称已使用指定版本。完成中文与缩略图检查后交我审核。",
+      "text_rules": {
+        "headline": "用平实观点句，少感叹号、少形容词；保留具体对象与动作。",
+        "question": "一句观众会问且本片能回答的问题；与主标题互补，不重复，不新增未讲过的收益。",
+        "line_break": "按完整短语断行；“不一定”“不是”“还要”等跟随结论。长标题先调断行，不能压成手机难读小字。",
+        "emphasis": "低饱和灰绿仅强调一处，主要依靠字号和留白。",
+        "visual_labels": "默认不加图注；确有必要时仅放本片支持的短标签，不编造指标。",
+        "metadata": "系列、讲者、学校、日期只在已核实时使用；示例信息不继承。",
+        "avoid": "不写唯一、必然、人人都能、保证翻倍等缺乏原声依据的承诺；不添加伪引号。"
+      },
+      "migration": {
+        "keep": [
+          "主次层级",
+          "配色职责",
+          "版式留白",
+          "字体气质"
+        ],
+        "replace": [
+          "标题与问题",
+          "主体与图注",
+          "讲者、地点、日期"
+        ],
+        "adapt": "依据题长调字级、依据观点选主体；只换颜色不算新方案。"
+      },
+      "category": "文字与关系",
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-quiet-gray-image-v11.txt",
+      "generation_original": "/static/cover-design/originals/cover-quiet-gray-image-v11.png",
+      "model_record": "built-in image_gen; exact model version not exposed",
+      "sample": {
+        "headline": "热爱与深度 / 怎样借AI迁移",
+        "question": "把一件事做深，能否迁移到别处？"
+      }
+    },
+    {
+      "id": "COVER-SPLIT-COMPARE",
+      "name": "双栏同尺度对照",
+      "version": "1.1",
+      "use": "两种对象、角色与边界",
+      "preview": "/static/cover-design/examples/cover-split-compare-image-v11.png",
+      "examples": [
+        "/static/cover-design/examples/cover-split-compare-image-v11.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "对照",
+      "palette": [
+        "#f0eee7",
+        "#273a34",
+        "#386b55"
+      ],
+      "typography": "清晰粗宋体，按完整短语断行",
+      "layout": "上部标题与问题，下部有材质、光线与空间关系的原创概念主体",
+      "composition_variants": [
+        "左右两端",
+        "上下前后",
+        "共享中轴"
+      ],
+      "rules": [
+        "上下统一标题；下方两栏同尺度并排",
+        "边缘约8%留白，主标题2–3行，手机缩略图优先",
+        "主体承接本条观点，关系、箭头与数字必须有内容依据",
+        "没有依据时不画高低分、对错符号或胜负",
+        "图像模型直接生成整张封面；材质、透视、光线服务观点，禁止代码绘图代替。"
+      ],
+      "text_rules": {
+        "headline": "先写共同话题，再点明两种对象；避免把差异写成优劣",
+        "question": "询问边界或分工，避免无依据的“谁更强”",
+        "line_break": "每行是一段完整短语；不把“不一定、不是、还要”等限定词拆开或删去。长标题先改断行，再在保留原意的前提下收短。",
+        "emphasis": "只强调比较维度，左右对象使用相同字号",
+        "visual_labels": "默认不加图注；确有必要时仅放本片支持的短标签，不编造指标。",
+        "metadata": "系列名、讲者、日期可选且必须核实；不从样张继承。",
+        "avoid": "没有依据时不画高低分、对错符号或胜负"
+      },
+      "sample": {
+        "clip_id": "T19",
+        "headline": "个人与企业 / 第二大脑",
+        "question": "个人积累与企业知识，边界在哪？",
+        "evidence": "个人第二大脑以自己的数据为基础，辅助个人分析和决策。企业第二大脑则面向团队，把适合公开的会议内容组织起来，让AI参与分析。\n\n两者的区别首先是数据范围与使用对象。课程保留了哪些会议可以公开这一前提，帮助团队把个人积累与企业协作的边界说清楚。",
+        "verification": "依据现有内容记录，未新增逐条听审"
+      },
+      "slots": {
+        "headline": "完整观点",
+        "question": "本片能回答的问题",
+        "visual": "按此模板布局原创",
+        "footer": "可选核实信息"
+      },
+      "migration": {
+        "keep": [
+          "版式骨架",
+          "标题层级",
+          "强调色职责",
+          "视觉关系类型"
+        ],
+        "replace": [
+          "标题与问题",
+          "概念主体与图注",
+          "系列及署名",
+          "所有示例数字和事实"
+        ],
+        "adapt": "选择一个构图变体；长标题时缩减辅助信息，不能缩成难读小字。"
+      },
+      "agent_request": "使用 $video-cover-design，模板 COVER-SPLIT-COMPARE@1.1「双栏同尺度对照」，为【内容编号/视频路径】设计封面。先读取本模板 text_rules、migration、示例和当前成片字幕。使用图像模型直接生成包含中文标题、问题和主体的完整3:4封面，禁止用SVG、HTML或代码绘图代替。按当前内容重新构图，不复制示例事实。交付1080×1440 PNG、180px缩略图、原始生成图、提示词、依据与版本记录。用户指定模型时优先使用；工具不暴露模型选择或版本时如实记录，不假称已使用指定版本。完成中文与缩略图检查后交我审核。",
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-split-compare-image-v11.txt",
+      "generation_original": "/static/cover-design/originals/cover-split-compare-image-v11.png",
+      "model_record": "built-in image_gen; exact model version not exposed"
+    },
+    {
+      "id": "COVER-TYPE-NEGATION",
+      "name": "巨字否定判断",
+      "version": "1.1",
+      "use": "纠偏、限定、概念澄清",
+      "preview": "/static/cover-design/examples/cover-type-negation-image-v11.png",
+      "examples": [
+        "/static/cover-design/examples/cover-type-negation-image-v11.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "文字主导",
+      "palette": [
+        "#191e1b",
+        "#f7f1df",
+        "#e8c74a"
+      ],
+      "typography": "清晰粗宋体，按完整短语断行",
+      "layout": "上部标题与问题，下部有材质、光线与空间关系的原创概念主体",
+      "composition_variants": [
+        "大否定词",
+        "概念不等号",
+        "主句加条件"
+      ],
+      "rules": [
+        "上方完整否定判断；下方单一大符号",
+        "边缘约8%留白，主标题2–3行，手机缩略图优先",
+        "主体承接本条观点，关系、箭头与数字必须有内容依据",
+        "只有原文明确区分两个概念时才用≠；不能把概率说成绝不",
+        "图像模型直接生成整张封面；材质、透视、光线服务观点，禁止代码绘图代替。"
+      ],
+      "text_rules": {
+        "headline": "否定或条件与结论一起写，不能丢掉“不一定”",
+        "question": "问判断依据，不能写成自动化无价值",
+        "line_break": "每行是一段完整短语；不把“不一定、不是、还要”等限定词拆开或删去。长标题先改断行，再在保留原意的前提下收短。",
+        "emphasis": "强调受限的结论，保留否定词同组",
+        "visual_labels": "默认不加图注；确有必要时仅放本片支持的短标签，不编造指标。",
+        "metadata": "系列名、讲者、日期可选且必须核实；不从样张继承。",
+        "avoid": "只有原文明确区分两个概念时才用≠；不能把概率说成绝不"
+      },
+      "sample": {
+        "clip_id": "T39",
+        "headline": "自动化高 / 不一定价值高",
+        "question": "流程跑通了，就一定值得做吗？",
+        "evidence": "一个任务的自动化程度很高，为什么仍可能被判断为低价值？课程从会议生成与跟踪的例子讨论，说明描述不够深入或替代方案较多，都可能影响评估。\n\n讲者结合价值密度、可复用性、变现能力和自动化程度展开分析。重点是评估业务本身及其差异，而非只看流程能否跑起来；具体判断也受输入描述影响。",
+        "verification": "依据现有内容记录，未新增逐条听审"
+      },
+      "slots": {
+        "headline": "完整观点",
+        "question": "本片能回答的问题",
+        "visual": "按此模板布局原创",
+        "footer": "可选核实信息"
+      },
+      "migration": {
+        "keep": [
+          "版式骨架",
+          "标题层级",
+          "强调色职责",
+          "视觉关系类型"
+        ],
+        "replace": [
+          "标题与问题",
+          "概念主体与图注",
+          "系列及署名",
+          "所有示例数字和事实"
+        ],
+        "adapt": "选择一个构图变体；长标题时缩减辅助信息，不能缩成难读小字。"
+      },
+      "agent_request": "使用 $video-cover-design，模板 COVER-TYPE-NEGATION@1.1「巨字否定判断」，为【内容编号/视频路径】设计封面。先读取本模板 text_rules、migration、示例和当前成片字幕。使用图像模型直接生成包含中文标题、问题和主体的完整3:4封面，禁止用SVG、HTML或代码绘图代替。按当前内容重新构图，不复制示例事实。交付1080×1440 PNG、180px缩略图、原始生成图、提示词、依据与版本记录。用户指定模型时优先使用；工具不暴露模型选择或版本时如实记录，不假称已使用指定版本。完成中文与缩略图检查后交我审核。",
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-type-negation-image-v11.txt",
+      "generation_original": "/static/cover-design/originals/cover-type-negation-image-v11.png",
+      "model_record": "built-in image_gen; exact model version not exposed"
+    },
+    {
+      "id": "COVER-EXPLODED-CONSTRAINT",
+      "name": "分层拆解工艺",
+      "version": "1.1",
+      "use": "从概念到生产、约束与落地",
+      "preview": "/static/cover-design/examples/cover-exploded-constraint-image-v11.png",
+      "examples": [
+        "/static/cover-design/examples/cover-exploded-constraint-image-v11.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "拆解",
+      "palette": [
+        "#e9ece1",
+        "#304b38",
+        "#bc6d31"
+      ],
+      "typography": "清晰粗宋体，按完整短语断行",
+      "layout": "上部标题与问题，下部有材质、光线与空间关系的原创概念主体",
+      "composition_variants": [
+        "工艺三层",
+        "剖面约束",
+        "部件装配"
+      ],
+      "rules": [
+        "标题在上；下方三层轴测分解",
+        "边缘约8%留白，主标题2–3行，手机缩略图优先",
+        "主体承接本条观点，关系、箭头与数字必须有内容依据",
+        "分层是概念示意；不得冒充具体产品结构或已实现工艺",
+        "图像模型直接生成整张封面；材质、透视、光线服务观点，禁止代码绘图代替。"
+      ],
+      "text_rules": {
+        "headline": "用“能力＋仍需满足的条件”完整表达，不写生成即完成",
+        "question": "问从图到物的中间条件",
+        "line_break": "每行是一段完整短语；不把“不一定、不是、还要”等限定词拆开或删去。长标题先改断行，再在保留原意的前提下收短。",
+        "emphasis": "突出落地要求，而不是夸大AI能力",
+        "visual_labels": "默认不加图注；确有必要时仅放本片支持的短标签，不编造指标。",
+        "metadata": "系列名、讲者、日期可选且必须核实；不从样张继承。",
+        "avoid": "分层是概念示意；不得冒充具体产品结构或已实现工艺"
+      },
+      "sample": {
+        "clip_id": "T03",
+        "headline": "AI画得漂亮 / 也要造得出来",
+        "question": "一张好图，怎样走进真实生产？",
+        "evidence": "AI能够画出创意，并不代表图案就能直接用于制造。以景泰蓝工艺为例：线条之间的间距、格子的大小和比例，会影响烧制过程中是否凹陷或不平整。因此，创意生成还需要考虑实际工艺约束。\n\n案例进一步讨论借助模型和Skill推导数学公式，再将结果连接到激光打线与人工贴线的制造环节。行业不同，AI的作用和价值也不同。具体任务要深入到工艺要求和执行动作，才能理解它怎样进入真实生产。",
+        "verification": "依据现有内容记录，未新增逐条听审"
+      },
+      "slots": {
+        "headline": "完整观点",
+        "question": "本片能回答的问题",
+        "visual": "按此模板布局原创",
+        "footer": "可选核实信息"
+      },
+      "migration": {
+        "keep": [
+          "版式骨架",
+          "标题层级",
+          "强调色职责",
+          "视觉关系类型"
+        ],
+        "replace": [
+          "标题与问题",
+          "概念主体与图注",
+          "系列及署名",
+          "所有示例数字和事实"
+        ],
+        "adapt": "选择一个构图变体；长标题时缩减辅助信息，不能缩成难读小字。"
+      },
+      "agent_request": "使用 $video-cover-design，模板 COVER-EXPLODED-CONSTRAINT@1.1「分层拆解工艺」，为【内容编号/视频路径】设计封面。先读取本模板 text_rules、migration、示例和当前成片字幕。使用图像模型直接生成包含中文标题、问题和主体的完整3:4封面，禁止用SVG、HTML或代码绘图代替。按当前内容重新构图，不复制示例事实。交付1080×1440 PNG、180px缩略图、原始生成图、提示词、依据与版本记录。用户指定模型时优先使用；工具不暴露模型选择或版本时如实记录，不假称已使用指定版本。完成中文与缩略图检查后交我审核。",
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-exploded-constraint-image-v11.txt",
+      "generation_original": "/static/cover-design/originals/cover-exploded-constraint-image-v11.png",
+      "model_record": "built-in image_gen; exact model version not exposed"
+    },
+    {
+      "id": "COVER-STAGE-STAIRS",
+      "name": "阶梯路径与门槛",
+      "version": "1.1",
+      "use": "原型到上线、推进过程与门槛",
+      "preview": "/static/cover-design/examples/cover-stage-stairs-image-v11.png",
+      "examples": [
+        "/static/cover-design/examples/cover-stage-stairs-image-v11.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "过程",
+      "palette": [
+        "#f3eee3",
+        "#283c2e",
+        "#b96c32"
+      ],
+      "typography": "清晰粗宋体，按完整短语断行",
+      "layout": "上部标题与问题，下部有材质、光线与空间关系的原创概念主体",
+      "composition_variants": [
+        "阶梯",
+        "折线路径",
+        "关卡门框"
+      ],
+      "rules": [
+        "标题在上；阶梯向右上展开，阶段间留间隔",
+        "边缘约8%留白，主标题2–3行，手机缩略图优先",
+        "主体承接本条观点，关系、箭头与数字必须有内容依据",
+        "阶段名称与顺序要来自内容；样张三阶段不是固定事实",
+        "图像模型直接生成整张封面；材质、透视、光线服务观点，禁止代码绘图代替。"
+      ],
+      "text_rules": {
+        "headline": "先说起点，再保留推进难点；不用“一步搞定”",
+        "question": "问还缺哪些阶段或条件",
+        "line_break": "每行是一段完整短语；不把“不一定、不是、还要”等限定词拆开或删去。长标题先改断行，再在保留原意的前提下收短。",
+        "emphasis": "强调门槛或终点，不把步骤数量写成收益承诺",
+        "visual_labels": "默认不加图注；确有必要时仅放本片支持的短标签，不编造指标。",
+        "metadata": "系列名、讲者、日期可选且必须核实；不从样张继承。",
+        "avoid": "阶段名称与顺序要来自内容；样张三阶段不是固定事实"
+      },
+      "sample": {
+        "clip_id": "T05",
+        "headline": "Demo很快 / 上线没那么简单",
+        "question": "从原型到上线，还差哪几步？",
+        "evidence": "借助AI快速制作Demo，可以更快地测试需求，但Demo受到关注，并不代表项目已经具备生产条件。从业务人员、设计师和研发人员的分工看：先做原型验证，立项后由研发接手处理稳定性等生产要求。\n\n还要判断客户究竟看中了哪一点，以及是否值得投入产品级资源。可以用更多Demo探索需求，但从原型走向严肃立项，仍需要多维度评估。这里的分工比例是团队实践举例，不是适用于所有项目的固定标准。",
+        "verification": "依据现有内容记录，未新增逐条听审"
+      },
+      "slots": {
+        "headline": "完整观点",
+        "question": "本片能回答的问题",
+        "visual": "按此模板布局原创",
+        "footer": "可选核实信息"
+      },
+      "migration": {
+        "keep": [
+          "版式骨架",
+          "标题层级",
+          "强调色职责",
+          "视觉关系类型"
+        ],
+        "replace": [
+          "标题与问题",
+          "概念主体与图注",
+          "系列及署名",
+          "所有示例数字和事实"
+        ],
+        "adapt": "选择一个构图变体；长标题时缩减辅助信息，不能缩成难读小字。"
+      },
+      "agent_request": "使用 $video-cover-design，模板 COVER-STAGE-STAIRS@1.1「阶梯路径与门槛」，为【内容编号/视频路径】设计封面。先读取本模板 text_rules、migration、示例和当前成片字幕。使用图像模型直接生成包含中文标题、问题和主体的完整3:4封面，禁止用SVG、HTML或代码绘图代替。按当前内容重新构图，不复制示例事实。交付1080×1440 PNG、180px缩略图、原始生成图、提示词、依据与版本记录。用户指定模型时优先使用；工具不暴露模型选择或版本时如实记录，不假称已使用指定版本。完成中文与缩略图检查后交我审核。",
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-stage-stairs-image-v11.txt",
+      "generation_original": "/static/cover-design/originals/cover-stage-stairs-image-v11.png",
+      "model_record": "built-in image_gen; exact model version not exposed"
+    },
+    {
+      "id": "COVER-DIALOGUE-BRIDGE",
+      "name": "双声部沟通",
+      "version": "1.1",
+      "use": "沟通摩擦、不同视角与误解",
+      "preview": "/static/cover-design/examples/cover-dialogue-bridge-image-v11.png",
+      "examples": [
+        "/static/cover-design/examples/cover-dialogue-bridge-image-v11.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "对话",
+      "palette": [
+        "#f1efe7",
+        "#263e34",
+        "#547e66"
+      ],
+      "typography": "清晰粗宋体，按完整短语断行",
+      "layout": "上部标题与问题，下部有材质、光线与空间关系的原创概念主体",
+      "composition_variants": [
+        "两方错位",
+        "第三方连接",
+        "问题与回应"
+      ],
+      "rules": [
+        "上下错位两块对话区域，标题完整居上",
+        "边缘约8%留白，主标题2–3行，手机缩略图优先",
+        "主体承接本条观点，关系、箭头与数字必须有内容依据",
+        "示意对白不得加引号冒充逐字原话；不得编造人物身份",
+        "图像模型直接生成整张封面；材质、透视、光线服务观点，禁止代码绘图代替。"
+      ],
+      "text_rules": {
+        "headline": "并列呈现双方视角，不为任一方编造敌意",
+        "question": "问如何理解、反馈或接近，避免“到底谁错了”",
+        "line_break": "每行是一段完整短语；不把“不一定、不是、还要”等限定词拆开或删去。长标题先改断行，再在保留原意的前提下收短。",
+        "emphasis": "两方相同字重，只强调核心分歧",
+        "visual_labels": "默认不加图注；确有必要时仅放本片支持的短标签，不编造指标。",
+        "metadata": "系列名、讲者、日期可选且必须核实；不从样张继承。",
+        "avoid": "示意对白不得加引号冒充逐字原话；不得编造人物身份"
+      },
+      "sample": {
+        "clip_id": "N07",
+        "headline": "业务说不好用 / 技术说不配合",
+        "question": "需求表达与使用反馈，怎样接近？",
+        "evidence": "业务部门说AI不好用，建设部门说业务不配合，项目就在反复沟通中缓慢推进。课程从这组矛盾出发，讨论业务人员参与应用开发的可能。\n\n解决这组矛盾，需要业务人员把需求和流程表达清楚，让AI理解业务，并由业务人员确认结果。业务参与应用开发，意味着需求表达、技术实现和使用反馈之间的距离可以缩短。",
+        "verification": "依据现有内容记录，未新增逐条听审"
+      },
+      "slots": {
+        "headline": "完整观点",
+        "question": "本片能回答的问题",
+        "visual": "按此模板布局原创",
+        "footer": "可选核实信息"
+      },
+      "migration": {
+        "keep": [
+          "版式骨架",
+          "标题层级",
+          "强调色职责",
+          "视觉关系类型"
+        ],
+        "replace": [
+          "标题与问题",
+          "概念主体与图注",
+          "系列及署名",
+          "所有示例数字和事实"
+        ],
+        "adapt": "选择一个构图变体；长标题时缩减辅助信息，不能缩成难读小字。"
+      },
+      "agent_request": "使用 $video-cover-design，模板 COVER-DIALOGUE-BRIDGE@1.1「双声部沟通」，为【内容编号/视频路径】设计封面。先读取本模板 text_rules、migration、示例和当前成片字幕。使用图像模型直接生成包含中文标题、问题和主体的完整3:4封面，禁止用SVG、HTML或代码绘图代替。按当前内容重新构图，不复制示例事实。交付1080×1440 PNG、180px缩略图、原始生成图、提示词、依据与版本记录。用户指定模型时优先使用；工具不暴露模型选择或版本时如实记录，不假称已使用指定版本。完成中文与缩略图检查后交我审核。",
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-dialogue-bridge-image-v11.txt",
+      "generation_original": "/static/cover-design/originals/cover-dialogue-bridge-image-v11.png",
+      "model_record": "built-in image_gen; exact model version not exposed"
+    },
+    {
+      "id": "COVER-KNOWLEDGE-INDEX",
+      "name": "知识索引卡片",
+      "version": "1.1",
+      "use": "知识积累、关联与洞察",
+      "preview": "/static/cover-design/examples/cover-knowledge-index-image-v11.png",
+      "examples": [
+        "/static/cover-design/examples/cover-knowledge-index-image-v11.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "知识",
+      "palette": [
+        "#e9e8df",
+        "#283c32",
+        "#548164"
+      ],
+      "typography": "清晰粗宋体，按完整短语断行",
+      "layout": "上部标题与问题，下部有材质、光线与空间关系的原创概念主体",
+      "composition_variants": [
+        "叠卡",
+        "标签分组",
+        "单卡特写"
+      ],
+      "rules": [
+        "标题在上；下方叠放索引卡，最前卡承载一条关系",
+        "边缘约8%留白，主标题2–3行，手机缩略图优先",
+        "主体承接本条观点，关系、箭头与数字必须有内容依据",
+        "索引卡不是平台截图，不能绘制虚假界面按钮与结果数",
+        "图像模型直接生成整张封面；材质、透视、光线服务观点，禁止代码绘图代替。"
+      ],
+      "text_rules": {
+        "headline": "主标题使用对象＋持续动作，不能把文件数量当成果",
+        "question": "问从积累到洞察之间的机制",
+        "line_break": "每行是一段完整短语；不把“不一定、不是、还要”等限定词拆开或删去。长标题先改断行，再在保留原意的前提下收短。",
+        "emphasis": "突出“持续”或实际动作",
+        "visual_labels": "默认不加图注；确有必要时仅放本片支持的短标签，不编造指标。",
+        "metadata": "系列名、讲者、日期可选且必须核实；不从样张继承。",
+        "avoid": "索引卡不是平台截图，不能绘制虚假界面按钮与结果数"
+      },
+      "sample": {
+        "clip_id": "T38",
+        "headline": "知识库怎样 / 持续产生洞察",
+        "question": "文件存进去之后，洞察从哪里来？",
+        "evidence": "知识库持续产生洞察，需要先明确分析方法与文件结构。课程介绍把会议文档交给编程智能体，按照指定结构分析并存储，再通过调用或定时任务生成日报。\n\n关键是提出具体要求，把原始输入与分析任务连接起来。这仍需要建设和调整，讲者也说明做到类似效果会花时间，不能把文件放进去就当作完整系统已经建成。",
+        "verification": "依据现有内容记录，未新增逐条听审"
+      },
+      "slots": {
+        "headline": "完整观点",
+        "question": "本片能回答的问题",
+        "visual": "按此模板布局原创",
+        "footer": "可选核实信息"
+      },
+      "migration": {
+        "keep": [
+          "版式骨架",
+          "标题层级",
+          "强调色职责",
+          "视觉关系类型"
+        ],
+        "replace": [
+          "标题与问题",
+          "概念主体与图注",
+          "系列及署名",
+          "所有示例数字和事实"
+        ],
+        "adapt": "选择一个构图变体；长标题时缩减辅助信息，不能缩成难读小字。"
+      },
+      "agent_request": "使用 $video-cover-design，模板 COVER-KNOWLEDGE-INDEX@1.1「知识索引卡片」，为【内容编号/视频路径】设计封面。先读取本模板 text_rules、migration、示例和当前成片字幕。使用图像模型直接生成包含中文标题、问题和主体的完整3:4封面，禁止用SVG、HTML或代码绘图代替。按当前内容重新构图，不复制示例事实。交付1080×1440 PNG、180px缩略图、原始生成图、提示词、依据与版本记录。用户指定模型时优先使用；工具不暴露模型选择或版本时如实记录，不假称已使用指定版本。完成中文与缩略图检查后交我审核。",
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-knowledge-index-image-v11.txt",
+      "generation_original": "/static/cover-design/originals/cover-knowledge-index-image-v11.png",
+      "model_record": "built-in image_gen; exact model version not exposed"
+    },
+    {
+      "id": "COVER-EVIDENCE-LENS",
+      "name": "证据透镜",
+      "version": "1.1",
+      "use": "工程解释、推理依据、专业判断",
+      "preview": "/static/cover-design/examples/cover-evidence-lens-image-v11.png",
+      "examples": [
+        "/static/cover-design/examples/cover-evidence-lens-image-v11.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "证据",
+      "palette": [
+        "#edf3f0",
+        "#214047",
+        "#267783"
+      ],
+      "typography": "清晰粗宋体，按完整短语断行",
+      "layout": "上部标题与问题，下部有材质、光线与空间关系的原创概念主体",
+      "composition_variants": [
+        "圆形透镜",
+        "局部剖面",
+        "证据窗口"
+      ],
+      "rules": [
+        "大标题＋下方一只透镜，镜内最多三项",
+        "边缘约8%留白，主标题2–3行，手机缩略图优先",
+        "主体承接本条观点，关系、箭头与数字必须有内容依据",
+        "镜内文字是概念项，不绘制不存在的实验结果或准确率",
+        "图像模型直接生成整张封面；材质、透视、光线服务观点，禁止代码绘图代替。"
+      ],
+      "text_rules": {
+        "headline": "写需要解释的专业能力，避免“超越所有专家”",
+        "question": "询问依据和可解释性，保留能力边界",
+        "line_break": "每行是一段完整短语；不把“不一定、不是、还要”等限定词拆开或删去。长标题先改断行，再在保留原意的前提下收短。",
+        "emphasis": "强调判断或依据",
+        "visual_labels": "默认不加图注；确有必要时仅放本片支持的短标签，不编造指标。",
+        "metadata": "系列名、讲者、日期可选且必须核实；不从样张继承。",
+        "avoid": "镜内文字是概念项，不绘制不存在的实验结果或准确率"
+      },
+      "sample": {
+        "clip_id": "T10",
+        "headline": "工程AI怎样 / 像老师傅判断",
+        "question": "除了画图，AI能解释依据吗？",
+        "evidence": "结构设计里的AI，不只是更快生成一个图。讲者更看重它能否像有经验的老师傅一样，辅助设计决策，解释为什么采用某种方案和选型。\n\n课程结合非标夹治具与CAD数据的案例，讨论积累下来的工程知识如何进入智能体。数据基础让任务有机会实现，设计依据与经验判断则构成更深的价值。案例里的技术能力仍需要在实际工程中验证，不能将辅助判断直接当成可靠性保证。",
+        "verification": "依据现有内容记录，未新增逐条听审"
+      },
+      "slots": {
+        "headline": "完整观点",
+        "question": "本片能回答的问题",
+        "visual": "按此模板布局原创",
+        "footer": "可选核实信息"
+      },
+      "migration": {
+        "keep": [
+          "版式骨架",
+          "标题层级",
+          "强调色职责",
+          "视觉关系类型"
+        ],
+        "replace": [
+          "标题与问题",
+          "概念主体与图注",
+          "系列及署名",
+          "所有示例数字和事实"
+        ],
+        "adapt": "选择一个构图变体；长标题时缩减辅助信息，不能缩成难读小字。"
+      },
+      "agent_request": "使用 $video-cover-design，模板 COVER-EVIDENCE-LENS@1.1「证据透镜」，为【内容编号/视频路径】设计封面。先读取本模板 text_rules、migration、示例和当前成片字幕。使用图像模型直接生成包含中文标题、问题和主体的完整3:4封面，禁止用SVG、HTML或代码绘图代替。按当前内容重新构图，不复制示例事实。交付1080×1440 PNG、180px缩略图、原始生成图、提示词、依据与版本记录。用户指定模型时优先使用；工具不暴露模型选择或版本时如实记录，不假称已使用指定版本。完成中文与缩略图检查后交我审核。",
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-evidence-lens-image-v11.txt",
+      "generation_original": "/static/cover-design/originals/cover-evidence-lens-image-v11.png",
+      "model_record": "built-in image_gen; exact model version not exposed"
+    },
+    {
+      "id": "COVER-DECISION-LANES",
+      "name": "决策三轨",
+      "version": "1.1",
+      "use": "选择、优先级、判断标准",
+      "preview": "/static/cover-design/examples/cover-decision-lanes-image-v11.png",
+      "examples": [
+        "/static/cover-design/examples/cover-decision-lanes-image-v11.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "决策",
+      "palette": [
+        "#f7f4eb",
+        "#2c4434",
+        "#648565"
+      ],
+      "typography": "清晰粗宋体，按完整短语断行",
+      "layout": "上部标题与问题，下部有材质、光线与空间关系的原创概念主体",
+      "composition_variants": [
+        "平行轨道",
+        "条件清单",
+        "决策门槛"
+      ],
+      "rules": [
+        "标题在上；横向判断轨道并排，不带数值刻度",
+        "边缘约8%留白，主标题2–3行，手机缩略图优先",
+        "主体承接本条观点，关系、箭头与数字必须有内容依据",
+        "滑点仅为概念位置，不代表真实性能分数；有数据才用刻度",
+        "图像模型直接生成整张封面；材质、透视、光线服务观点，禁止代码绘图代替。"
+      ],
+      "text_rules": {
+        "headline": "主标题写顺序或取舍，条件先于收益",
+        "question": "问先后关系，避免给出万能模型推荐",
+        "line_break": "每行是一段完整短语；不把“不一定、不是、还要”等限定词拆开或删去。长标题先改断行，再在保留原意的前提下收短。",
+        "emphasis": "强调优先级的动作词",
+        "visual_labels": "默认不加图注；确有必要时仅放本片支持的短标签，不编造指标。",
+        "metadata": "系列名、讲者、日期可选且必须核实；不从样张继承。",
+        "avoid": "滑点仅为概念位置，不代表真实性能分数；有数据才用刻度"
+      },
+      "sample": {
+        "clip_id": "T04",
+        "headline": "选模型先跑通 / 能力再降本",
+        "question": "先验证能力，还是先省成本？",
+        "evidence": "在研发阶段，先用能力足够的模型验证任务能否跑通，再考虑降本。这是课程给出的模型选择顺序。能力不足的模型可能让开发者反复受挫，误判AI能否解决问题。\n\n验证完成后，不同任务可以选择不同模型。团队的中台还需要提供诊断和推荐，帮助使用者理解能力与成本的取舍。这是一项按任务持续评估的工作，原片中的具体品牌版本比较未纳入本条。",
+        "verification": "依据现有内容记录，未新增逐条听审"
+      },
+      "slots": {
+        "headline": "完整观点",
+        "question": "本片能回答的问题",
+        "visual": "按此模板布局原创",
+        "footer": "可选核实信息"
+      },
+      "migration": {
+        "keep": [
+          "版式骨架",
+          "标题层级",
+          "强调色职责",
+          "视觉关系类型"
+        ],
+        "replace": [
+          "标题与问题",
+          "概念主体与图注",
+          "系列及署名",
+          "所有示例数字和事实"
+        ],
+        "adapt": "选择一个构图变体；长标题时缩减辅助信息，不能缩成难读小字。"
+      },
+      "agent_request": "使用 $video-cover-design，模板 COVER-DECISION-LANES@1.1「决策三轨」，为【内容编号/视频路径】设计封面。先读取本模板 text_rules、migration、示例和当前成片字幕。使用图像模型直接生成包含中文标题、问题和主体的完整3:4封面，禁止用SVG、HTML或代码绘图代替。按当前内容重新构图，不复制示例事实。交付1080×1440 PNG、180px缩略图、原始生成图、提示词、依据与版本记录。用户指定模型时优先使用；工具不暴露模型选择或版本时如实记录，不假称已使用指定版本。完成中文与缩略图检查后交我审核。",
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-decision-lanes-image-v11.txt",
+      "generation_original": "/static/cover-design/originals/cover-decision-lanes-image-v11.png",
+      "model_record": "built-in image_gen; exact model version not exposed"
+    },
+    {
+      "id": "COVER-BOUNDARY-HORIZON",
+      "name": "地平线任务边界",
+      "version": "1.1",
+      "use": "虚拟与现实、脑力与物理、角色边界",
+      "preview": "/static/cover-design/examples/cover-boundary-horizon-image-v11.png",
+      "examples": [
+        "/static/cover-design/examples/cover-boundary-horizon-image-v11.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "边界",
+      "palette": [
+        "#e8e7dd",
+        "#293f38",
+        "#bb774c"
+      ],
+      "typography": "清晰粗宋体，按完整短语断行",
+      "layout": "上部标题与问题，下部有材质、光线与空间关系的原创概念主体",
+      "composition_variants": [
+        "水平分界",
+        "交叉区域",
+        "桥接边界"
+      ],
+      "rules": [
+        "一条地平线区分两个工作领域，标题留在上部",
+        "边缘约8%留白，主标题2–3行，手机缩略图优先",
+        "主体承接本条观点，关系、箭头与数字必须有内容依据",
+        "地平线是概念分区，不代表技术无法跨越的永久结论",
+        "图像模型直接生成整张封面；材质、透视、光线服务观点，禁止代码绘图代替。"
+      ],
+      "text_rules": {
+        "headline": "用两个真实对象加“边界”，不写谁将全面被替代",
+        "question": "问哪些任务属于哪一类",
+        "line_break": "每行是一段完整短语；不把“不一定、不是、还要”等限定词拆开或删去。长标题先改断行，再在保留原意的前提下收短。",
+        "emphasis": "强调边界本身，两个对象同权重",
+        "visual_labels": "默认不加图注；确有必要时仅放本片支持的短标签，不编造指标。",
+        "metadata": "系列名、讲者、日期可选且必须核实；不从样张继承。",
+        "avoid": "地平线是概念分区，不代表技术无法跨越的永久结论"
+      },
+      "sample": {
+        "clip_id": "N04",
+        "headline": "脑力任务与 / 物理任务的边界",
+        "question": "哪些任务处理信息，哪些必须动手？",
+        "evidence": "需要大量智能判断和脑力工作的任务，与AI的能力可能有较高重叠；进入真实物理世界的任务，则面临不同条件。课程用办公室工作和配送任务对比，讨论这种边界。\n\n对企业来说，下一步是重新梳理工作分工：哪些环节主要依赖信息处理和判断，哪些环节必须在物理世界中完成？理解任务的差别，才能思考AI怎么参与，以及人应该怎样调整自己的工作。",
+        "verification": "依据现有内容记录，未新增逐条听审"
+      },
+      "slots": {
+        "headline": "完整观点",
+        "question": "本片能回答的问题",
+        "visual": "按此模板布局原创",
+        "footer": "可选核实信息"
+      },
+      "migration": {
+        "keep": [
+          "版式骨架",
+          "标题层级",
+          "强调色职责",
+          "视觉关系类型"
+        ],
+        "replace": [
+          "标题与问题",
+          "概念主体与图注",
+          "系列及署名",
+          "所有示例数字和事实"
+        ],
+        "adapt": "选择一个构图变体；长标题时缩减辅助信息，不能缩成难读小字。"
+      },
+      "agent_request": "使用 $video-cover-design，模板 COVER-BOUNDARY-HORIZON@1.1「地平线任务边界」，为【内容编号/视频路径】设计封面。先读取本模板 text_rules、migration、示例和当前成片字幕。使用图像模型直接生成包含中文标题、问题和主体的完整3:4封面，禁止用SVG、HTML或代码绘图代替。按当前内容重新构图，不复制示例事实。交付1080×1440 PNG、180px缩略图、原始生成图、提示词、依据与版本记录。用户指定模型时优先使用；工具不暴露模型选择或版本时如实记录，不假称已使用指定版本。完成中文与缩略图检查后交我审核。",
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-boundary-horizon-image-v11.txt",
+      "generation_original": "/static/cover-design/originals/cover-boundary-horizon-image-v11.png",
+      "model_record": "built-in image_gen; exact model version not exposed"
+    },
+    {
+      "id": "COVER-CONVERGENCE",
+      "name": "双流汇合",
+      "version": "1.1",
+      "use": "人机协作、互补能力、共同成长",
+      "preview": "/static/cover-design/examples/cover-convergence-image-v11.png",
+      "examples": [
+        "/static/cover-design/examples/cover-convergence-image-v11.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "协作",
+      "palette": [
+        "#eeeede",
+        "#2b4636",
+        "#557d5c"
+      ],
+      "typography": "清晰粗宋体，按完整短语断行",
+      "layout": "上部标题与问题，下部有材质、光线与空间关系的原创概念主体",
+      "composition_variants": [
+        "双流汇合",
+        "交汇区域",
+        "共享平台"
+      ],
+      "rules": [
+        "两端输入汇到一处；中心不是胜负裁判",
+        "边缘约8%留白，主标题2–3行，手机缩略图优先",
+        "主体承接本条观点，关系、箭头与数字必须有内容依据",
+        "两条线不等于已验证因果；箭头与反馈关系需依成片确定",
+        "图像模型直接生成整张封面；材质、透视、光线服务观点，禁止代码绘图代替。"
+      ],
+      "text_rules": {
+        "headline": "写共同动作或互相影响，不宣称AI单向赋能一切",
+        "question": "问方法怎样随着能力一起更新",
+        "line_break": "每行是一段完整短语；不把“不一定、不是、还要”等限定词拆开或删去。长标题先改断行，再在保留原意的前提下收短。",
+        "emphasis": "强调“共同”或持续动作",
+        "visual_labels": "默认不加图注；确有必要时仅放本片支持的短标签，不编造指标。",
+        "metadata": "系列名、讲者、日期可选且必须核实；不从样张继承。",
+        "avoid": "两条线不等于已验证因果；箭头与反馈关系需依成片确定"
+      },
+      "sample": {
+        "clip_id": "T13",
+        "headline": "人和AI要 / 持续共同进化",
+        "question": "工具在成长，工作方法怎么更新？",
+        "evidence": "工业时代的一套方法，可能支撑机器使用很多年。AI时代的技术和模型持续变化，课程提醒我们，不能用昨天的能力理解今天，也不能用今天的能力看待明天。\n\n讲者结合团队每半年迭代工作流程的经历，说明工具在成长，人也需要更新方法。重点是持续学习、持续调整，而不是一次培训之后就结束。",
+        "verification": "依据现有内容记录，未新增逐条听审"
+      },
+      "slots": {
+        "headline": "完整观点",
+        "question": "本片能回答的问题",
+        "visual": "按此模板布局原创",
+        "footer": "可选核实信息"
+      },
+      "migration": {
+        "keep": [
+          "版式骨架",
+          "标题层级",
+          "强调色职责",
+          "视觉关系类型"
+        ],
+        "replace": [
+          "标题与问题",
+          "概念主体与图注",
+          "系列及署名",
+          "所有示例数字和事实"
+        ],
+        "adapt": "选择一个构图变体；长标题时缩减辅助信息，不能缩成难读小字。"
+      },
+      "agent_request": "使用 $video-cover-design，模板 COVER-CONVERGENCE@1.1「双流汇合」，为【内容编号/视频路径】设计封面。先读取本模板 text_rules、migration、示例和当前成片字幕。使用图像模型直接生成包含中文标题、问题和主体的完整3:4封面，禁止用SVG、HTML或代码绘图代替。按当前内容重新构图，不复制示例事实。交付1080×1440 PNG、180px缩略图、原始生成图、提示词、依据与版本记录。用户指定模型时优先使用；工具不暴露模型选择或版本时如实记录，不假称已使用指定版本。完成中文与缩略图检查后交我审核。",
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-convergence-image-v11.txt",
+      "generation_original": "/static/cover-design/originals/cover-convergence-image-v11.png",
+      "model_record": "built-in image_gen; exact model version not exposed"
+    },
+    {
+      "id": "COVER-EXPERT-ORBIT",
+      "name": "专家团环绕",
+      "version": "1.1",
+      "use": "个体知识服务、专家调用、能力扩展",
+      "preview": "/static/cover-design/examples/cover-expert-orbit-image-v11.png",
+      "examples": [
+        "/static/cover-design/examples/cover-expert-orbit-image-v11.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "个体能力",
+      "palette": [
+        "#eef0e6",
+        "#2a4237",
+        "#47796d"
+      ],
+      "typography": "清晰粗宋体，按完整短语断行",
+      "layout": "上部标题与问题，下部有材质、光线与空间关系的原创概念主体",
+      "composition_variants": [
+        "中心环绕",
+        "半环",
+        "一人一组"
+      ],
+      "rules": [
+        "人物位置用一个中心节点，周围专家节点稀疏环绕",
+        "边缘约8%留白，主标题2–3行，手机缩略图优先",
+        "主体承接本条观点，关系、箭头与数字必须有内容依据",
+        "不生成未经授权的专家头像、名字或资质；节点数量是构图数",
+        "图像模型直接生成整张封面；材质、透视、光线服务观点，禁止代码绘图代替。"
+      ],
+      "text_rules": {
+        "headline": "表述服务可获得性，不写每个人已拥有具体专家配置",
+        "question": "问服务怎样贴近个人需求",
+        "line_break": "每行是一段完整短语；不把“不一定、不是、还要”等限定词拆开或删去。长标题先改断行，再在保留原意的前提下收短。",
+        "emphasis": "强调“专家团”，不强调数量",
+        "visual_labels": "默认不加图注；确有必要时仅放本片支持的短标签，不编造指标。",
+        "metadata": "系列名、讲者、日期可选且必须核实；不从样张继承。",
+        "avoid": "不生成未经授权的专家头像、名字或资质；节点数量是构图数"
+      },
+      "sample": {
+        "clip_id": "T31",
+        "headline": "人人拥有 / 专家团",
+        "question": "知识服务，能更贴近每个人吗？",
+        "evidence": "当知识服务的成本降低，人人拥有专家团可能怎样改变交付？课程从一位老师面对许多学生的课堂结构，讨论一对一服务的成本与专家稀缺。\n\n讲者以个人网站知识服务为例，讨论AI回应问题与人提供交流价值的分工。重点是交付体系的可能变化，本条不采用医学自诊或个体基因测序的旁支。",
+        "verification": "依据现有内容记录，未新增逐条听审"
+      },
+      "slots": {
+        "headline": "完整观点",
+        "question": "本片能回答的问题",
+        "visual": "按此模板布局原创",
+        "footer": "可选核实信息"
+      },
+      "migration": {
+        "keep": [
+          "版式骨架",
+          "标题层级",
+          "强调色职责",
+          "视觉关系类型"
+        ],
+        "replace": [
+          "标题与问题",
+          "概念主体与图注",
+          "系列及署名",
+          "所有示例数字和事实"
+        ],
+        "adapt": "选择一个构图变体；长标题时缩减辅助信息，不能缩成难读小字。"
+      },
+      "agent_request": "使用 $video-cover-design，模板 COVER-EXPERT-ORBIT@1.1「专家团环绕」，为【内容编号/视频路径】设计封面。先读取本模板 text_rules、migration、示例和当前成片字幕。使用图像模型直接生成包含中文标题、问题和主体的完整3:4封面，禁止用SVG、HTML或代码绘图代替。按当前内容重新构图，不复制示例事实。交付1080×1440 PNG、180px缩略图、原始生成图、提示词、依据与版本记录。用户指定模型时优先使用；工具不暴露模型选择或版本时如实记录，不假称已使用指定版本。完成中文与缩略图检查后交我审核。",
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-expert-orbit-image-v11.txt",
+      "generation_original": "/static/cover-design/originals/cover-expert-orbit-image-v11.png",
+      "model_record": "built-in image_gen; exact model version not exposed"
+    },
+    {
+      "id": "COVER-FOUR-FOLDS",
+      "name": "折页四种思维",
+      "version": "1.1",
+      "use": "不同思维、视角演进、框架介绍",
+      "preview": "/static/cover-design/examples/cover-four-folds-image-v11.png",
+      "examples": [
+        "/static/cover-design/examples/cover-four-folds-image-v11.png"
+      ],
+      "status": "design-candidate",
+      "size": [
+        1080,
+        1440
+      ],
+      "ratio": "3:4",
+      "category": "框架",
+      "palette": [
+        "#f0eddf",
+        "#2a4334",
+        "#5c8268"
+      ],
+      "typography": "清晰粗宋体，按完整短语断行",
+      "layout": "上部标题与问题，下部有材质、光线与空间关系的原创概念主体",
+      "composition_variants": [
+        "连续折页",
+        "错落书页",
+        "并列透视"
+      ],
+      "rules": [
+        "四页折面连续展开，标题在上保持整体",
+        "边缘约8%留白，主标题2–3行，手机缩略图优先",
+        "主体承接本条观点，关系、箭头与数字必须有内容依据",
+        "折页不代表历史年份和必然阶段；不要添加未讲过的分类",
+        "图像模型直接生成整张封面；材质、透视、光线服务观点，禁止代码绘图代替。"
+      ],
+      "text_rules": {
+        "headline": "数量词只有在原片明确存在时使用；否则改成“不同视角”",
+        "question": "问视角如何变化，不宣称后一种淘汰前一种",
+        "line_break": "每行是一段完整短语；不把“不一定、不是、还要”等限定词拆开或删去。长标题先改断行，再在保留原意的前提下收短。",
+        "emphasis": "强调核心主题，数字不是吸睛装饰",
+        "visual_labels": "默认不加图注；确有必要时仅放本片支持的短标签，不编造指标。",
+        "metadata": "系列名、讲者、日期可选且必须核实；不从样张继承。",
+        "avoid": "折页不代表历史年份和必然阶段；不要添加未讲过的分类"
+      },
+      "sample": {
+        "clip_id": "N08",
+        "headline": "四代思维怎样 / 理解AI时代",
+        "question": "经验、流程、连接之后，是什么？",
+        "evidence": "农业时代重经验与资源，工业时代重流程和规模，互联网时代重连接与协同，AI时代则出现生成能力、智能决策和个性化适配。课程用四代框架说明这些差别。\n\n这些思维方式各有形成的背景。理解AI，不能只沿用过去对经验、流程或连接的认识，而要理解它带来的新特点，再思考自己的业务怎样改变。",
+        "verification": "依据现有内容记录，未新增逐条听审"
+      },
+      "slots": {
+        "headline": "完整观点",
+        "question": "本片能回答的问题",
+        "visual": "按此模板布局原创",
+        "footer": "可选核实信息"
+      },
+      "migration": {
+        "keep": [
+          "版式骨架",
+          "标题层级",
+          "强调色职责",
+          "视觉关系类型"
+        ],
+        "replace": [
+          "标题与问题",
+          "概念主体与图注",
+          "系列及署名",
+          "所有示例数字和事实"
+        ],
+        "adapt": "选择一个构图变体；长标题时缩减辅助信息，不能缩成难读小字。"
+      },
+      "agent_request": "使用 $video-cover-design，模板 COVER-FOUR-FOLDS@1.1「折页四种思维」，为【内容编号/视频路径】设计封面。先读取本模板 text_rules、migration、示例和当前成片字幕。使用图像模型直接生成包含中文标题、问题和主体的完整3:4封面，禁止用SVG、HTML或代码绘图代替。按当前内容重新构图，不复制示例事实。交付1080×1440 PNG、180px缩略图、原始生成图、提示词、依据与版本记录。用户指定模型时优先使用；工具不暴露模型选择或版本时如实记录，不假称已使用指定版本。完成中文与缩略图检查后交我审核。",
+      "generation_method": "image-model",
+      "generation_prompt": "/static/cover-design/prompts/cover-four-folds-image-v11.txt",
+      "generation_original": "/static/cover-design/originals/cover-four-folds-image-v11.png",
+      "model_record": "built-in image_gen; exact model version not exposed"
+    }
+  ],
+  "boundaries": [
+    "选择模板保存的是制作要求，实际封面需生成并审核",
+    "风格已确认不等于每张图片已确认；不自动上传或发布"
+  ],
+  "skill_text": "---\nname: video-cover-design\ndescription: 为邱懿武的课程、演讲、访谈剪辑设计视频封面，衔接剪辑策划、成片版本与审核记录，完成观点标题、视觉设计、实际图片和缩略图验收。用于单条或批量成片封面、封面改版和封面测试；不代替视频剪辑或平台发布。\n---\n\n# 原声观点视频封面设计\n\n让观众一眼看懂这条视频值得看的观点，并能在视频里获得封面承诺的内容。交付实际可用的封面图片、原始生成图及可复用提示词，不止给提示词或设计建议。用户只要方案或评审时，按其范围交付。\n\n## 接住剪辑工作\n\n优先读取当前项目的内容记录、选题策划、最新版成片、字幕及审核意见。与 course-video-editing 协作时，按其 `references/content-record.md` 和 `references/publishing-package.md` 读取真实接口；独立使用时直接读取用户提供的视频与文稿，不要求安装该技能。\n\n每条明确 clip_id、视频路径、render_revision、核心观点与目标受众。只处理本次指定批次。没有成片时可依据已确认策划做概念稿，标明“基于策划，待成片核对”。缺少观点依据时不编造内容；先检索现有转录，确实缺失再询问必要材料。\n\n标题依据必须落在本条成片实际保留的内容中。记录支持它的原句、原片时码及可用的成片时码，区分两个时间基准。只有 ASR 证据时明确尚未听音核实；不要宣称已完成听审。引用已有审核结果必须核对对应版本。\n\n## 文案决策\n\n先用一句话写出“这条视频回答什么问题”，再拟封面标题。默认给 3 个有区别的候选：直接观点、受众问题、被原声支持的反常识角度；没有反常识依据就换成具体收益，不硬造冲突。选出推荐项并简述依据，直接制作推荐稿，不为普通设计选择反复等待确认；推荐不等于用户已选定。\n\n封面主标题、平台短标题、视频内标题分别记录。默认主标题尽量 8–16 字、2–3 行，每行构成完整短语；这是设计起点，不是平台限制。数字、否定、条件和因果不能为了短而删掉。没有逐字证据的概括不加引号，不把设计文案冒充讲者原话。不增加“唯一”“必然”“所有人”等原声未支持的承诺。\n\n默认不把姓名、职务、课程全名、话题标签同时堆到封面。需要系列名时降为次级信息。实际平台限制通过当前官方说明核实，不把项目字数偏好称作平台规则。\n\n## 模板库与调用\n\n用户选择模板时读取 `templates/catalog.json` 中对应 ID、版本、规则和示例；模板决定字体、颜色、质感和布局范围，主体与文字依据当前成片重新设计。逐项读取 `text_rules`（主标题、问题、断行、强调、图注、元数据、禁用表达）与 `migration`（保留、替换、适配），不只看缩略图。新增样张基于现有内容记录，属于设计候选，不能冒称经过听审或点击率验证。模板的 `style-confirmed` 只代表风格已确认，`design-candidate` 仍为候选。不要把示例里的讲者、地点、日期、数字或课程自动写入新封面。\n\n模板库现有34套，覆盖概念插画、文字判断、同尺度对照、工艺拆解、路径门槛、双声部、知识索引、证据透镜、决策轨道、任务边界、双流协作、专家环绕与折页框架。具体 ID 与构图变体以目录为准；在分发台「创作资源 → 封面设计」查看、复制调用要求或为内容保存选择。\n\n调用例：`使用 $video-cover-design，模板 COVER-FOREST-ISO@1.0，为 T15 的当前成片设计封面。` 从 `/api/packages/<package_id>/creative` 读取 `cover_id` 与 `versions.cover_id`，从 `/api/creative/catalog` 解析模板；选择模板不代表图片已经生成。服务不可用时读本技能的目录。记录 template_id 与 template_version，适配本条内容而非机械换标题。\n\n本模板库主稿采用3:4、1080×1440；用户另指定比例时重新构图。本用户的封面统一用图像模型直接生成包含标题和画面的完整图片，不使用 SVG、HTML、Canvas 或代码绘图替代。保留参考图、提示词和栅格原稿，不称作分层源文件。用户指定模型时优先使用该模型；工具未暴露型号或模型选择时，如实说明实际调用工具与无法核实的版本，不假称已使用指定型号。\n\n## 视觉起点与实现\n\n优先延续本批次已选样式；没有参考时，先依据观点选择文字主导、人物侧置、调查拼贴、漫画叙事、单物件隐喻、纪实场景或同尺度对照，确定观看顺序后起稿。这是可调整的初始方案，不能写成用户已批准的品牌规范。\n\n可根据内容选择：\n\n- **真实人物与观点**：从指定成片或可追溯原片选自然、清晰的讲者画面，保留人物比例，不默认推近脸部。\n- **观点与关系图**：适合组织、流程、对比等主题，用少量形状表达视频里真实存在的关系。\n- **概念插画与观点**：抽象主题确实受益时使用；插画是说明，不伪装成现场照片、真实案例或数据证据。\n\n封面可以单独构图，不强行复制视频中“上标题、中横片、下字幕”的所有层次；保留系列识别。优先选择无半句字幕干扰的画面，用布局遮罩或换帧解决干扰，不随意涂改原片证据。检查闭眼、嘴型、遮挡、人物拉伸和敏感信息。原片有脱敏要求时，封面也必须覆盖。\n\n默认主稿与当前竖版成片同比例、同像素尺寸；尺寸无法确定时可先做 1080×1920 的设计稿并注明假设。需要横版或方形时重新排版，不拉伸。没有平台裁切信息时，把四周约 8% 作为保守设计留白并做居中裁切预览，明确这不是平台安全区认证。\n\n工具按实际能力选择：\n\n- 真实视频截帧用本地视频工具，记录精确视频来源和截帧秒数；中点附近只用于寻找候选，不是选帧标准。\n- 新生成或编辑栅格插画时使用可用的图像生成工具，并先读取对应 imagegen 技能；遵守其编辑与参考图要求。不把未经检查的生成文字直接当定稿。\n- 标题、问题、插画和整体构图通过图像模型整图生成；修改文字或构图也用图像编辑工具。普通尺寸导出可以缩放，不重新用代码画图。\n- 图像工具不可用时保留方案并说明阻塞，不退回 SVG 或代码绘图，不把源代码称为生成图片。\n\n批量任务先做一条代表性样稿和手机缩略图预览，建立同批次的字体、色彩、间距与系列标识。用户已授权整批制作时可采用推荐样式继续，不新增审批门槛；对每条内容单独提炼观点，避免只换标题的机械套版。\n\n\n## 差异化方案评审\n\n多风格探索先研究差异明显的实际作品并记录来源、观察及迁移边界；不把他平台尺寸或营销点击率说法当视频号规则。研究记录见 templates/差异化研究.txt。\n\n比较至少四个维度：图片语言（摄影、拼贴、漫画、文字）、观看顺序（文字先、主体先、并行、对话）、构图（左侧、中段、下方、满幅）、字体与色彩。只换主体、颜色或标题不算新风格。可固定一条真实内容和同一标题做6套探索；多变量探索不是严谨单变量A/B测试。\n\n最小信息为一个观点标题、一个视觉焦点和清晰层级；问题小字、系列、日期和署名都可选。180px宽先读懂主标题和主图；不要为了信息多牺牲阅读。个人封面优先考虑真实讲者素材，禁止生成本人替身；概念摄影不冒称真实案例。\n\n新方向 COVER-TYPE-PUNCH、COVER-REPORT-COLLAGE、COVER-COMIC-TENSION、COVER-SINGLE-METAPHOR、COVER-DOCUMENTARY-BAND、COVER-DUOTONE-CONTRAST 保留各自图片语言与观看顺序，不统一成米白宋体立体模型。库内可有多个系列；系列内部保持识别，整个库保留差异。正式同尺度比较必须检查物件尺度，巨字必须检查字形与边距。\n\n\n## 能力与提示词资源\n\n读取 templates/能力与提示词研究.txt 区分实际验证、案例启发和未测试能力。每套的 prompt_template 是含占位字段的中文通用提示词；generation_prompt 保存本次实际输入，不能把历史标题直接用于新片。先以当前成片填入主题、依据、受众、文字、对象与构图，再调用图像模型。\n\n提示词写成可读设计要求：用途与受众、观点依据、准确文案、主体关系、媒介材质、构图留白、必须保留与禁止增加的元素。分镜逐格写动作并锁定跨格对象；局部修订明确只改哪里和保留哪里。写明不等于必然满足，输出后必须检查。\n\n用户认可漫画与红底单物件的方向；可以继续扩展这两类，但其确认不代表所有新变体已通过内容审核。借鉴他人提示词的机制，保留来源，不抄作品或新增示例事实。\n\n## 封面测试与剪辑反馈\n\n导出后必须打开实际图片检查，再检查约 180 像素宽的缩略图；需要时做方形/横版裁切预览。逐条核对：\n\n1. 缩小后仍能读懂主标题，断行自然，重点没有被背景吞没。\n2. 标题承诺由本条成片支持，画面和概念不制造额外事实。\n3. 人物自然，中文无错漏，比例正确，关键内容不被裁切，敏感信息未重新暴露。\n4. 封面与视频对应正确版本，审核入口指向实际图片。\n\n视觉检查不等于用户批准或点击率验证。A/B 设计只更改一个主要变量，例如标题角度或人物/图解布局；没有实际曝光与点击数据，不宣称哪张效果更好。数据比较说明观察窗口、样本量、渠道及其他差异。\n\n若封面承诺无法由视频兑现，优先收窄封面文案；把需要剪辑补足的事项回传为建议，不自行改视频。原声、结构、标题或脱敏版本改变后，将封面标为待复核；核实仍匹配才恢复可交付状态，不要求无意义重画。\n\n## 保存、审核与交接\n\n使用稳定 clip_id 和独立封面版本保存，例如 `covers/<clip_id>/c01/`，保留历史。每条交付主图、原始生成图与提示词、缩略图预览和简短设计记录。批次优先嵌入现有审核台；无法接入时提供一个联系表预览入口，不声称已经集成。\n\n设计记录至少包含：clip_id、render_revision、封面版本、观点证据、标题候选、推荐标题、用户已选标题（未选留空）、图片/源文件路径、像素尺寸、截帧来源与时间（非截帧留空）、视觉检查结果、用户确认状态。沿用项目已有字段，新增内容放在相邻设计记录中，不擅自改变主记录 schema。\n\n候选稿不覆盖主记录的选定封面。用户选定或已授权自动选定后，更新现有 `cover.path` 以及实际存在的交付 manifest 引用，保留未知字段和历史值；若原记录使用 sha256，同时刷新图片哈希。`cover_capture_seconds` 只记真实截帧时间，且来源另行说明；纯设计图留空，不伪造时间。平台短标题不因封面文案变化而自动覆盖。\n\n交付区分“方案 / 图片已生成 / 视觉已检查 / 用户已确认 / 已写入交付包”。创建封面不授权发布或上传平台；无平台回执不能声称封面已应用。总结给出实际预览与唯一审核入口，并指出仍待核实的项目。\n",
+  "skill_sha256": "15936da2fc33b2e4cbc0e6775630896f34cf201eb6899c5fa51b9cb194b922c0",
+  "revision": "2026-10-09.20"
+}

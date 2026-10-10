@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "分发台 · 视频号辅助提交",
-  "version": "0.7.1",
+  "version": "0.7.10",
   "description": "从本机分发台辅助上传、填写和保存草稿；公开发布由用户完成。",
   "permissions": [
     "activeTab",
@@ -24,6 +24,7 @@
         "https://channels.weixin.qq.com/*"
       ],
       "js": [
+        "asset-transfer.js",
         "form-options.js",
         "frame-agent.js",
         "observer.js"
@@ -37,6 +38,7 @@
         "https://channels.weixin.qq.com/*"
       ],
       "js": [
+        "asset-transfer.js",
         "runner.js",
         "content.js"
       ],

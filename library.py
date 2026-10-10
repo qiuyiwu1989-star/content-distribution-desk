@@ -97,12 +97,40 @@ def fingerprint(c, pid, data):
 
 def install(app, data, db, get, fail, text, now, seed_path):
     migrate(db, data, seed_path, now)
+    with db() as c:
+        c.execute('CREATE TABLE IF NOT EXISTS library_annotations(id INTEGER PRIMARY KEY AUTOINCREMENT,package_id TEXT NOT NULL REFERENCES packages(id),note TEXT NOT NULL,fingerprint TEXT NOT NULL,snapshot TEXT NOT NULL,created TEXT NOT NULL)')
+
+    @app.get('/api/packages/<pid>/annotations')
+    def annotations(pid):
+        with db() as c:
+            get(c, 'packages', pid)
+            rows = [dict(r) for r in c.execute('SELECT id,note,fingerprint,created FROM library_annotations WHERE package_id=? ORDER BY id DESC', (pid,))]
+        return jsonify(annotations=rows)
+
+    @app.post('/api/packages/<pid>/annotations')
+    def add_annotation(pid):
+        d = request.get_json()
+        note = text(d.get('note'), 5000, True)
+        with db() as c:
+            c.execute('BEGIN IMMEDIATE')
+            get(c, 'packages', pid)
+            snapshot = editorial_snapshot(c, pid, data)
+            fp = content_fingerprint(snapshot)
+            if d.get('fingerprint') != fp:
+                fail('内容已变化，请重新打开当前内容后保存批注', 409)
+            created = now()
+            row = c.execute('INSERT INTO library_annotations(package_id,note,fingerprint,snapshot,created) VALUES(?,?,?,?,?)', (pid, note, fp, json.dumps(snapshot, ensure_ascii=False), created))
+            aid = row.lastrowid
+        return jsonify(id=aid, note=note, fingerprint=fp, created=created), 201
+
 
     def metadata(c, pid):
         row = c.execute('SELECT * FROM library_packages WHERE package_id=?', (pid,)).fetchone()
         meta = dict(row) if row else dict(batch_id='unassigned', sequence=None, archived=0, supersedes_id=None)
         meta.pop('package_id', None)
         meta['archived'] = bool(meta['archived'])
+        has_trash=c.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='content_trash'").fetchone()
+        meta['deleted']=bool(has_trash and c.execute('SELECT 1 FROM content_trash WHERE package_id=?',(pid,)).fetchone())
         replacement = c.execute('SELECT package_id FROM library_packages WHERE supersedes_id=?', (pid,)).fetchone()
         meta['superseded_by'] = replacement['package_id'] if replacement else None
         fp = fingerprint(c, pid, data)
@@ -130,6 +158,8 @@ def install(app, data, db, get, fail, text, now, seed_path):
                 a['metadata'] = json.loads(row['value']) if row else {}
                 if not (Path(data) / 'files' / a['id']).exists():
                     a['metadata']['error'] = '原始文件不存在'
+            if hasattr(app, 'desk_enrich_publication'):
+                app.desk_enrich_publication(snapshot, connection=c)
             return jsonify(batches=[dict(r) for r in c.execute('SELECT id,name FROM library_batches ORDER BY created,id')],
                            packages={p['id']: metadata(c, p['id']) for p in snapshot['packages']}, snapshot=snapshot)
 

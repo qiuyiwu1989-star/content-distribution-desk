@@ -1,0 +1,26 @@
+[
+  {
+    "id": "aa9806679a9f499489cc7d6640eb5b68",
+    "name": "造物云 · 标准版 · 透明PNG",
+    "svg": "/static/creative/logos/zaowuyun-light.svg",
+    "png": "/static/creative/logos/zaowuyun-light.png",
+    "source": "https://www.zaowuyun.com/design-system.html#resources",
+    "background": "浅色背景"
+  },
+  {
+    "id": "9c945cc0626d400e9c2d7754ad1efeaa",
+    "name": "造物云 · 深底版 · 透明PNG",
+    "svg": "/static/creative/logos/zaowuyun-dark.svg",
+    "png": "/static/creative/logos/zaowuyun-dark.png",
+    "source": "https://www.zaowuyun.com/design-system.html#resources",
+    "background": "深色背景"
+  },
+  {
+    "id": "542f329ea3b44b9aa0ee62837fb63033",
+    "name": "浙江大学 · 白色横排 · 透明PNG",
+    "svg": "/static/creative/logos/zju-white.svg",
+    "png": "/static/creative/logos/zju-white.png",
+    "source": "https://www.zju.edu.cn/xxbs/list.htm",
+    "background": "深色背景"
+  }
+]

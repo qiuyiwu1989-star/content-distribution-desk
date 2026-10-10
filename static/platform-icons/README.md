@@ -1,0 +1,1 @@
+Brand SVGs from https://github.com/simple-icons/simple-icons (CC0); downloaded 2026-10-09. Used for identification, not endorsement. WeChat family shares its parent logo with explicit text labels; Douyin uses its shared musical-note family mark. Unsupported platforms retain text labels.

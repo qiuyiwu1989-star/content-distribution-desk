@@ -11,6 +11,10 @@ from flask import jsonify, request
 
 EVENTS = {'schedule_changed', 'submit_clicked', 'draft_clicked', 'result_observed', 'manual_confirmation'}
 SOURCES = {'session_observer', 'manual'}
+PUBLICATION_RESULTS = {
+    '用户人工确认本条已发布；非平台自动验证': 'published',
+    '用户撤销本条已发布标记；需重新核对': 'unconfirmed',
+}
 ALLOWED_PATHS = {'/platform/post', '/platform/post/create', '/platform/post/list', '/platform/post/edit', '/platform/home'}
 FIELDS = {'task_id', 'revision', 'event_id', 'event_kind', 'observed_account', 'page_url', 'scheduled_text', 'result_text', 'source'}
 
@@ -47,6 +51,41 @@ def install(app, data, db, get, fail, text, now):
         value['task_snapshot'] = json.loads(value['task_snapshot'])
         return value
 
+    def publication_progress(connection=None):
+        if connection is None:
+            with db() as c:
+                return publication_progress(c)
+        rows = connection.execute("""SELECT o.task_id,o.account_id,o.revision,o.created,o.event_id,o.result_text
+            FROM channel_observations o WHERE o.source='manual' AND o.event_kind='manual_confirmation'
+            AND o.result_text IN (?,?) ORDER BY o.created,o.rowid""", tuple(PUBLICATION_RESULTS)).fetchall()
+        result = {}
+        for row in rows:
+            item = dict(row)
+            item.update(status=PUBLICATION_RESULTS[item.pop('result_text')], source='manual', confirmed_at=item.pop('created'))
+            result.setdefault(item['task_id'], []).append(item)
+        return result
+
+    app.desk_publication_progress = publication_progress
+
+    def enrich_publication(result, connection=None):
+        history = publication_progress(connection)
+        for task in result['tasks']:
+            items = history.get(task['id'], [])
+            task['publication_history'] = items
+            task['publication_progress'] = next((item for item in reversed(items)
+                if item['account_id'] == task['account_id']), None)
+        return result
+
+    app.desk_enrich_publication = enrich_publication
+
+    @app.get('/api/publication-progress')
+    def publications():
+        with db() as c:
+            tasks = [dict(row) for row in c.execute('SELECT id,account_id,revision FROM tasks')]
+        enriched = enrich_publication({'tasks': tasks})
+        return jsonify(progress={task['id']: task['publication_progress'] for task in enriched['tasks']},
+                       history={task['id']: task['publication_history'] for task in enriched['tasks'] if task['publication_history']})
+
     @app.get('/api/channel-observations')
     def observations():
         tid = request.args.get('task_id')
@@ -58,11 +97,26 @@ def install(app, data, db, get, fail, text, now):
                 rows = c.execute('SELECT * FROM channel_observations ORDER BY created DESC,id LIMIT 200').fetchall()
             return jsonify(observations=[public(r) for r in rows])
 
+    @app.post('/api/publication-progress')
+    def set_publication():
+        data = request.get_json()
+        if not isinstance(data, dict) or set(data) - {'task_id', 'revision', 'status'}:
+            fail('发布进度字段不正确')
+        status = data.get('status')
+        if status not in {'published', 'unconfirmed'}:
+            fail('请选择已发布或撤销发布标记')
+        return record_observation({'task_id': data.get('task_id'), 'revision': data.get('revision'),
+            'event_id': uuid.uuid4().hex, 'event_kind': 'manual_confirmation', 'source': 'manual',
+            'page_url': 'https://channels.weixin.qq.com/platform/post/create',
+            'result_text': next(text for text, value in PUBLICATION_RESULTS.items() if value == status)})
+
     @app.post('/api/channel-observations')
     def observe():
         if request.content_length and request.content_length > 24000:
             fail('观察记录过大')
-        d = request.get_json()
+        return record_observation(request.get_json())
+
+    def record_observation(d):
         if not isinstance(d, dict) or set(d) - FIELDS:
             fail('观察记录字段不正确')
         value = {}

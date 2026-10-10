@@ -1,0 +1,735 @@
+{
+  "schema": "content-layouts.v2",
+  "templates": [
+    {
+      "id": "T01",
+      "name": "留白原声",
+      "version": "2.0.0",
+      "collection": "initial-12",
+      "tag": "横版完整保留",
+      "use": "人物、现场与背景共同交代语境",
+      "preview": "/static/creative/initial-set/T01.svg",
+      "canvas": [
+        1080,
+        1920
+      ],
+      "media": [
+        0,
+        600,
+        1080,
+        608
+      ],
+      "bg": "#090b0c",
+      "ink": "#ffffff",
+      "accent": "#d7d9da",
+      "subtitle_size": 52,
+      "title_size": 76,
+      "window_mode": "横版完整保留",
+      "fit": "contain",
+      "brand_visible": false,
+      "status": "layout-prototype",
+      "reference_note": "马兆远 / 笔记侠：黑底、完整横画面",
+      "design_spec": {
+        "字幕与字体": "思源黑体；标题 76px，字幕 52px；字幕最多两行，按语义断句；独立字幕区",
+        "底纹": "纯色底，背景 #090b0c，正文 #ffffff，强调色 #d7d9da",
+        "Logo": "不显示个人姓名；默认无Logo",
+        "标题与辅助元素": "主标题最多两行，76px；副标题为可选栏目或身份信息，30px；超长标题先精简，禁止无限缩小；示例文案不作为讲者原话",
+        "构图适配": "横版源素材重排为 9:16；材料保持比例，不拉伸，不裁掉论证信息",
+        "播放画面": "1080×1920 画布；主窗口 x=0, y=600, w=1080, h=608；原比例适配窗口",
+        "动态规则": "按完整语义切换素材；标题和字幕位置保持稳定；字幕与原声同步，不自动生成音轨",
+        "验收": "检查手机尺寸可读性、长标题和双行字幕、脸部与材料遮挡；叠加目标平台界面复核；当前仅静态版式已制作，动态样片待验证"
+      },
+      "subtitle": {
+        "x": 540,
+        "first_baseline": 1313,
+        "size_px": 52,
+        "max_lines": 2
+      },
+      "title": {
+        "x": 540,
+        "baselines": [
+          285,
+          390
+        ],
+        "size_px": 76,
+        "alignment": "middle"
+      },
+      "speaker_window": null,
+      "safe_area": {
+        "note": "平台遮挡须按目标界面复核；底部样张编号不属于正式成片"
+      },
+      "sound_default": "original_voice",
+      "preview_disclaimer": "课程照片来自既有素材；PPT、文档与软件界面为自制结构示意，文字不代表讲者原话。"
+    },
+    {
+      "id": "T02",
+      "name": "黑金圆窗",
+      "version": "2.0.0",
+      "collection": "initial-12",
+      "tag": "横版完整保留",
+      "use": "商业演讲与访谈，保留完整横版构图",
+      "preview": "/static/creative/initial-set/T02.svg",
+      "canvas": [
+        1080,
+        1920
+      ],
+      "media": [
+        40,
+        600,
+        1000,
+        563
+      ],
+      "bg": "#101110",
+      "ink": "#f8f4e8",
+      "accent": "#d8b979",
+      "subtitle_size": 50,
+      "title_size": 76,
+      "window_mode": "横版完整保留",
+      "fit": "contain",
+      "brand_visible": false,
+      "status": "layout-prototype",
+      "reference_note": "领羊圆角窗口 + 黑金曲线",
+      "design_spec": {
+        "字幕与字体": "思源黑体；标题 76px，字幕 50px；字幕最多两行，按语义断句；独立字幕区",
+        "底纹": "低对比金色曲线，背景 #101110，正文 #f8f4e8，强调色 #d8b979",
+        "Logo": "不显示个人姓名；默认无Logo",
+        "标题与辅助元素": "主标题最多两行，76px；副标题为可选栏目或身份信息，30px；超长标题先精简，禁止无限缩小；示例文案不作为讲者原话",
+        "构图适配": "横版源素材重排为 9:16；材料保持比例，不拉伸，不裁掉论证信息",
+        "播放画面": "1080×1920 画布；主窗口 x=40, y=600, w=1000, h=563；圆角 36px",
+        "动态规则": "按完整语义切换素材；标题和字幕位置保持稳定；字幕与原声同步，不自动生成音轨",
+        "验收": "检查手机尺寸可读性、长标题和双行字幕、脸部与材料遮挡；叠加目标平台界面复核；当前仅静态版式已制作，动态样片待验证"
+      },
+      "subtitle": {
+        "x": 540,
+        "first_baseline": 1268,
+        "size_px": 50,
+        "max_lines": 2
+      },
+      "title": {
+        "x": 540,
+        "baselines": [
+          285,
+          390
+        ],
+        "size_px": 76,
+        "alignment": "middle"
+      },
+      "speaker_window": null,
+      "safe_area": {
+        "note": "平台遮挡须按目标界面复核；底部样张编号不属于正式成片"
+      },
+      "sound_default": "original_voice",
+      "preview_disclaimer": "课程照片来自既有素材；PPT、文档与软件界面为自制结构示意，文字不代表讲者原话。"
+    },
+    {
+      "id": "T03",
+      "name": "网格访谈",
+      "version": "2.0.0",
+      "collection": "initial-12",
+      "tag": "人物主讲",
+      "use": "人物近景与稳定的字幕阅读区",
+      "preview": "/static/creative/initial-set/T03.svg",
+      "canvas": [
+        1080,
+        1920
+      ],
+      "media": [
+        0,
+        550,
+        1080,
+        740
+      ],
+      "bg": "#101215",
+      "ink": "#ffffff",
+      "accent": "#ebcf79",
+      "subtitle_size": 52,
+      "title_size": 78,
+      "window_mode": "人物主讲",
+      "fit": "cover",
+      "brand_visible": false,
+      "status": "layout-prototype",
+      "reference_note": "网易科技：网格、双层标题",
+      "design_spec": {
+        "字幕与字体": "思源黑体；标题 78px，字幕 52px；字幕最多两行，按语义断句；独立字幕区",
+        "底纹": "低对比细网格，背景 #101215，正文 #ffffff，强调色 #ebcf79",
+        "Logo": "不显示个人姓名；默认无Logo",
+        "标题与辅助元素": "主标题最多两行，78px；副标题为可选栏目或身份信息，30px；超长标题先精简，禁止无限缩小；示例文案不作为讲者原话",
+        "构图适配": "横版源素材重排为 9:16；人物画面允许裁切，保护脸部、手势",
+        "播放画面": "1080×1920 画布；主窗口 x=0, y=550, w=1080, h=740；原比例适配窗口",
+        "动态规则": "按完整语义切换素材；标题和字幕位置保持稳定；字幕与原声同步，不自动生成音轨",
+        "验收": "检查手机尺寸可读性、长标题和双行字幕、脸部与材料遮挡；叠加目标平台界面复核；当前仅静态版式已制作，动态样片待验证"
+      },
+      "subtitle": {
+        "x": 540,
+        "first_baseline": 1395,
+        "size_px": 52,
+        "max_lines": 2
+      },
+      "title": {
+        "x": 540,
+        "baselines": [
+          285,
+          390
+        ],
+        "size_px": 78,
+        "alignment": "middle"
+      },
+      "speaker_window": null,
+      "safe_area": {
+        "note": "平台遮挡须按目标界面复核；底部样张编号不属于正式成片"
+      },
+      "sound_default": "original_voice",
+      "preview_disclaimer": "课程照片来自既有素材；PPT、文档与软件界面为自制结构示意，文字不代表讲者原话。"
+    },
+    {
+      "id": "T04",
+      "name": "浅纸讲堂",
+      "version": "2.0.0",
+      "collection": "initial-12",
+      "tag": "横版完整保留",
+      "use": "课程、研究与完整现场画面",
+      "preview": "/static/creative/initial-set/T04.svg",
+      "canvas": [
+        1080,
+        1920
+      ],
+      "media": [
+        0,
+        620,
+        1080,
+        608
+      ],
+      "bg": "#edf3ec",
+      "ink": "#284b3c",
+      "accent": "#547c65",
+      "subtitle_size": 50,
+      "title_size": 74,
+      "window_mode": "横版完整保留",
+      "fit": "contain",
+      "brand_visible": true,
+      "status": "layout-prototype",
+      "reference_note": "混沌文理院：浅底、宋体、来源说明",
+      "design_spec": {
+        "字幕与字体": "思源宋体标题＋思源黑体字幕；标题 74px，字幕 50px；字幕最多两行，按语义断句；独立字幕区",
+        "底纹": "浅色净底，背景 #edf3ec，正文 #284b3c，强调色 #547c65",
+        "Logo": "造物云设计系统SVG导出的透明PNG Logo，保持原色原比例；位置(430,1580)，220×76",
+        "标题与辅助元素": "主标题最多两行，74px；副标题为可选栏目或身份信息，30px；超长标题先精简，禁止无限缩小；示例文案不作为讲者原话",
+        "构图适配": "横版源素材重排为 9:16；材料保持比例，不拉伸，不裁掉论证信息",
+        "播放画面": "1080×1920 画布；主窗口 x=0, y=620, w=1080, h=608；原比例适配窗口",
+        "动态规则": "按完整语义切换素材；标题和字幕位置保持稳定；字幕与原声同步，不自动生成音轨",
+        "验收": "检查手机尺寸可读性、长标题和双行字幕、脸部与材料遮挡；叠加目标平台界面复核；当前仅静态版式已制作，动态样片待验证"
+      },
+      "subtitle": {
+        "x": 540,
+        "first_baseline": 1333,
+        "size_px": 50,
+        "max_lines": 2
+      },
+      "title": {
+        "x": 540,
+        "baselines": [
+          285,
+          390
+        ],
+        "size_px": 74,
+        "alignment": "middle"
+      },
+      "speaker_window": null,
+      "safe_area": {
+        "note": "平台遮挡须按目标界面复核；底部样张编号不属于正式成片"
+      },
+      "sound_default": "original_voice",
+      "preview_disclaimer": "课程照片来自既有素材；PPT、文档与软件界面为自制结构示意，文字不代表讲者原话。"
+    },
+    {
+      "id": "T05",
+      "name": "暖棕会客厅",
+      "version": "2.0.0",
+      "collection": "initial-12",
+      "tag": "人物主讲",
+      "use": "人物访谈，保留手势和表情",
+      "preview": "/static/creative/initial-set/T05.svg",
+      "canvas": [
+        1080,
+        1920
+      ],
+      "media": [
+        0,
+        470,
+        1080,
+        900
+      ],
+      "bg": "#37251e",
+      "ink": "#fff6e9",
+      "accent": "#e1bc81",
+      "subtitle_size": 52,
+      "title_size": 76,
+      "window_mode": "人物主讲",
+      "fit": "cover",
+      "brand_visible": false,
+      "status": "layout-prototype",
+      "reference_note": "天真一代：暖棕分区、人物大画面",
+      "design_spec": {
+        "字幕与字体": "思源宋体标题＋思源黑体字幕；标题 76px，字幕 52px；字幕最多两行，按语义断句；独立字幕区",
+        "底纹": "暖棕斜面，背景 #37251e，正文 #fff6e9，强调色 #e1bc81",
+        "Logo": "不显示个人姓名；默认无Logo",
+        "标题与辅助元素": "主标题最多两行，76px；副标题为可选栏目或身份信息，30px；超长标题先精简，禁止无限缩小；示例文案不作为讲者原话",
+        "构图适配": "横版源素材重排为 9:16；人物画面允许裁切，保护脸部、手势",
+        "播放画面": "1080×1920 画布；主窗口 x=0, y=470, w=1080, h=900；原比例适配窗口",
+        "动态规则": "按完整语义切换素材；标题和字幕位置保持稳定；字幕与原声同步，不自动生成音轨",
+        "验收": "检查手机尺寸可读性、长标题和双行字幕、脸部与材料遮挡；叠加目标平台界面复核；当前仅静态版式已制作，动态样片待验证"
+      },
+      "subtitle": {
+        "x": 540,
+        "first_baseline": 1455,
+        "size_px": 52,
+        "max_lines": 2
+      },
+      "title": {
+        "x": 540,
+        "baselines": [
+          285,
+          390
+        ],
+        "size_px": 76,
+        "alignment": "middle"
+      },
+      "speaker_window": null,
+      "safe_area": {
+        "note": "平台遮挡须按目标界面复核；底部样张编号不属于正式成片"
+      },
+      "sound_default": "original_voice",
+      "preview_disclaimer": "课程照片来自既有素材；PPT、文档与软件界面为自制结构示意，文字不代表讲者原话。"
+    },
+    {
+      "id": "T06",
+      "name": "蓝色人物专访",
+      "version": "2.0.0",
+      "collection": "initial-12",
+      "tag": "人物主讲",
+      "use": "单人讲述，标题与身份清晰分层",
+      "preview": "/static/creative/initial-set/T06.svg",
+      "canvas": [
+        1080,
+        1920
+      ],
+      "media": [
+        0,
+        540,
+        1080,
+        810
+      ],
+      "bg": "#123958",
+      "ink": "#ffffff",
+      "accent": "#b6ddec",
+      "subtitle_size": 54,
+      "title_size": 78,
+      "window_mode": "人物主讲",
+      "fit": "cover",
+      "brand_visible": false,
+      "status": "layout-prototype",
+      "reference_note": "蓝色嘉宾访谈：身份区与大画面",
+      "design_spec": {
+        "字幕与字体": "思源黑体；标题 78px，字幕 54px；字幕最多两行，按语义断句；独立字幕区",
+        "底纹": "深蓝斜面，背景 #123958，正文 #ffffff，强调色 #b6ddec",
+        "Logo": "不显示个人姓名；默认无Logo",
+        "标题与辅助元素": "主标题最多两行，78px；副标题为可选栏目或身份信息，30px；超长标题先精简，禁止无限缩小；示例文案不作为讲者原话",
+        "构图适配": "横版源素材重排为 9:16；人物画面允许裁切，保护脸部、手势",
+        "播放画面": "1080×1920 画布；主窗口 x=0, y=540, w=1080, h=810；原比例适配窗口",
+        "动态规则": "按完整语义切换素材；标题和字幕位置保持稳定；字幕与原声同步，不自动生成音轨",
+        "验收": "检查手机尺寸可读性、长标题和双行字幕、脸部与材料遮挡；叠加目标平台界面复核；当前仅静态版式已制作，动态样片待验证"
+      },
+      "subtitle": {
+        "x": 540,
+        "first_baseline": 1455,
+        "size_px": 54,
+        "max_lines": 2
+      },
+      "title": {
+        "x": 72,
+        "baselines": [
+          285,
+          390
+        ],
+        "size_px": 78,
+        "alignment": "start"
+      },
+      "speaker_window": null,
+      "safe_area": {
+        "note": "平台遮挡须按目标界面复核；底部样张编号不属于正式成片"
+      },
+      "sound_default": "original_voice",
+      "preview_disclaimer": "课程照片来自既有素材；PPT、文档与软件界面为自制结构示意，文字不代表讲者原话。"
+    },
+    {
+      "id": "T07",
+      "name": "PPT主讲·圆形小窗",
+      "version": "2.0.0",
+      "collection": "initial-12",
+      "tag": "PPT与人物",
+      "use": "解释PPT时材料放大，人物保留存在感",
+      "preview": "/static/creative/initial-set/T07.svg",
+      "canvas": [
+        1080,
+        1920
+      ],
+      "media": [
+        32,
+        490,
+        1016,
+        650
+      ],
+      "bg": "#101211",
+      "ink": "#ffffff",
+      "accent": "#d5bb83",
+      "subtitle_size": 50,
+      "title_size": 74,
+      "window_mode": "PPT与人物",
+      "fit": "contain",
+      "brand_visible": false,
+      "status": "layout-prototype",
+      "reference_note": "用户首张示例：PPT主导、人物圆窗",
+      "design_spec": {
+        "字幕与字体": "思源黑体；标题 74px，字幕 50px；字幕最多两行，按语义断句；独立字幕区",
+        "底纹": "纯色底，背景 #101211，正文 #ffffff，强调色 #d5bb83",
+        "Logo": "不显示个人姓名；默认无Logo",
+        "标题与辅助元素": "主标题最多两行，74px；副标题为可选栏目或身份信息，30px；超长标题先精简，禁止无限缩小；示例文案不作为讲者原话",
+        "构图适配": "横版源素材重排为 9:16；材料保持比例，不拉伸，不裁掉论证信息",
+        "播放画面": "1080×1920 画布；主窗口 x=32, y=490, w=1016, h=650；原比例适配窗口",
+        "动态规则": "讲到PPT时切入材料；人物小窗可换角或隐藏；重点太小时局部放大；解释结束后回人物",
+        "验收": "检查手机尺寸可读性、长标题和双行字幕、脸部与材料遮挡；叠加目标平台界面复核；当前仅静态版式已制作，动态样片待验证"
+      },
+      "subtitle": {
+        "x": 540,
+        "first_baseline": 1245,
+        "size_px": 50,
+        "max_lines": 2
+      },
+      "title": {
+        "x": 540,
+        "baselines": [
+          285,
+          390
+        ],
+        "size_px": 74,
+        "alignment": "middle"
+      },
+      "speaker_window": [
+        62,
+        930,
+        210,
+        210
+      ],
+      "safe_area": {
+        "note": "平台遮挡须按目标界面复核；底部样张编号不属于正式成片"
+      },
+      "sound_default": "original_voice",
+      "preview_disclaimer": "课程照片来自既有素材；PPT、文档与软件界面为自制结构示意，文字不代表讲者原话。"
+    },
+    {
+      "id": "T08",
+      "name": "PPT上下讲解",
+      "version": "2.0.0",
+      "collection": "initial-12",
+      "tag": "PPT与人物",
+      "use": "PPT不能被遮挡，同时需要看讲者动作",
+      "preview": "/static/creative/initial-set/T08.svg",
+      "canvas": [
+        1080,
+        1920
+      ],
+      "media": [
+        40,
+        400,
+        1000,
+        600
+      ],
+      "bg": "#eaf0f3",
+      "ink": "#163442",
+      "accent": "#26728b",
+      "subtitle_size": 48,
+      "title_size": 70,
+      "window_mode": "PPT与人物",
+      "fit": "contain",
+      "brand_visible": false,
+      "status": "layout-prototype",
+      "reference_note": "PPT主导规则扩展：材料与人物独立分区",
+      "design_spec": {
+        "字幕与字体": "思源黑体；标题 70px，字幕 48px；字幕最多两行，按语义断句；独立字幕区",
+        "底纹": "浅色净底，背景 #eaf0f3，正文 #163442，强调色 #26728b",
+        "Logo": "不显示个人姓名；默认无Logo",
+        "标题与辅助元素": "主标题最多两行，70px；副标题为可选栏目或身份信息，30px；超长标题先精简，禁止无限缩小；示例文案不作为讲者原话",
+        "构图适配": "横版源素材重排为 9:16；材料保持比例，不拉伸，不裁掉论证信息",
+        "播放画面": "1080×1920 画布；主窗口 x=40, y=400, w=1000, h=600；原比例适配窗口",
+        "动态规则": "讲到PPT时切入材料；人物小窗可换角或隐藏；重点太小时局部放大；解释结束后回人物",
+        "验收": "检查手机尺寸可读性、长标题和双行字幕、脸部与材料遮挡；叠加目标平台界面复核；当前仅静态版式已制作，动态样片待验证"
+      },
+      "subtitle": {
+        "x": 540,
+        "first_baseline": 1500,
+        "size_px": 48,
+        "max_lines": 2
+      },
+      "title": {
+        "x": 540,
+        "baselines": [
+          260,
+          365
+        ],
+        "size_px": 70,
+        "alignment": "middle"
+      },
+      "speaker_window": [
+        280,
+        1040,
+        520,
+        390
+      ],
+      "safe_area": {
+        "note": "平台遮挡须按目标界面复核；底部样张编号不属于正式成片"
+      },
+      "sound_default": "original_voice",
+      "preview_disclaimer": "课程照片来自既有素材；PPT、文档与软件界面为自制结构示意，文字不代表讲者原话。"
+    },
+    {
+      "id": "T09",
+      "name": "资料阅读台",
+      "version": "2.0.0",
+      "collection": "initial-12",
+      "tag": "材料解读",
+      "use": "文档或案例解读，突出当前阅读段落",
+      "preview": "/static/creative/initial-set/T09.svg",
+      "canvas": [
+        1080,
+        1920
+      ],
+      "media": [
+        48,
+        530,
+        984,
+        720
+      ],
+      "bg": "#f1eee6",
+      "ink": "#272d32",
+      "accent": "#a44b38",
+      "subtitle_size": 48,
+      "title_size": 72,
+      "window_mode": "材料解读",
+      "fit": "contain",
+      "brand_visible": true,
+      "status": "layout-prototype",
+      "reference_note": "AI纪年 / 文档解读：材料、标注、摘要",
+      "design_spec": {
+        "字幕与字体": "思源黑体；标题 72px，字幕 48px；字幕最多两行，按语义断句；实色字幕底板",
+        "底纹": "浅色净底，背景 #f1eee6，正文 #272d32，强调色 #a44b38",
+        "Logo": "造物云设计系统SVG导出的透明PNG Logo，保持原色原比例；位置(430,1580)，220×76",
+        "标题与辅助元素": "主标题最多两行，72px；副标题为可选栏目或身份信息，30px；超长标题先精简，禁止无限缩小；示例文案不作为讲者原话",
+        "构图适配": "横版源素材重排为 9:16；材料保持比例，不拉伸，不裁掉论证信息",
+        "播放画面": "1080×1920 画布；主窗口 x=48, y=530, w=984, h=720；原比例适配窗口",
+        "动态规则": "按完整语义切换素材；标题和字幕位置保持稳定；字幕与原声同步，不自动生成音轨",
+        "验收": "检查手机尺寸可读性、长标题和双行字幕、脸部与材料遮挡；叠加目标平台界面复核；当前仅静态版式已制作，动态样片待验证"
+      },
+      "subtitle": {
+        "x": 540,
+        "first_baseline": 1355,
+        "size_px": 48,
+        "max_lines": 2
+      },
+      "title": {
+        "x": 72,
+        "baselines": [
+          285,
+          390
+        ],
+        "size_px": 72,
+        "alignment": "start"
+      },
+      "speaker_window": null,
+      "safe_area": {
+        "note": "平台遮挡须按目标界面复核；底部样张编号不属于正式成片"
+      },
+      "sound_default": "original_voice",
+      "preview_disclaimer": "课程照片来自既有素材；PPT、文档与软件界面为自制结构示意，文字不代表讲者原话。"
+    },
+    {
+      "id": "T10",
+      "name": "科技演示窗",
+      "version": "2.0.0",
+      "collection": "initial-12",
+      "tag": "录屏演示",
+      "use": "软件操作、工具演示；焦点区域可放大",
+      "preview": "/static/creative/initial-set/T10.svg",
+      "canvas": [
+        1080,
+        1920
+      ],
+      "media": [
+        40,
+        560,
+        1000,
+        650
+      ],
+      "bg": "#0b1833",
+      "ink": "#f4f7ff",
+      "accent": "#6ccbdc",
+      "subtitle_size": 50,
+      "title_size": 74,
+      "window_mode": "录屏演示",
+      "fit": "contain",
+      "brand_visible": false,
+      "status": "layout-prototype",
+      "reference_note": "Tech Daily：界面窗口与讲解重点",
+      "design_spec": {
+        "字幕与字体": "思源黑体；标题 74px，字幕 50px；字幕最多两行，按语义断句；实色字幕底板",
+        "底纹": "深蓝细网格，背景 #0b1833，正文 #f4f7ff，强调色 #6ccbdc",
+        "Logo": "不显示个人姓名；默认无Logo",
+        "标题与辅助元素": "主标题最多两行，74px；副标题为可选栏目或身份信息，30px；超长标题先精简，禁止无限缩小；示例文案不作为讲者原话",
+        "构图适配": "横版源素材重排为 9:16；材料保持比例，不拉伸，不裁掉论证信息",
+        "播放画面": "1080×1920 画布；主窗口 x=40, y=560, w=1000, h=650；原比例适配窗口",
+        "动态规则": "按完整语义切换素材；标题和字幕位置保持稳定；字幕与原声同步，不自动生成音轨",
+        "验收": "检查手机尺寸可读性、长标题和双行字幕、脸部与材料遮挡；叠加目标平台界面复核；当前仅静态版式已制作，动态样片待验证"
+      },
+      "subtitle": {
+        "x": 540,
+        "first_baseline": 1315,
+        "size_px": 50,
+        "max_lines": 2
+      },
+      "title": {
+        "x": 72,
+        "baselines": [
+          285,
+          390
+        ],
+        "size_px": 74,
+        "alignment": "start"
+      },
+      "speaker_window": null,
+      "safe_area": {
+        "note": "平台遮挡须按目标界面复核；底部样张编号不属于正式成片"
+      },
+      "sound_default": "original_voice",
+      "preview_disclaimer": "课程照片来自既有素材；PPT、文档与软件界面为自制结构示意，文字不代表讲者原话。"
+    },
+    {
+      "id": "T11",
+      "name": "竖屏沉浸",
+      "version": "2.0.0",
+      "collection": "initial-12",
+      "tag": "原生竖构图",
+      "use": "竖拍或可安全重构的人物素材",
+      "preview": "/static/creative/initial-set/T11.svg",
+      "canvas": [
+        1080,
+        1920
+      ],
+      "media": [
+        0,
+        0,
+        1080,
+        1920
+      ],
+      "bg": "#101215",
+      "ink": "#ffffff",
+      "accent": "#ebd399",
+      "subtitle_size": 56,
+      "title_size": 80,
+      "window_mode": "原生竖构图",
+      "fit": "cover",
+      "brand_visible": false,
+      "status": "layout-prototype",
+      "reference_note": "原生竖屏现场：满幅画面、文字叠加",
+      "design_spec": {
+        "字幕与字体": "思源黑体；标题 80px，字幕 56px；字幕最多两行，按语义断句；画面内字幕，暗部渐变托底",
+        "底纹": "纯色底，背景 #101215，正文 #ffffff，强调色 #ebd399",
+        "Logo": "不显示个人姓名；默认无Logo",
+        "标题与辅助元素": "主标题最多两行，80px；副标题为可选栏目或身份信息，30px；超长标题先精简，禁止无限缩小；示例文案不作为讲者原话",
+        "构图适配": "原生竖版优先；本样张用横版课程照片裁切模拟，实际竖拍素材仍待验证",
+        "播放画面": "1080×1920 画布；主窗口 x=0, y=0, w=1080, h=1920；原比例适配窗口",
+        "动态规则": "按完整语义切换素材；标题和字幕位置保持稳定；字幕与原声同步，不自动生成音轨",
+        "验收": "检查手机尺寸可读性、长标题和双行字幕、脸部与材料遮挡；叠加目标平台界面复核；当前仅静态版式已制作，动态样片待验证"
+      },
+      "subtitle": {
+        "x": 540,
+        "first_baseline": 1400,
+        "size_px": 56,
+        "max_lines": 2
+      },
+      "title": {
+        "x": 540,
+        "baselines": [
+          285,
+          390
+        ],
+        "size_px": 80,
+        "alignment": "middle"
+      },
+      "speaker_window": null,
+      "safe_area": {
+        "note": "平台遮挡须按目标界面复核；底部样张编号不属于正式成片"
+      },
+      "sound_default": "original_voice",
+      "preview_disclaimer": "课程照片来自既有素材；PPT、文档与软件界面为自制结构示意，文字不代表讲者原话。"
+    },
+    {
+      "id": "T12",
+      "name": "双区对照",
+      "version": "2.0.0",
+      "collection": "initial-12",
+      "tag": "上下对照",
+      "use": "步骤前后、两种方案与不同产品形态比较",
+      "preview": "/static/creative/initial-set/T12.svg",
+      "canvas": [
+        1080,
+        1920
+      ],
+      "media": [
+        48,
+        540,
+        984,
+        450
+      ],
+      "bg": "#172720",
+      "ink": "#f5f1e5",
+      "accent": "#d5ce8b",
+      "subtitle_size": 50,
+      "title_size": 72,
+      "window_mode": "上下对照",
+      "fit": "contain",
+      "brand_visible": false,
+      "status": "layout-prototype",
+      "reference_note": "参考中的材料解读延伸为双区对照",
+      "design_spec": {
+        "字幕与字体": "思源黑体；标题 72px，字幕 50px；字幕最多两行，按语义断句；独立字幕区",
+        "底纹": "低对比细网格，背景 #172720，正文 #f5f1e5，强调色 #d5ce8b",
+        "Logo": "不显示个人姓名；默认无Logo",
+        "标题与辅助元素": "主标题最多两行，72px；副标题为可选栏目或身份信息，30px；超长标题先精简，禁止无限缩小；示例文案不作为讲者原话",
+        "构图适配": "横版源素材重排为 9:16；材料保持比例，不拉伸，不裁掉论证信息",
+        "播放画面": "1080×1920 画布；主窗口 x=48, y=540, w=984, h=450；原比例适配窗口",
+        "动态规则": "按完整语义切换素材；标题和字幕位置保持稳定；字幕与原声同步，不自动生成音轨",
+        "验收": "检查手机尺寸可读性、长标题和双行字幕、脸部与材料遮挡；叠加目标平台界面复核；当前仅静态版式已制作，动态样片待验证"
+      },
+      "subtitle": {
+        "x": 540,
+        "first_baseline": 1500,
+        "size_px": 50,
+        "max_lines": 2
+      },
+      "title": {
+        "x": 540,
+        "baselines": [
+          285,
+          390
+        ],
+        "size_px": 72,
+        "alignment": "middle"
+      },
+      "speaker_window": null,
+      "safe_area": {
+        "note": "平台遮挡须按目标界面复核；底部样张编号不属于正式成片"
+      },
+      "sound_default": "original_voice",
+      "preview_disclaimer": "课程照片来自既有素材；PPT、文档与软件界面为自制结构示意，文字不代表讲者原话。"
+    }
+  ]
+}

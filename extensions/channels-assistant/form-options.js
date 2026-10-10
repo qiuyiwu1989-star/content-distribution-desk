@@ -68,14 +68,19 @@
   }
   function termsDialog(){return query('[role="dialog"],dialog,.weui-desktop-dialog').find(el=>visible(el)&&/原创/.test(normalize(el.textContent))&&/(?:同意|阅读|确认声明|承诺|协议|须知|条款)/.test(normalize(el.textContent)));}
   function assertNoTerms(){if(termsDialog())throw Error('平台出现原创条款，请人工阅读并处理；辅助不会接受条款');}
-  async function original(){
+  async function original(options={}){
+   async function handleTerms(){const dialog=termsDialog();if(!dialog)return;if(!options.confirmTerms)assertNoTerms();
+    const checks=[...dialog.querySelectorAll('input[type="checkbox"],[role="checkbox"]')];if(checks.length!==1)throw Error('原创协议勾选框不唯一，请人工处理');const agree=checks[0];if(readChecked(agree)!==true){if(!enabled(agree))throw Error('原创协议不可勾选');agree.click();await wait(150);}if(readChecked(agree)!==true)throw Error('原创协议未勾选');
+    const buttons=[...dialog.querySelectorAll('button,[role="button"]')].filter(el=>visible(el)&&enabled(el)&&['声明原创','确认','确认声明'].includes(normalize(el.textContent)));if(buttons.length!==1)throw Error('原创声明确认按钮不唯一，请人工处理');buttons[0].click();await wait(150);if(termsDialog())throw Error('原创声明弹窗仍未关闭，请人工核对');
+   }
+   await handleTerms();
    assertNoTerms();let el=single('original');const before=readChecked(el);
    if(before===null)throw Error('无法确认声明原创的勾选状态，未进行点击，请手动核对');
    if(before===true)return {checked:true,already:true};
    if(!enabled(el))throw Error('声明原创控件不可用，请在平台核对');
    el.click(); // Exactly one click; never toggle a checked declaration off.
    for(let i=0;i<12;i++){
-    await wait(100);assertNoTerms();el=single('original');
+    await wait(100);await handleTerms();el=single('original');
     if(readChecked(el)===true){await wait(180);assertNoTerms();if(readChecked(single('original'))===true)return {checked:true,already:false};}
    }
    throw Error('已点击声明原创，但未回读到已勾选状态，请在平台核对');
@@ -135,7 +140,7 @@
    const shape=el=>({tag:el.tagName,className:String(el.className||'').slice(0,200),role:el.getAttribute('role'),type:el.getAttribute('type'),ariaChecked:el.getAttribute('aria-checked'),checked:typeof el.checked==='boolean'?el.checked:null,visible:visible(el)});
    return ['声明原创','添加到合集','选择合集'].map(label=>({label,regions:exactLeaves(label).slice(0,3).map(el=>{const levels=[];for(let p=el,depth=0;p&&depth<4;p=p.parentElement,depth++){if(p.matches?.('body,html,form'))break;levels.push({node:shape(p),children:[...p.children].slice(0,12).map(shape),controls:[...p.querySelectorAll('input,select,[role="checkbox"],[role="combobox"]')].slice(0,8).map(shape)});}return levels;})}));
   }
-  return {candidates,diagnostics,perform:(kind,value)=>{if(kind==='original')return original();if(kind==='collection')return collection(value);return Promise.reject(Error('不支持的表单选项'));},readChecked,readCollection};
+  return {candidates,diagnostics,perform:(kind,value)=>{if(kind==='original')return original(value||{});if(kind==='collection')return collection(value);return Promise.reject(Error('不支持的表单选项'));},readChecked,readCollection};
  }
  root.DeskFormOptions={...create(),create};
  if(typeof module!=='undefined')module.exports=root.DeskFormOptions;

@@ -29,3 +29,13 @@ console.log('Workspace semantic tests passed');
 assert.match(ux.taskReason({...t('draft'),format:'video',asset_ids:['a']},{assets:[]}),/素材不可用/);
 assert.match(ux.taskReason({...t('draft'),format:'video',asset_ids:['a']},{assets:[{id:'a',kind:'image'}]}),/需选择视频文件/);
 assert.match(ux.taskReason({...t('draft'),format:'gallery',asset_ids:['a']},{assets:[{id:'a',kind:'video'}]}),/只能选择图片/);
+
+// Publication navigation never treats draft delivery, review, or a button click as publication.
+for(const status of ['draft','ready','scheduled','delivered','review','unknown','failed','blocked'])assert.equal(ux.publicationGroup(t(status)),'pending');
+assert.equal(ux.publicationGroup(t('published')),'published');
+assert.equal(ux.publicationGroup({...t('draft'),revision:2,publication_progress:{status:'published',revision:1}}),'published','A confirmed historical publication remains visible after a content revision');
+const manuallyPublished={...t('draft'),revision:2,publication_progress:{status:'published',revision:2}};
+assert.equal(ux.publicationGroup(manuallyPublished),'published');
+assert.match(ux.taskStatus(manuallyPublished),/人工确认/);
+assert.equal(ux.publicationGroup({...manuallyPublished,status:'canceled'}),'history');
+assert.equal(ux.publicationGroup({...manuallyPublished,publication_progress:{status:'pending',revision:2}}),'pending');

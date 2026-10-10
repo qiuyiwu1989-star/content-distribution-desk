@@ -1,0 +1,215 @@
+{
+  "schema": "desk.browser-plugins.v1",
+  "plugins": [
+    {
+      "id": "channels-assistant",
+      "name": "视频号辅助提交",
+      "description": "从本机分发台辅助上传、填写和保存草稿；公开发布由用户完成。",
+      "current_version": "0.7.10",
+      "releases": [
+        {
+          "version": "0.7.10",
+          "archived_at": "2026-10-09T15:26:52+08:00",
+          "url": "/static/browser-plugins/releases/channels-assistant/0.7.10.zip",
+          "sha256": "cf5bd3f564310ca962beffaf6b6bf51aac55830561db23410791119339a4af78",
+          "bytes": 55736,
+          "notes": "常用按钮固定底部；封面缩小；补传下载与诊断归入备用工具；封面核对取消重复弹窗；登记已发布后选择同批次下一条（不自动上传或点击发表）。",
+          "minimum_chrome_version": "106",
+          "permissions": [
+            "activeTab",
+            "storage",
+            "alarms"
+          ]
+        },
+        {
+          "version": "0.7.9",
+          "archived_at": "2026-10-09T03:29:45+08:00",
+          "url": "/static/browser-plugins/releases/channels-assistant/0.7.9.zip",
+          "sha256": "e66a26b4ef33971f6a2e43f52b2822f196d0659e9941ae4a210215b877ab5678",
+          "bytes": 55026,
+          "notes": "按截图修正上传链路：识别百分比进度、取消上传、转码等标记，存在视频预览但上传未结束时继续等待，结束后再进入封面编辑。识别封面裁切已显示目标图片时不要求再点击候选。增加按批次和账号记忆的合集输入，默认AI与组织，可改名或清空。勾选本条声明原创后，唯一识别原创弹窗时勾选协议并点击声明原创，回读最终状态。位置暂不自动更改。14组插件Node测试、9个Python测试及语法检查通过；真实平台效果待验证。",
+          "minimum_chrome_version": "106",
+          "permissions": [
+            "activeTab",
+            "storage",
+            "alarms"
+          ]
+        },
+        {
+          "version": "0.7.8",
+          "archived_at": "2026-10-09T03:10:43+08:00",
+          "url": "/static/browser-plugins/releases/channels-assistant/0.7.8.zip",
+          "sha256": "dac618ba0786dd73e73b56ce76767ba5786f8e8eb1eb7198edf09f35f9c5b149",
+          "bytes": 54250,
+          "notes": "逻辑检修：视频标注重复执行不重复点击，并回读选择是否保留；页面任意frame扫描失败时不继续上传或填写；视频上传仅触发一次change，避免额外input事件导致控件重建。自动标注和单独选项入口核对页面与账号关联，单独选项无需先核对封面。15组Node回归、9个Python测试及JS语法检查全部通过。测试报告与统一测试入口已保存；未进行真实平台UI上传验收。",
+          "minimum_chrome_version": "106",
+          "permissions": [
+            "activeTab",
+            "storage",
+            "alarms"
+          ]
+        },
+        {
+          "version": "0.7.7",
+          "archived_at": "2026-10-09T02:48:08+08:00",
+          "url": "/static/browser-plugins/releases/channels-assistant/0.7.7.zip",
+          "sha256": "13872b6935344cf298918702a7b0518385bb6b352bc211ff724c372335694f6f",
+          "bytes": 53821,
+          "notes": "修复发布后下一条回到第一条：保留当前序号，同批次同账号向后查找，到末尾不回绕。视频标注个人观点仅供参考提前到文案填写后尝试选择，封面核对暂停不再阻止该步骤；单独应用按钮增加标注并分别反馈标注、原创、合集结果。14组回归与语法检查通过。真实平台结果未验证，分类、应用等未实现。",
+          "minimum_chrome_version": "106",
+          "permissions": [
+            "activeTab",
+            "storage",
+            "alarms"
+          ]
+        },
+        {
+          "version": "0.7.6",
+          "archived_at": "2026-10-09T02:37:41+08:00",
+          "url": "/static/browser-plugins/releases/channels-assistant/0.7.6.zip",
+          "sha256": "5ef417b8648d9e573d74c8962fa49b14bd26896b91cc5514fad713819a747d72",
+          "bytes": 53369,
+          "notes": "修复上传失败或旧执行记录导致空白页面无法重新一键上传的问题。上传尝试不再作为实际上传成功的证据；点击主按钮或继续准备后，所有frame扫描显示无视频、无已选文件、无处理提示时重建执行并重新传入。已有视频或处理中不重传。主按钮在暂停后仍可点击，不再需要先停止。14组回归与语法检查通过，真实平台结果待验证。",
+          "minimum_chrome_version": "106",
+          "permissions": [
+            "activeTab",
+            "storage",
+            "alarms"
+          ]
+        },
+        {
+          "version": "0.7.5",
+          "archived_at": "2026-10-09T02:24:30+08:00",
+          "url": "/static/browser-plugins/releases/channels-assistant/0.7.5.zip",
+          "sha256": "93bad1c0d40ea099fad928bb0f1feb029ad77e9055e058d9103911357342b75d",
+          "bytes": 53103,
+          "notes": "修复当前编辑页选条后被路由轮询误判为页面变化而暂停的问题。空闲状态真实路由切换会重建面板，执行中离开编辑页仍停止写入。主按钮改为“一键上传视频、文案与封面”，直接传入平台，无需先下载；保留仅同步文案、补上传封面等单独入口。14组回归和脚本语法检查通过，真实平台上传结果仍需实际验证。",
+          "minimum_chrome_version": "106",
+          "permissions": [
+            "activeTab",
+            "storage",
+            "alarms"
+          ]
+        },
+        {
+          "version": "0.7.4",
+          "archived_at": "2026-10-09T02:05:34+08:00",
+          "url": "/static/browser-plugins/releases/channels-assistant/0.7.4.zip",
+          "sha256": "f41aa32a15832a7cf3ad6703da02a16cfefaf47b89717914ed868275a6504b56",
+          "bytes": 52867,
+          "notes": "修复自动准备启动阶段过早检查文案输入框的问题：先检查视频入口，视频就绪后再填写文案。启动进度与失败原因显示在自动按钮附近；后台丢失页面脚本注册时尝试重连。新增独立手动操作：下载视频、仅同步标题与文案、复制文案与短标题、刷新本条。14组回归通过，真实平台效果需重载后核对。",
+          "minimum_chrome_version": "106",
+          "permissions": [
+            "activeTab",
+            "storage",
+            "alarms"
+          ]
+        },
+        {
+          "version": "0.7.3",
+          "archived_at": "2026-10-09T01:07:10+08:00",
+          "url": "/static/browser-plugins/releases/channels-assistant/0.7.3.zip",
+          "sha256": "670193d9827f486c5538a5dbb6afe04e0aea5810170b69b1121fee416b9339d8",
+          "bytes": 51360,
+          "notes": "修复整段视频转base64后超过64MiB扩展消息限制的问题，改为1MiB分块读取和页面内组装文件。实际53,891,636字节视频校验通过：52块，单条消息最大1,398,208字节，SHA-256一致。修复传输失败后停止并重新开始的入口；已有视频或文件处理中的页面仍拦截重复上传。14组Node回归通过，真实平台上传需重载后核对。",
+          "minimum_chrome_version": "106",
+          "permissions": [
+            "activeTab",
+            "storage",
+            "alarms"
+          ]
+        },
+        {
+          "version": "0.7.2",
+          "archived_at": "2026-10-09T00:34:51+08:00",
+          "url": "/static/browser-plugins/releases/channels-assistant/0.7.2.zip",
+          "sha256": "28829cec7ea37510d940600afb18f62f201b0effd5ffa3f0bd278914d6bbae0c",
+          "bytes": 49579,
+          "notes": "人工发布进度与分发台共享；刷新内容后合并确认或撤销结果，按任务版本保留发布历史。",
+          "minimum_chrome_version": "106",
+          "permissions": [
+            "activeTab",
+            "storage",
+            "alarms"
+          ]
+        },
+        {
+          "version": "0.7.1",
+          "archived_at": "2026-10-09T00:34:51+08:00",
+          "url": "/static/browser-plugins/releases/channels-assistant/0.7.1.zip",
+          "sha256": "781029eb31407a0daf53da187275b75ef0c353bff081e2b1af12616365e7edbf",
+          "bytes": 49257,
+          "notes": "优化视频出现后的文案填写与媒体识别；新增人工发布标记、撤销标记和下一条未发布内容。",
+          "minimum_chrome_version": "106",
+          "permissions": [
+            "activeTab",
+            "storage",
+            "alarms"
+          ]
+        },
+        {
+          "version": "0.7.0",
+          "archived_at": "2026-10-09T00:34:51+08:00",
+          "url": "/static/browser-plugins/releases/channels-assistant/0.7.0.zip",
+          "sha256": "77b73810de62735c33bf61cda76867045bbf045fc5ae951a0a65c478debb8271",
+          "bytes": 47663,
+          "notes": "单条内容准备支持暂停和继续，执行进度保存在本机；真实平台草稿验收仍待完成。",
+          "minimum_chrome_version": "106",
+          "permissions": [
+            "activeTab",
+            "storage",
+            "alarms"
+          ]
+        },
+        {
+          "version": "0.6.4",
+          "archived_at": "2026-10-09T00:34:51+08:00",
+          "url": "/static/browser-plugins/releases/channels-assistant/0.6.4.zip",
+          "sha256": "697ad1b1beb2f24ca43d0edab17ce8524105cc475263e03f5a1963211af94bdd",
+          "bytes": 39158,
+          "notes": "历史归档版本。具体功能与安装方式见压缩包内说明。",
+          "minimum_chrome_version": "",
+          "permissions": [
+            "activeTab"
+          ]
+        },
+        {
+          "version": "0.6.3",
+          "archived_at": "2026-10-09T00:34:51+08:00",
+          "url": "/static/browser-plugins/releases/channels-assistant/0.6.3.zip",
+          "sha256": "899cb2fa79edf8d4f4dcdc062774c75555705bb2a41300ef86fa737d206db4bb",
+          "bytes": 39119,
+          "notes": "历史归档版本。具体功能与安装方式见压缩包内说明。",
+          "minimum_chrome_version": "",
+          "permissions": [
+            "activeTab"
+          ]
+        },
+        {
+          "version": "0.6.2",
+          "archived_at": "2026-10-09T00:34:51+08:00",
+          "url": "/static/browser-plugins/releases/channels-assistant/0.6.2.zip",
+          "sha256": "f59db51a5448b7933bb0bd6ec2ea54535e4c31a399f2fb7506ffef32e8d03afe",
+          "bytes": 38573,
+          "notes": "历史归档版本。具体功能与安装方式见压缩包内说明。",
+          "minimum_chrome_version": "",
+          "permissions": [
+            "activeTab"
+          ]
+        },
+        {
+          "version": "0.6.1",
+          "archived_at": "2026-10-09T00:34:51+08:00",
+          "url": "/static/browser-plugins/releases/channels-assistant/0.6.1.zip",
+          "sha256": "1c330bb2a1398ad562da683919181a2bc50237c4d43b88b6ad2f3ca6989304c8",
+          "bytes": 35056,
+          "notes": "历史归档版本。具体功能与安装方式见压缩包内说明。",
+          "minimum_chrome_version": "",
+          "permissions": [
+            "activeTab"
+          ]
+        }
+      ]
+    }
+  ]
+}

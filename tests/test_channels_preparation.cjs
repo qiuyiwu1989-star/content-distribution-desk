@@ -2,7 +2,7 @@ const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/st
 const tick=()=>new Promise(r=>setImmediate(r));
 const settle=async(n=25)=>{for(let i=0;i<n;i++)await tick();};
 const until=async check=>{for(let i=0;i<200;i++){if(check())return;await tick();}throw Error('Expected asynchronous step did not start');};
-async function fixture({storage={},session={},existing=0,uploadMode='ok',observed='示例账号',confirm=true,cover=false,failStorage=false,titleMode='ok'}={}){
+async function fixture({storage={},session={},existing=0,uploadMode='ok',observed='示例账号',confirm=true,cover=false,failStorage=false,titleMode='ok',scanError=false,processing=0}={}){
 let doc;const all=[],messages=[],confirmations=[];
 class E{
  constructor(tag='div'){this.tag=tag;this.style={};this.children=[];this.attrs={};this.value='';this.disabled=false;this.hidden=false;this.isConnected=false;this.textContent='';this.map=new Map();all.push(this);}
@@ -21,12 +21,12 @@ doc={host:null,createElement:t=>new E(t),querySelector:s=>s==='#desk-channels-as
 const task={id:'t1',revision:1,title:'测试内容',account:'示例账号',body:'正文',tags:'',asset_ids:['v1'],cover_id:cover?'c1':null,sequence:1,batch_id:'b',status:'draft',options:{collection:'企业AI'}};
 const assets=[{id:'v1',kind:'video',name:'video.mp4'},...(cover?[{id:'c1',kind:'image',name:'cover.png'}]:[])];
 let releaseUpload,releaseTitle,listener,interval;
-const env={storage,session,messages,confirmations,existing,uploadMode,observed,confirm,failStorage,titleMode};
+const env={storage,session,messages,confirmations,existing,uploadMode,observed,confirm,failStorage,titleMode,scanError,processing};
 const ctx={document:doc,location:{pathname:'/platform/post/create',href:'https://channels.weixin.qq.com/platform/post/create'},sessionStorage:{getItem:k=>session[k]||null,setItem:(k,v)=>session[k]=v},localStorage:{getItem:()=>null,setItem(){}},innerWidth:1400,innerHeight:1000,ResizeObserver:class{observe(){}disconnect(){}},MutationObserver:class{observe(){}disconnect(){}},setTimeout:f=>setImmediate(f),clearTimeout:clearImmediate,setInterval:f=>interval=f,Option:class extends E{constructor(text,value){super('option');this.textContent=text;this.value=value;}},chrome:{storage:{local:{get:async k=>({[k]:storage[k]}),set:async o=>{if(env.failStorage)throw Error('模拟进度存储失败');Object.assign(storage,JSON.parse(JSON.stringify(o)));}}},runtime:{onMessage:{addListener:f=>listener=f},sendMessage:async m=>{
  messages.push(m);
  if(m.type==='state')return{ok:true,result:{batches:[{id:'b',name:'测试'}],tasks:[task],assets}};
  if(m.type==='asset')return{ok:true,result:{base64:'AQID',mime:'video/mp4'}};
- if(m.type==='frames')return{ok:true,result:[{counts:{video:1,body:1,title:1,existingVideo:env.existing,coverEdit:0,cover:cover?1:0}}]};
+ if(m.type==='frames')return{ok:true,result:[...(env.scanError?[{error:'frame disconnected'}]:[]),{videoProcessing:env.processing>0?env.processing--:0,counts:{video:1,body:1,title:1,existingVideo:env.existing,coverEdit:0,cover:cover?1:0}}]};
  if(m.type==='observation-bind'||m.type==='observation-check')return{ok:true,result:{task_id:task.id,revision:task.revision,observed_account:env.observed}};
  if(m.type==='field'){
   assert(!['save','publish'].includes(m.kind),'Preparation must never save or publish');
@@ -34,7 +34,7 @@ const ctx={document:doc,location:{pathname:'/platform/post/create',href:'https:/
   if(m.kind==='title'&&env.titleMode==='defer')await new Promise(r=>releaseTitle=r);
   if(m.kind==='video'){
    if(env.uploadMode==='defer')await new Promise(r=>releaseUpload=r);
-   env.existing=1;
+   env.existing=1;if(env.uploadMode==='processing')env.processing=5;
    if(env.uploadMode==='timeout')return{ok:false,error:'模拟上传响应超时'};
    if(env.uploadMode==='account-change')env.observed='其他账号';
   }
@@ -48,6 +48,8 @@ env.root=doc.host.shadowRoot;env.click=id=>env.root.querySelector('#'+id).onclic
 env.releaseTitle=()=>releaseTitle?.();env.hasTitle=()=>!!releaseTitle;env.navigate=path=>{ctx.location.pathname=path;ctx.location.href='https://channels.weixin.qq.com'+path;interval();};env.release=()=>releaseUpload?.();env.hasRelease=()=>!!releaseUpload;env.actions=kind=>messages.filter(m=>m.type==='field'&&(!kind||m.kind===kind));env.record=()=>Object.values(storage)[0];return env;
 }
 (async()=>{
+ const incomplete=await fixture({scanError:true});await incomplete.click('fill');assert.equal(incomplete.actions().length,0,'Incomplete frame scans must not permit upload');assert.match(incomplete.status(),/扫描不完整/);
+ const processingVideo=await fixture({uploadMode:'processing'});await processingVideo.click('fill');assert.equal(processingVideo.record().engine.status,'completed');assert.equal(processingVideo.processing,0,'Video processing must finish before cover and copy');
  const timeout=await fixture({uploadMode:'timeout'});
  await timeout.click('fill');assert.match(timeout.status(),/响应超时/);assert.equal(timeout.actions('video').length,1);assert.equal(timeout.actions('body').length,0);
  await timeout.click('run-resume');assert.equal(timeout.actions('video').length,1,'Uncertain upload response must never cause a repeat upload');assert.equal(timeout.record().engine.status,'completed');
@@ -59,7 +61,8 @@ env.releaseTitle=()=>releaseTitle?.();env.hasTitle=()=>!!releaseTitle;env.naviga
  const restored=await fixture({storage:origin.storage,session:origin.session,existing:1,confirm:false});
  assert.equal(restored.actions().length,0,'Restoring a panel must not operate platform');
  await restored.click('run-resume');assert.equal(restored.actions().length,0,'Declining restored-page confirmation must not operate');assert(restored.confirmations.some(s=>s.includes('重新打开')));
- restored.confirm=true;restored.existing=0;await restored.click('run-resume');assert.match(restored.status(),/恰有一个/);assert.equal(restored.actions().length,0);
+ const emptyRestored=await fixture({storage:JSON.parse(JSON.stringify(origin.storage)),session:origin.session,existing:0,confirm:true});await emptyRestored.click('run-resume');assert.equal(emptyRestored.actions('video').length,1,'Restored intent on an empty page retries exactly once on explicit click');assert.equal(emptyRestored.record().engine.status,'completed');
+ restored.confirm=true;
  restored.existing=2;await restored.click('run-resume');assert.match(restored.status(),/恰有一个/);assert.equal(restored.actions().length,0);
  restored.existing=1;await restored.click('run-resume');assert.equal(restored.actions('video').length,0,'Restored interrupted upload is adopted, never sent again');assert.equal(restored.record().engine.status,'completed');
  const changed=await fixture({uploadMode:'account-change'});await changed.click('fill');assert.match(changed.status(),/账号已改变/);assert.equal(changed.actions('body').length,0,'Changed account stops before copy');assert.equal(changed.record().engine.status,'paused');

@@ -3,7 +3,7 @@ const frames=new Map();let counter=0;
 chrome.runtime.onConnect.addListener(port=>{
  if(port.name!=='desk-frame'||!port.sender.tab)return;
  const tabId=port.sender.tab.id,frameId=port.sender.frameId,key=tabId+':'+frameId,pending=new Map();
- const entry={tabId,frameId,documentId:port.sender.documentId,port,ask:message=>new Promise((resolve,reject)=>{const id=++counter;const timeout=setTimeout(()=>{pending.delete(id);reject(Error('frame操作超时，结果待核对'));},60000);pending.set(id,{resolve,reject,timeout});port.postMessage({...message,id});})};
+ const entry={tabId,frameId,documentId:port.sender.documentId,port,ask:message=>new Promise((resolve,reject)=>{const id=++counter;const timeout=setTimeout(()=>{pending.delete(id);reject(Error('frame操作超时，结果待核对'));},message.op==='upload'?300000:message.op==='scan'?10000:60000);pending.set(id,{resolve,reject,timeout});port.postMessage({...message,id});})};
  frames.set(key,entry);
  port.onMessage.addListener(m=>{const request=pending.get(m.id);if(!request)return;clearTimeout(request.timeout);pending.delete(m.id);m.ok?request.resolve(m.result):request.reject(Error(m.error));});
  port.onDisconnect.addListener(()=>{if(frames.get(key)===entry)frames.delete(key);for(const r of pending.values()){clearTimeout(r.timeout);r.reject(Error('页面frame已离开，结果待核对'));}});
@@ -38,6 +38,14 @@ function assertAccountMatch(task,observed){
 }
 function isTop(sender){try{return !!sender.tab&&sender.frameId===0&&new URL(sender.url).origin==='https://channels.weixin.qq.com';}catch{return false;}}
 function allowedReader(sender){if(isTop(sender))return true;if(!sender.tab)return true;try{const u=new URL(sender.url),own=new URL(chrome.runtime.getURL('popup.html'));return u.origin===own.origin&&u.protocol==='chrome-extension:'&&u.host===own.host&&u.pathname==='/popup.html';}catch{return false;}}
+function mergePublicationProgress(task,serverTask,local){
+ const valid=value=>value&&value.revision===task.revision&&value.account_id===task.account_id;
+ const remote=serverTask?.publication_progress;
+ if(!valid(local))return valid(remote)?remote:null;
+ if(!valid(remote))return local;
+ // A newer unsynchronized user action stays visible; otherwise use server's canonical receipt.
+ return Date.parse(local.confirmed_at)>Date.parse(remote.confirmed_at)?local:remote;
+}
 async function readState(){
  let response;try{response=await fetch(BASE+'/api/state',{cache:'no-store'});}catch{throw Error('无法连接本机分发台，请保持应用打开后刷新内容。');}
  if(!response.ok)throw Error('分发台返回错误 HTTP '+response.status);
@@ -45,7 +53,7 @@ async function readState(){
  if(!r.ok)throw Error('无法读取当前内容批次，请更新并重启分发台；未使用旧批次表。');
  const catalog=await r.json();if(!Array.isArray(catalog.batches)||!catalog.packages)throw Error('批次数据不完整，请刷新分发台');
  const snapshot=catalog.snapshot||state;const progress=(await chrome.storage.local.get('desk.publication.progress'))['desk.publication.progress']||{};
- return {batches:catalog.batches,tasks:snapshot.tasks.filter(t=>t.format==='video'&&state.accounts.find(a=>a.id===t.account_id)?.platform==='channels'&&!['published','canceled','running','queued'].includes(t.status)&&!catalog.packages[t.package_id]?.archived&&!catalog.packages[t.package_id]?.superseded_by).map(t=>({...t,publication_progress:progress[t.id]?.revision===t.revision?progress[t.id]:null,asset_ids:videoIds(t,snapshot.assets),batch_id:catalog.packages[t.package_id]?.batch_id||'unassigned',sequence:catalog.packages[t.package_id]?.sequence,account:state.accounts.find(a=>a.id===t.account_id).name,account_display_name:state.accounts.find(a=>a.id===t.account_id).connection?.status==='bound'?(state.accounts.find(a=>a.id===t.account_id).connection.display_name||''):''})),assets:snapshot.assets.map(a=>({id:a.id,name:a.name,size:a.size,mime:a.mime,kind:a.kind}))};
+ return {batches:catalog.batches,tasks:snapshot.tasks.filter(t=>t.format==='video'&&state.accounts.find(a=>a.id===t.account_id)?.platform==='channels'&&!['published','canceled','running','queued'].includes(t.status)&&!catalog.packages[t.package_id]?.archived&&!catalog.packages[t.package_id]?.superseded_by).map(t=>({...t,publication_progress:mergePublicationProgress(t,state.tasks.find(item=>item.id===t.id),progress[t.id]),publication_history:state.tasks.find(item=>item.id===t.id)?.publication_history||[],asset_ids:videoIds(t,snapshot.assets),batch_id:catalog.packages[t.package_id]?.batch_id||'unassigned',sequence:catalog.packages[t.package_id]?.sequence,account:state.accounts.find(a=>a.id===t.account_id).name,account_display_name:state.accounts.find(a=>a.id===t.account_id).connection?.status==='bound'?(state.accounts.find(a=>a.id===t.account_id).connection.display_name||''):''})),assets:snapshot.assets.map(a=>({id:a.id,name:a.name,size:a.size,mime:a.mime,kind:a.kind}))};
 }
 async function postObservation(payload){
  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),15000);try{
@@ -57,13 +65,16 @@ async function postObservation(payload){
  }finally{clearTimeout(timer);}
 }
 async function feedback(sender,data){try{await chrome.tabs.sendMessage(sender.tab.id,{type:'observation-feedback',...data},{frameId:0});}catch{}}
+async function ensureFrames(tabId){if([...frames.values()].some(f=>f.tabId===tabId))return;try{await chrome.tabs.sendMessage(tabId,{type:'desk-frame-wakeup'});}catch{return;}for(let i=0;i<10&&!([...frames.values()].some(f=>f.tabId===tabId));i++)await new Promise(r=>setTimeout(r,20));}
 chrome.runtime.onMessage.addListener((message,sender,reply)=>{
  (async()=>{
   if(message.type==='frames'||message.type==='field'){
    if(!sender.tab||new URL(sender.url).hostname!=='channels.weixin.qq.com'||sender.frameId!==0)throw Error('只允许顶部辅助面板请求');
+   await ensureFrames(sender.tab.id);
    const all=[...frames.values()].filter(f=>f.tabId===sender.tab.id);
    const scans=await Promise.all(all.map(async f=>{try{return {...await f.ask({op:'scan'}),frameId:f.frameId};}catch(e){return {frameId:f.frameId,error:e.message};}}));
    if(message.type==='frames')return scans;
+   if(!scans.length||scans.some(f=>f.error))throw Error('页面扫描不完整，未执行本次操作；请刷新页面后重试');
    const found=scans.filter(f=>f.counts?.[message.kind]===1);
    const total=scans.reduce((n,f)=>n+(f.counts?.[message.kind]||0),0);
    if(found.length!==1||total!==1)throw Error(message.kind+'：'+all.length+'个frame中找到'+total+'个候选，请查看结构诊断');
@@ -129,14 +140,25 @@ chrome.runtime.onMessage.addListener((message,sender,reply)=>{
     return {recorded:false,queued:true,event_id:p.event_id,error:''};
    }catch(error){if(sender.tab)await feedback(sender,{recorded:false,error:error.message});throw error;}
   }
-  if(message.type==='asset'){
+  if(message.type==='asset'||message.type==='asset-chunk'){
    if(new URL(sender.url).hostname!=='channels.weixin.qq.com'&&!['about:blank','about:srcdoc'].includes(sender.url))throw Error('非法页面');
    if(!/^[a-f0-9]{32}$/.test(message.id))throw Error('非法素材编号');
-   const r=await fetch(BASE+'/api/assets/'+message.id);if(!r.ok)throw Error('素材不存在');
+   const chunk=message.type==='asset-chunk',limit=1024*1024;
+   if(chunk&&(!Number.isSafeInteger(message.offset)||message.offset<0||message.offset>=512*1024*1024))throw Error('非法素材偏移');
+   const r=await fetch(BASE+'/api/assets/'+message.id,chunk?{headers:{Range:`bytes=${message.offset}-${message.offset+limit-1}`},cache:'no-store'}:{cache:'no-store'});if(!r.ok)throw Error('素材不存在或读取失败');
+   let total,offset=chunk?message.offset:0;
+   if(chunk){
+    const match=/^bytes (\d+)-(\d+)\/(\d+)$/.exec(r.headers.get('Content-Range')||'');
+    if(r.status===206&&match&&Number(match[1])===offset){total=Number(match[3]);if(Number(match[2])-offset+1>limit)throw Error('素材分块超过约定大小');}
+    else if(r.status===200&&offset===0&&Number(r.headers.get('Content-Length'))>0&&Number(r.headers.get('Content-Length'))<=limit)total=Number(r.headers.get('Content-Length'));
+    else throw Error('本机服务未正确返回素材分块，请更新分发台后重试');
+    if(!Number.isSafeInteger(total)||total<=0||total>512*1024*1024)throw Error('素材大小不正确');
+   }else if(Number(r.headers.get('Content-Length'))>4*1024*1024)throw Error('整文件传输仅用于小素材，请重载新版插件使用分块传输');
    const bytes=new Uint8Array(await r.arrayBuffer());
-   if(bytes.length>64*1024*1024)throw Error('首版自动传输上限64MB，请在平台手动选择该视频');
+   if(bytes.length>(chunk?limit:4*1024*1024))throw Error('素材消息过大，请重载新版插件');
+   if(chunk&&bytes.length!==Math.min(limit,total-offset))throw Error('素材分块长度不一致');
    let binary='';for(let i=0;i<bytes.length;i+=16384)binary+=String.fromCharCode(...bytes.subarray(i,i+16384));
-   return {base64:btoa(binary),mime:r.headers.get('Content-Type')};
+   return {base64:btoa(binary),mime:r.headers.get('Content-Type'),...(chunk?{offset,total,bytes:bytes.length}:{})};
   }
   throw Error('未知请求');
  })().then(result=>reply({ok:true,result}),error=>reply({ok:false,error:error.message}));return true;

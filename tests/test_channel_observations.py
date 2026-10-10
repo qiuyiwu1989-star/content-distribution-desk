@@ -104,6 +104,34 @@ class ObservationTests(unittest.TestCase):
         self.assertEqual(self.post(event_kind='manual_confirmation', result_text='confirmed').status_code, 400)
         self.assertEqual(self.post(event_id='manual', event_kind='manual_confirmation', source='manual', result_text='人工查看作品列表').status_code, 201)
 
+    def test_manual_publication_progress_is_shared_reversible_and_revision_scoped(self):
+        endpoint = '/api/publication-progress'
+        payload = {'task_id': self.tid, 'revision': 1, 'status': 'published'}
+        self.assertEqual(self.client.post(endpoint, json=payload).status_code, 403)
+        self.assertEqual(self.client.post(endpoint, json=payload, headers={**self.headers, 'Origin': 'chrome-extension://'+'a'*32}).status_code, 403)
+        self.assertEqual(self.client.post(endpoint, json=payload, headers=self.headers).status_code, 201)
+        task = next(t for t in self.client.get('/api/state').json['tasks'] if t['id'] == self.tid)
+        self.assertEqual(task['status'], 'draft')
+        self.assertEqual(task['publication_progress']['status'], 'published')
+        snapshot_task=next(t for t in self.client.get('/api/library').json['snapshot']['tasks'] if t['id']==self.tid)
+        self.assertEqual(snapshot_task['publication_progress']['status'], 'published')
+        self.assertEqual(task['publication_progress']['account_id'], self.aid)
+        # Neither a success toast nor arbitrary manual prose overrides explicit confirmation.
+        self.post(event_id='toast', event_kind='result_observed', result_text='发表成功')
+        self.post(event_id='prose', event_kind='manual_confirmation', source='manual', result_text='可能已发布')
+        self.assertEqual(self.client.get(endpoint).json['progress'][self.tid]['status'], 'published')
+        self.assertEqual(self.client.post(endpoint, json={**payload, 'status': 'unconfirmed'}, headers=self.headers).status_code, 201)
+        result = self.client.get(endpoint).json
+        self.assertEqual(result['progress'][self.tid]['status'], 'unconfirmed')
+        self.assertEqual(len(result['history'][self.tid]), 2)
+        with self.db() as c:
+            c.execute('UPDATE tasks SET revision=2 WHERE id=?', (self.tid,))
+        self.assertEqual(self.client.get(endpoint).json['progress'][self.tid]['revision'], 1)
+        self.assertEqual(len(self.client.get(endpoint).json['history'][self.tid]), 2)
+        self.assertEqual(self.client.post(endpoint, json=payload, headers=self.headers).status_code, 409)
+        self.assertEqual(self.client.post(endpoint, json={**payload, 'revision': 2}, headers=self.headers).status_code, 201)
+        self.assertEqual(self.client.get(endpoint).json['progress'][self.tid]['revision'], 2)
+
     def test_non_channels_task_rejected_and_existing_guard_applies(self):
         with self.db() as c:
             c.execute("UPDATE accounts SET platform='rednote' WHERE id=?", (self.aid,))
